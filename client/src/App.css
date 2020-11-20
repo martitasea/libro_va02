@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+* {
+  margin:0; 
+  padding:0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color:#E1F7FB;
+  /* background-color: red; */
+  margin: 0.5rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ------------------------------------
+COLORS 
+---------------------------------------*/
+.transparent{
+  background-color: transparent;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.green{
+  color: #29A18C;
+}
+.blue{
+  color: #195392;
+}
+.red{
+  color: #EE7A71;
+}
+.grey{
+  color: #707070;
+}
+/* ------------------------------------
+FONTS 
+---------------------------------------*/
+.child{
+  font-family:'childish-reveriebold';
+}
+.childIcon{
+  font-family: 'childish-reverie-doodlesRg';
+}
+.dosis{
+  font-family: 'Dosis', sans-serif;
+  font-weight: 700;
+}
+.uppercase{
+  text-transform: uppercase;
+}
+/* ------------------------------------
+SIZES 
+---------------------------------------*/
+.title{
+  font-size: 2em;
+}
+.mini{
+  font-size: 0.75em;
+}
+.symbol{
+  font-size: 2.25em;
+}
+/* ------------------------------------
+BUTTONS
+---------------------------------------*/
+.btn-green{
+  background-color: #29A18C;
+  color: white;
+  width: 12em;
+}
+.btn-green:hover{
+  background-color: #207e6e;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.btn-green-ghost{
+  background-color: white;
+  color:  #29A18C;
+  border: 2px solid #29a18c;
+  width: 12em;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-blue{
+  background-color: #195392;
+  color: white;
+  width: 12em;
+}
+.btn-blue:hover{
+  background-color: #1f64ad;
+  color: white;
+  width: 12em;
+}
+/* ------------------------------------
+BORDERS
+---------------------------------------*/
+.border-green-2{
+  border: 2px solid #29A18C;
+}
+.border-blue-1{
+  border: 1px solid #195392;
+}
+.border-blue-2{
+  border: 2px solid #195392;
+}
+/* ------------------------------------
+Z-INDEX
+---------------------------------------*/
+/* .z1{
+  z-index: 1;
+}
+.z10{
+  z-index: 10;
+} */
+/* ------------------------------------
+MARGIN
+---------------------------------------*/
+.margin-header{
+  margin-top: 3em;
+}
+.fondo{
+  background-color: red;
 }

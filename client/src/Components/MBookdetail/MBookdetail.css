@@ -1,0 +1,16 @@
+.bookdetail{
+    position: fixed;
+    top: 6em;
+    width: 90%;
+}
+.book{
+    /* position:relative; */
+    object-fit: cover;
+    width: 250px;
+    height: 200px;
+    margin:0px;
+    padding: 0px;
+}
+.titleBook{
+    font-weight: 500;
+}
