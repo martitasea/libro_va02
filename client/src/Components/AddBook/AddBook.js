@@ -22,7 +22,7 @@ class AddBook extends Component {
           <p>Busca en las primera páginas de tu libro el código ISBN e introdúcelo::</p>
           <form className="mb-3">
             <div>
-              <p className="mb-1 grey mini">ISBN</p>
+              <label for="ISBN" className="mb-1 grey mini">ISBN</label>
               <input type="text" className="p-1 mb-2 grey width100 border-blue-1"/>
             </div>
             <Link to="/userarea">  
