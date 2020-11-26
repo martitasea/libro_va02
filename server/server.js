@@ -40,6 +40,9 @@ app.post("/getbookapi/:isbn/:firebaseid", routes.getBookApi);
 // Read all my books
 app.get("/allmybooks/:firebaseid", routes.getAllMyBooks);
 
+// Read all catalogue
+app.get("/allcatalogue/:firebaseid", routes.getAllCatalogue);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

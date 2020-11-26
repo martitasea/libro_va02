@@ -6,32 +6,39 @@ import MyBook from './MyBook';
 class AllMyBooks extends Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      books:[],
+      isFetch:false
+    };
+    this.getAllMyBooks=this.getAllMyBooks.bind(this);
   }
+
+getAllMyBooks(){
+  console.log(this.state.books)
+    return this.state.books.map((book)=>(
+    <MyBook
+      src={book.image}
+      title={book.title}/>
+  ))
+}
+
+// componentDidUpdate(prevProps, prevState){
+//   if(prevState.books!==this.state.books){
+//   let firebaseID=this.context.firebaseID
+  // fetch("http://localhost:5000/allmybooks/"+firebaseID)
+  //   .then((res) => {return res.json();})
+  //   .then(booksJson => {this.setState({books:booksJson, isFetch:false})})
+  //   .then(err => {console.log(err);});
+// }
+// }
+
 
 componentDidMount(){
   let firebaseID=this.context.firebaseID
-  console.log(firebaseID)
   fetch("http://localhost:5000/allmybooks/"+firebaseID)
-    .then((res) => {
-      console.log("La respuesta del servidor");
-      console.log(res.json);
-      return res.json();
-    })
-    .then(books => {
-      books.map((book)=>{
-        console.log(book.title)
-        console.log(book.description)
-      })
-      // console.log(books)
-      // console.log(books[0].title)
-
-      //HACER UN MAP CON LOS RESULTADOS Y RENDERIZARLOS EN SU SITO
-    }
-    )
-    .then(err => {
-      console.log(err);
-    });
+    .then((res) => {return res.json();})
+    .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
+    .catch(err => {console.log(err);});
 }
 
   render() {
@@ -45,10 +52,7 @@ componentDidMount(){
         <div id="allmybooks" className="collapse grey pl-2">
           <p className="grey pl-2 pb-2">Estos son los libros disponibles para prestar a tus compañeros:</p>
           <div className="d-flex flex-wrap justify-content-around">
-            <MyBook/>
-            <MyBook/>
-            <MyBook/>
-            <MyBook/>
+            {this.getAllMyBooks()}
           </div>
         </div>
     </div>  

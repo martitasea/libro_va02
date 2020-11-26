@@ -11,7 +11,7 @@ class MInstructions extends Component {
     return (
       <section className="bg-white d-flex flex-column signup instructions">
         <p className="child green title text-center  mt-3 mb-0">Instrucciones</p>
-        <article className="overflow prueba mx-3 mb-5">
+        <article className="overflow textinstructions mx-3 mb-5">
         <p>
           Libro Va es una plataforma digital para el intercambio de libros entre niños de un mismo colegio. Es una plataforma que pretende fomentar la lectura infantil, la comunidad y el hecho de compartir.
         </p>

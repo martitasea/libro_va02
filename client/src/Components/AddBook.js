@@ -16,12 +16,9 @@ class AddBook extends Component {
 setAddIsbn(e){this.setState({newIsbn: e.target.value})}
 
 getBookApi(contxt){
-  // e.preventDefault();
-  // console.log(contxt.firebaseID)
   let newBook={
     newIsbn:this.state.newIsbn,
     firebaseID: contxt.firebaseID
-    // firebaseID:"7O37SYxH7Wboa9HYQemHjKDdmMA3"
   }
   fetch("http://localhost:5000/getbookapi/"+newBook.newIsbn+"/"+newBook.firebaseID, {
     method: "POST",

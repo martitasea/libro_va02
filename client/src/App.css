@@ -193,12 +193,18 @@ MLOGIN
 MYBOOK 
 ---------------------------------------*/
 .mybook{
+  width:100px;
+}
+.mybookimage{
   /* position:relative; */
   object-fit: cover;
   width: 100px;
-  height: 125px;
+  height: 155px;
   margin:0px;
   padding: 0px;
+}
+.mybookimage:hover{
+  background-color: red;
 }
 /* ------------------------------------
 MBOOKDETAIL 
@@ -231,7 +237,7 @@ MINSTRUCTIONS
 .overflow{
   overflow: scroll;
 }
-.prueba{
+.textinstructions{
   /* width: 320px; */
   height: 65vh;
   /* margin-top: 10em; */
@@ -255,12 +261,12 @@ THUMBNAIL - HOVER EFECT IMAGE TEXT
 .thumbnail-book{
   position: absolute;
   object-fit: cover;
-  width: 80%;
+  width: 73%;
   height: 70%;
 }
 .overlay{
   position: absolute;
-  width: 80%;
+  width: 73%;
   height: 70%;
   background-color: #195492c7;
   transition: .35s ease;

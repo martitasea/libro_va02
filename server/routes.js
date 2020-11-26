@@ -38,7 +38,6 @@ exports.getBookApi = async (req, res) => {
           publisher:myJson.items[0].volumeInfo.publisher,
           publishedDate:myJson.items[0].volumeInfo.publishedDate,
           description:myJson.items[0].volumeInfo.description,
-          pageCount:myJson.items[0].volumeInfo.pageCount,
           categories:myJson.items[0].volumeInfo.categories[0],
           language:myJson.items[0].volumeInfo.language,
           image:myJson.items[0].volumeInfo.imageLinks.thumbnail,
@@ -56,9 +55,22 @@ READ ALL BOOKS FROM ONE USER
 ---------------------------------------------------------------------- */
 exports.getAllMyBooks = (req, res) => {
   let firebaseID=req.params.firebaseid;
-  console.log("console "+req.params.firebaseid);
   bbdd
     .getAllMyBooks(firebaseID)
+    .then((data) =>
+      res.status(200).send(data)
+      )
+    .catch((e) => console.log("ocurrió un error:" + e));
+};
+
+
+/* ----------------------------------------------------------------------
+READ ALL BOOKS FROM EVERY USER
+---------------------------------------------------------------------- */
+exports.getAllCatalogue = (req, res) => {
+  let firebaseID=req.params.firebaseid;
+  bbdd
+    .getAllCatalogue(firebaseID)
     .then((data) =>
       res.status(200).send(data)
       )

@@ -45,7 +45,7 @@ exports.createBook = async (newBook) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    INSERT INTO books (ownerID, isbn, state, title, authors, publisher, publishedDate, description, pageCount, categories, language, image, textSnippet)
+    INSERT INTO books (ownerID, isbn, state, title, authors, publisher, publishedDate, description, categories, language, image, textSnippet)
     VALUES
     (
       "${newBook.firebaseID}",
@@ -56,7 +56,6 @@ exports.createBook = async (newBook) => {
       "${newBook.publisher}",
       "${newBook.publishedDate}",
       "${newBook.description.substr(0,252).concat('',"...")}",
-      ${newBook.pageCount},
       "${newBook.categories}",
       "${newBook.language}",
       "${newBook.image}",
@@ -80,8 +79,28 @@ exports.getAllMyBooks = async (firebaseID) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT * FROM books
+    SELECT image,title FROM books
       WHERE ownerID="${firebaseID}"
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+
+/* ----------------------------------------------------------------------
+READ ALL BOOKS FROM EVERY USER
+---------------------------------------------------------------------- */
+exports.getAllCatalogue = async (firebaseID) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT image, title, state FROM books
+    ORDER BY state="rest" DESC 
     `);
     return res;
   } catch (err) {

@@ -19,10 +19,6 @@ class Notifications extends Component {
         <p>Te han pedido prestados los siguientes libros: (Confirma su prestamo):</p>
         <Notification src="./media/dedo.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
         <Notification src="./media/candido.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
-        <Notification src="./media/arbol.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
-        <Notification src="./media/volcan.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
-        <Notification src="./media/lechuga.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
-        <Notification src="./media/doctor.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
       </div>
     </div>  
     );
