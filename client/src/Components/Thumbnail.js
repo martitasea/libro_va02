@@ -11,7 +11,7 @@ class Thumbnail extends Component {
       book:{}
     };
     this.getState=this.getState.bind(this);
-    this.fijarIsbn=this.fijarIsbn.bind(this);
+    this.fixIsbn=this.fixIsbn.bind(this);
   }
 
 getState(){
@@ -20,7 +20,7 @@ getState(){
   else {return "NO DISPONIBLE"}
 }
 
-fijarIsbn(contxt){
+fixIsbn(contxt){
   contxt.setIsbn(this.props.isbn)
   console.log(contxt.isbn)
 }
@@ -33,10 +33,8 @@ fijarIsbn(contxt){
             <Link to="/bookdetail">
               <div className="bg-white shadow m-1 d-flex flex-column align-items-center file-thumbnail" 
               onClick={(e)=>{
-                  // e.preventDefault();
-                  this.fijarIsbn(contxt);
+                  this.fixIsbn(contxt);
                 }}
-                // console.log(this.props.isbn)
               >
                 <img src={this.props.src} alt={this.props.alt} className="thumbnail-book mt-2"/>
                     <div className="overlay mt-2">

@@ -14,7 +14,6 @@ class AllMyBooks extends Component {
   }
 
 getAllMyBooks(){
-  console.log(this.state.books)
     return this.state.books.map((book)=>(
     <MyBook
       src={book.image}

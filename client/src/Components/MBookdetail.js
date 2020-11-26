@@ -6,16 +6,16 @@ class MBookdetail extends Component {
   constructor(props){
     super(props);
     this.state = {
-      title:"",
-      authors:"",
-      publisher:"",
-      publishedDate:"",
-      description:"",
-      categories:"",
-      language:"",
-      image:"",
-      textSnippet:"",
-      isbn:""
+      title:"-",
+      authors:"-",
+      publisher:"-",
+      publishedDate:"-",
+      description:"-",
+      categories:"-",
+      language:"-",
+      image:"-",
+      textSnippet:"-",
+      isbn:"-"
     };
   }
 
@@ -54,7 +54,7 @@ class MBookdetail extends Component {
                 <p>{this.state.authors}</p>
                 <p className="dosis uppercase pt-3 pb-1 my-0">Editorial</p>
                 <p>{this.state.publisher}</p>
-                <p className="dosis uppercase pt-3 pb-1 my-0">{this.state.title}</p>
+                <p className="dosis uppercase pt-3 pb-1 my-0">Idioma</p>
                 <p>{this.state.language}</p>
               </div>
               <div className="mx-3">

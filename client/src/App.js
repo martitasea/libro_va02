@@ -12,12 +12,12 @@ import './App.css';
 
 function App() {
   const [name, setName] = useState('');
-  const [firebaseID, setFirebaseID] = useState('noId');
-  const [email, setEmail] = useState('noMail');
-  const [password, setPassword] = useState('noPassword');
-  const [tutorName, setTutorName] = useState('noParents');
+  const [firebaseID, setFirebaseID] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [tutorName, setTutorName] = useState('');
   const [login, setLogin] = useState('Iniciar Sesión');
-  const [phone, setPhone] = useState('noPhone');
+  const [phone, setPhone] = useState('');
   const [err, setErr]=useState(null);
   const [isbn, setIsbn]=useState('');
 

@@ -60,7 +60,6 @@ class MSignup extends Component {
                     e.preventDefault();
                     auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
                     .then((res)=>{
-                      // console.log(res)
                       contxt.setName(this.state.name);
                       contxt.setFirebaseID(res.user.uid);
                       this.setState({firebaseID: res.user.uid})

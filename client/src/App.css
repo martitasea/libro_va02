@@ -41,6 +41,9 @@ FONTS
 .uppercase{
   text-transform: uppercase;
 }
+p{
+  line-height: 1.25em;
+}
 /* ------------------------------------
 SIZES 
 ---------------------------------------*/
@@ -123,9 +126,6 @@ MARGIN
 .fondo{
   background-color: red;
 }
-
-
-
 /* ------------------------------------
 HEADER 
 ---------------------------------------*/
@@ -245,6 +245,9 @@ CATALOGUE
 ---------------------------------------*/
 .mcatalogue{
   padding-top: 5em;
+}
+.doodle{
+  width: 350px;
 }
 /* ------------------------------------
 THUMBNAIL - HOVER EFECT IMAGE TEXT

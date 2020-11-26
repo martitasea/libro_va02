@@ -8,7 +8,7 @@ class MyBook extends Component {
 
   render() {
     return (
-        <div className="d-flex flex-column align-items-center mr-3 mb-3 mybook">
+        <div className="d-flex flex-column align-items-center mr-1 mb-3 mybook">
             <img src={this.props.src} alt={this.props.title} className="mybookimage"/>
             <div className="pl-0 pt-2">
               <p className="uppercase dosis mini py-0 my-0">{this.props.title}</p>

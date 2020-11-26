@@ -21,15 +21,11 @@ exports.createUser = async (req, res) => {
 READ ONE BOOK FROM GOOGLE API
 ---------------------------------------------------------------------- */
 exports.getBookApi = async (req, res) => {
-    // let isbn = req.params.isbn;
-    console.log("ID de usuario "+req.body.firebaseID)
-    console.log("ISBN "+req.body.isbn)
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${req.body.isbn}`)
        .then(function (response) {
         return response.json();
         })
         .then(function (myJson) {
-        // console.log(myJson.items[0].volumeInfo.title)   
         let newBook={
           firebaseID: req.body.firebaseID,
           isbn:req.body.isbn,
@@ -83,8 +79,6 @@ READ ONE BOOK FROM CATALOGUE
 ---------------------------------------------------------------------- */
 exports.getOneBookDetail = (req, res) => {
   let isbn=req.params.isbn;
-  console.log("comprobación isbn")
-  console.log(isbn)
   bbdd
     .getOneBookDetail(isbn)
     .then((data) =>
