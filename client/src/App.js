@@ -1,25 +1,39 @@
 import React, {useState} from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Login from "./Views/Login/Login";
-import Instructions from "./Views/Instructions/Instructions";
-import Signup from "./Views/Signup/Signup";
-import Catalogue from "./Views/Catalogue/Catalogue";
-import Bookdetail from "./Views/Bookdetail/Bookdetail";
-import Userarea from "./Views/Userarea/Userarea";
-import Adminarea from "./Views/Adminarea/Adminarea";
+import Login from "./Views/Login";
+import Instructions from "./Views/Instructions";
+import Signup from "./Views/Signup";
+import Catalogue from "./Views/Catalogue";
+import Bookdetail from "./Views/Bookdetail";
+import Userarea from "./Views/Userarea";
+import Adminarea from "./Views/Adminarea";
 import {AuthProvider} from './Context/AuthContext';
 import './App.css';
 
 function App() {
-  const [name, setName] = useState('Ines');
-  const [email, setEmail] = useState('prueba@gmail.com');
-  const [password, setPassword] = useState('admin1234');
-  const [parents, setParents] = useState('parent');
-  const [phone, setPhone] = useState('123456789');
+  const [name, setName] = useState('');
+  const [firebaseID, setFirebaseID] = useState('noId');
+  const [email, setEmail] = useState('noMail');
+  const [password, setPassword] = useState('noPassword');
+  const [tutorName, setTutorName] = useState('noParents');
+  const [login, setLogin] = useState('Iniciar Sesión');
+  const [phone, setPhone] = useState('noPhone');
+  const [err, setErr]=useState(null);
+  const [newIsbn, setNewIsbn]=useState('');
 
   return (
     <div className="background">
-      <AuthProvider value={{name, setName, email, setEmail, password, setPassword, parents, setParents, phone, setPhone}}>
+      <AuthProvider value={{
+          name, setName, 
+          firebaseID, setFirebaseID, 
+          email, setEmail, 
+          password, setPassword, 
+          tutorName, setTutorName, 
+          login, setLogin, 
+          phone, setPhone, 
+          err, setErr, 
+          newIsbn, setNewIsbn,
+          }}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Login}/>

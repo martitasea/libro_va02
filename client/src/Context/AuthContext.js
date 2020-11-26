@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AuthContext =React.createContext("default Context")
+const AuthContext =React.createContext()
 
 const AuthProvider=AuthContext.Provider
 const AuthConsumer=AuthContext.Consumer

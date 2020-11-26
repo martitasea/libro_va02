@@ -27,8 +27,6 @@ export {auth};
 // ------------------------------------------------------
 // CREATE USER
 // ------------------------------------------------------
-// let email = "prueba@gmail.com"
-// let password = "prueba1234"
 //   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
 //     // Handle Errors here.
 //     var errorCode = error.code;
