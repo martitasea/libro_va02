@@ -22,17 +22,6 @@ getAllMyBooks(){
   ))
 }
 
-// componentDidUpdate(prevProps, prevState){
-//   if(prevState.books!==this.state.books){
-//   let firebaseID=this.context.firebaseID
-  // fetch("http://localhost:5000/allmybooks/"+firebaseID)
-  //   .then((res) => {return res.json();})
-  //   .then(booksJson => {this.setState({books:booksJson, isFetch:false})})
-  //   .then(err => {console.log(err);});
-// }
-// }
-
-
 componentDidMount(){
   let firebaseID=this.context.firebaseID
   fetch("http://localhost:5000/allmybooks/"+firebaseID)

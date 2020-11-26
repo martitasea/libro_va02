@@ -19,7 +19,7 @@ function App() {
   const [login, setLogin] = useState('Iniciar Sesión');
   const [phone, setPhone] = useState('noPhone');
   const [err, setErr]=useState(null);
-  const [newIsbn, setNewIsbn]=useState('');
+  const [isbn, setIsbn]=useState('');
 
   return (
     <div className="background">
@@ -32,7 +32,7 @@ function App() {
           login, setLogin, 
           phone, setPhone, 
           err, setErr, 
-          newIsbn, setNewIsbn,
+          isbn, setIsbn,
           }}>
         <BrowserRouter>
           <Switch>

@@ -21,10 +21,10 @@ exports.createUser = async (req, res) => {
 READ ONE BOOK FROM GOOGLE API
 ---------------------------------------------------------------------- */
 exports.getBookApi = async (req, res) => {
-    // let isbn = req.params.newIsbn;
+    // let isbn = req.params.isbn;
     console.log("ID de usuario "+req.body.firebaseID)
-    console.log("ISBN "+req.body.newIsbn)
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${req.body.newIsbn}`)
+    console.log("ISBN "+req.body.isbn)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${req.body.isbn}`)
        .then(function (response) {
         return response.json();
         })
@@ -32,7 +32,7 @@ exports.getBookApi = async (req, res) => {
         // console.log(myJson.items[0].volumeInfo.title)   
         let newBook={
           firebaseID: req.body.firebaseID,
-          isbn:req.body.newIsbn,
+          isbn:req.body.isbn,
           title:myJson.items[0].volumeInfo.title,
           authors:myJson.items[0].volumeInfo.authors[0],
           publisher:myJson.items[0].volumeInfo.publisher,
@@ -71,6 +71,22 @@ exports.getAllCatalogue = (req, res) => {
   let firebaseID=req.params.firebaseid;
   bbdd
     .getAllCatalogue(firebaseID)
+    .then((data) =>
+      res.status(200).send(data)
+      )
+    .catch((e) => console.log("ocurrió un error:" + e));
+};
+
+
+/* ----------------------------------------------------------------------
+READ ONE BOOK FROM CATALOGUE
+---------------------------------------------------------------------- */
+exports.getOneBookDetail = (req, res) => {
+  let isbn=req.params.isbn;
+  console.log("comprobación isbn")
+  console.log(isbn)
+  bbdd
+    .getOneBookDetail(isbn)
     .then((data) =>
       res.status(200).send(data)
       )

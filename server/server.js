@@ -43,6 +43,9 @@ app.get("/allmybooks/:firebaseid", routes.getAllMyBooks);
 // Read all catalogue
 app.get("/allcatalogue/:firebaseid", routes.getAllCatalogue);
 
+// Read one book from catalogue
+app.get("/onebookdetail/:isbn", routes.getOneBookDetail);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

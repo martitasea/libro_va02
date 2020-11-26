@@ -99,8 +99,28 @@ exports.getAllCatalogue = async (firebaseID) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT image, title, state FROM books
+    SELECT image, title, state, isbn FROM books
     ORDER BY state="rest" DESC 
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+
+/* ----------------------------------------------------------------------
+READ ONE BOOK FROM CATALOGUE
+---------------------------------------------------------------------- */
+exports.getOneBookDetail = async (isbn) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT * FROM books
+    WHERE isbn=${isbn} 
     `);
     return res;
   } catch (err) {

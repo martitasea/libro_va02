@@ -6,21 +6,21 @@ class AddBook extends Component {
   constructor(props){
     super(props);
     this.state = {
-      newIsbn:"",
+      isbn:"",
       firebaseID:""
     };
     this.setAddIsbn=this.setAddIsbn.bind(this);
     this.getBookApi=this.getBookApi.bind(this);
   }
 
-setAddIsbn(e){this.setState({newIsbn: e.target.value})}
+setAddIsbn(e){this.setState({isbn: e.target.value})}
 
 getBookApi(contxt){
   let newBook={
-    newIsbn:this.state.newIsbn,
+    isbn:this.state.isbn,
     firebaseID: contxt.firebaseID
   }
-  fetch("http://localhost:5000/getbookapi/"+newBook.newIsbn+"/"+newBook.firebaseID, {
+  fetch("http://localhost:5000/getbookapi/"+newBook.isbn+"/"+newBook.firebaseID, {
     method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
