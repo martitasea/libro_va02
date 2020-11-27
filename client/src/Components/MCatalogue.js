@@ -8,7 +8,8 @@ class MCatalogue extends Component {
     super(props);
     this.state = {
       books:[],
-      firebaseID:""
+      firebaseID:"",
+      ownerID:""
     };
     this.getAllCatalogue=this.getAllCatalogue.bind(this);
   }
@@ -17,9 +18,10 @@ class MCatalogue extends Component {
 getAllCatalogue(){
   return this.state.books.map((book)=>(
   <Thumbnail
+    key={book.isbn}
     src={book.image}
     title={book.title}
-    state={book.state}
+    phase={book.phase}
     isbn={book.isbn}
   />
   ))
@@ -31,7 +33,6 @@ componentDidMount(){
     .then((res) => {return res.json();})
     .then(booksJson => {
       this.setState({books:booksJson, firebaseID:this.context.firebaseID})
-      console.log(this.context.login)
     })
     .catch(err => {console.log(err);});
 }
@@ -43,7 +44,7 @@ componentDidMount(){
           <div className="row d-flex justify-content-center">
             <img src="./media/ReadingSideDoodle03-2.svg" alt="" className="mt-3 doodle"/>
             <Link to="/">
-              <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+              <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"></input>
             </Link>
             <p className="mt-4 child title blue text-center">Lo siento para ver el catálogo tienes que iniciar sesión</p>
           </div>

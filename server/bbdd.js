@@ -45,7 +45,7 @@ exports.createBook = async (newBook) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    INSERT INTO books (ownerID, isbn, state, title, authors, publisher, publishedDate, description, categories, language, image, textSnippet)
+    INSERT INTO books (ownerID, isbn, phase, title, authors, publisher, publishedDate, description, categories, language, image, textSnippet)
     VALUES
     (
       "${newBook.firebaseID}",
@@ -92,15 +92,16 @@ exports.getAllMyBooks = async (firebaseID) => {
 };
 
 /* ----------------------------------------------------------------------
-READ ALL BOOKS FROM EVERY USER
+READ ALL BOOKS FROM EVERY USER EXCEPT THE LOGGED ONE
 ---------------------------------------------------------------------- */
 exports.getAllCatalogue = async (firebaseID) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT image, title, state, isbn FROM books
-    ORDER BY state="rest" DESC 
+    SELECT image, title, phase, isbn, ownerID FROM books
+    WHERE NOT ownerID="${firebaseID}"
+    ORDER BY phase="rest" DESC 
     `);
     return res;
   } catch (err) {
@@ -121,6 +122,51 @@ exports.getOneBookDetail = async (isbn) => {
     const res = await conn.query(`
     SELECT * FROM books
     WHERE isbn=${isbn} 
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+/* ----------------------------------------------------------------------
+READ TITLE FROM JUST ADDED BOOK
+---------------------------------------------------------------------- */
+exports.getBookTitle = async (isbn, firebaseID) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT title FROM books
+    WHERE isbn="${isbn}" 
+    AND ownerID="${firebaseID}"
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+
+/* ----------------------------------------------------------------------
+UPDATE BOOK PHASE FROM REST TO REQUEST
+---------------------------------------------------------------------- */
+exports.updateBookPhase = async (isbn, firebaseID, phase) => {
+  if (phase==="rest"){
+    var change="request"
+  }
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    UPDATE books
+    SET phase="${change}"
+    WHERE isbn="${isbn}" 
+    AND ownerID="${firebaseID}"
     `);
     return res;
   } catch (err) {

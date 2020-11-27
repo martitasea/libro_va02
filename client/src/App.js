@@ -14,10 +14,7 @@ function App() {
   const [name, setName] = useState('');
   const [firebaseID, setFirebaseID] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [tutorName, setTutorName] = useState('');
   const [login, setLogin] = useState('Iniciar Sesión');
-  const [phone, setPhone] = useState('');
   const [err, setErr]=useState(null);
   const [isbn, setIsbn]=useState('');
 
@@ -27,10 +24,7 @@ function App() {
           name, setName, 
           firebaseID, setFirebaseID, 
           email, setEmail, 
-          password, setPassword, 
-          tutorName, setTutorName, 
           login, setLogin, 
-          phone, setPhone, 
           err, setErr, 
           isbn, setIsbn,
           }}>

@@ -10,10 +10,10 @@ exports.createUser = async (req, res) => {
     let user = await req.body;
       bbdd
         .createUser(user)
-        // .then((data) =>
+        .then((data) =>
         res.status(200).redirect("/catalogue")
-        // )
-        // .catch((e) => console.log("ocurrió un error:" + e));
+        )
+        .catch((e) => console.log("ocurrió un error:" + e));
     };
 
 
@@ -40,10 +40,15 @@ exports.getBookApi = async (req, res) => {
           textSnippet:myJson.items[0].searchInfo.textSnippet
         }
         console.log("Has guardado el libro "+newBook.title);
-      bbdd
-        .createBook(newBook);
-      res.status(200).redirect("/catalogue")  
-        });
+        bbdd
+          .createBook(newBook)
+          .then((myJson) =>
+          res.status(200).send(myJson)
+          ) 
+          // .catch((e) => console.log("ocurrió un error:" + e));
+        }
+        // .catch((e) => console.log("ocurrió un error:" + e))
+        );
       }
     
 /* ----------------------------------------------------------------------
@@ -86,3 +91,37 @@ exports.getOneBookDetail = (req, res) => {
       )
     .catch((e) => console.log("ocurrió un error:" + e));
 };
+
+
+/* ----------------------------------------------------------------------
+READ TITLE FROM JUST ADDED BOOK
+---------------------------------------------------------------------- */
+exports.getBookTitle = (req, res) => {
+  let isbn=req.params.isbn;
+  let firebaseID=req.params.firebaseid;
+  bbdd
+    .getBookTitle(isbn, firebaseID)
+    .then((data) =>
+      res.status(200).send(data)
+      )
+    .catch((e) => console.log("ocurrió un error:" + e));
+};
+
+/* ----------------------------------------------------------------------
+UPDATE BOOK PHASE FROM REST TO REQUEST
+---------------------------------------------------------------------- */
+exports.updateBookPhase = async (req, res) => {
+  let isbn=req.params.isbn;
+  let firebaseID=req.params.firebaseid;
+  let phase=req.params.phase;
+  console.log(isbn)
+  console.log(firebaseID)
+  console.log(phase)
+  console.log("Has cambiado el estado")
+    bbdd
+      .updateBookPhase(isbn, firebaseID, phase)
+      .then(() =>
+      res.status(200).redirect("/catalogue")
+      )
+      .catch((e) => console.log("ocurrió un error:" + e));
+  };

@@ -46,6 +46,12 @@ app.get("/allcatalogue/:firebaseid", routes.getAllCatalogue);
 // Read one book from catalogue
 app.get("/onebookdetail/:isbn", routes.getOneBookDetail);
 
+// Read title from just addedbook
+app.get("/getbooktitle/:isbn/:firebaseid", routes.getBookTitle);
+
+// Update book phase from rest to request
+app.get("/updatebookphase/:isbn/:firebaseid/:phase", routes.updateBookPhase);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------
@@ -85,7 +91,7 @@ app.get("/onebookdetail/:isbn", routes.getOneBookDetail);
 //           bookID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 //           ownerID VARCHAR(300) NOT NULL,
 //           isbn VARCHAR(20) NOT NULL, 
-//           state VARCHAR (20) NOT NULL,
+//           phase VARCHAR (20) NOT NULL,
 //           title VARCHAR(100) NOT NULL,
 //           authors VARCHAR(100),
 //           publisher VARCHAR (30),

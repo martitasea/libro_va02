@@ -38,7 +38,7 @@ setPassword(e){this.setState({password: e.target.value})}
                     contxt.setEmail(this.state.email);
                     contxt.setFirebaseID(res.user.uid);
                     contxt.setLogin("Cerrar Sesión");
-                    this.props.history.push("/userarea");
+                    this.props.history.push("/catalogue");
                   })
                 }
                 }>

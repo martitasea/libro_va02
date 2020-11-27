@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import { AuthConsumer } from '../Context/AuthContext';
 
 class Thumbnail extends Component {
   constructor(props){
     super(props);
     this.state = {
-      state:this.props.state,
+      phase:this.props.phase,
       link:"/bookdetail/"+this.props.isbn,
       book:{}
     };
@@ -15,7 +15,7 @@ class Thumbnail extends Component {
   }
 
 getState(){
-  if(this.state.state==="rest")
+  if(this.state.phase==="rest")
   {return "¡PIDELO!"}
   else {return "NO DISPONIBLE"}
 }
@@ -50,4 +50,4 @@ fixIsbn(contxt){
   }
 }
 
-export default Thumbnail;
+export default withRouter(Thumbnail);

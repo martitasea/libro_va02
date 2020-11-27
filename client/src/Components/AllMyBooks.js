@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 import MyBook from './MyBook';
 
@@ -30,6 +31,23 @@ componentDidMount(){
 }
 
   render() {
+    if(this.context.login==="Iniciar Sesión"){
+      return(
+      <div className="bg-white mb-3">
+        <a href="/" data-toggle="collapse" data-target="#allmybooks">
+          <p className="child blue title pt-2 pl-2 mb-0">
+            <span className="childIcon blue">f </span>Todos mis libros
+          </p>
+        </a>
+        <div id="allmybooks" className="collapse grey pl-2">
+          <p className="grey pl-2 pb-2">Tienes que iniciar sesión para poder ver tus libros.</p>
+          <Link to="/">
+            <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+          </Link>
+        </div>
+    </div>  
+      )
+    }
     return (
       <div className="bg-white mb-3">
         <a href="/" data-toggle="collapse" data-target="#allmybooks">
@@ -47,5 +65,6 @@ componentDidMount(){
     );
   }
 }
+
 AllMyBooks.contextType=AuthContext;
 export default AllMyBooks;

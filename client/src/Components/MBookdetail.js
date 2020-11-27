@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AuthConsumer } from '../Context/AuthContext';
+import {withRouter} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 
 class MBookdetail extends Component {
@@ -15,9 +16,37 @@ class MBookdetail extends Component {
       language:"-",
       image:"-",
       textSnippet:"-",
-      isbn:"-"
+      isbn:"-",
+      ownerID:"-",
+      phase:"-"
     };
+    this.changePhaseRequest=this.changePhaseRequest.bind (this);
   }
+
+changePhaseRequest(e){
+  e.preventDefault();
+    fetch("http://localhost:5000/updatebookphase/"+this.state.isbn+"/"+this.state.ownerID+"/"+this.state.phase)
+      .then((res) => {return res.json();})
+      .then(bookJson => 
+        {this.setState({
+          title:bookJson[0].title,
+          authors: bookJson[0].authors,
+          publisher: bookJson[0].publisher, 
+          publishedDate: bookJson[0].publishedDate, 
+          description: bookJson[0].description, 
+          categories: bookJson[0].categories, 
+          language: bookJson[0].language, 
+          image: bookJson[0].image, 
+          textSnippet: bookJson[0].textSnippet,
+          isbn:bookJson[0].isbn,
+          ownerID:bookJson[0].ownerID,
+          // phase:"request"
+        })
+      }
+      )
+      .catch(err => {console.log(err);});
+      console.log("debería estar redirigiendo")
+}
 
   componentDidMount(){
     let isbn=this.context.isbn
@@ -34,7 +63,9 @@ class MBookdetail extends Component {
           language: bookJson[0].language, 
           image: bookJson[0].image, 
           textSnippet: bookJson[0].textSnippet,
-          isbn:bookJson[0].isbn
+          isbn:bookJson[0].isbn,
+          ownerID:bookJson[0].ownerID,
+          phase:bookJson[0].phase
         })
         
       })
@@ -48,7 +79,7 @@ class MBookdetail extends Component {
         {(contxt)=>(
             <section className="container bg-white m-2 bookdetail">
             <div className="row">
-              <img src={this.state.image} alt={this.state.title} className="book my-3 ml-3 col-5"/>
+              <img src={this.state.image} alt={this.state.title} className="book my-3 ml-3 col-5"></img>
               <div className="my-3 mx-1 col-6">
                 <p className="uppercase dosis medium py-1 my-0">{this.state.title}</p>
                 <p>{this.state.authors}</p>
@@ -64,7 +95,7 @@ class MBookdetail extends Component {
                 <p className="dosis uppercase pt-3 pb-1 my-0">ISBN</p>
                 <p>{this.state.isbn}</p>
               </div>
-              <button className="btn btn-green uppercase m-3">Pedir prestado</button>
+              <button onClick={this.changePhaseRequest} className="btn btn-green uppercase m-3">Pedir prestado</button>
             </div>
           </section>
         )}
@@ -73,4 +104,4 @@ class MBookdetail extends Component {
   }
 }
 MBookdetail.contextType=AuthContext;
-export default MBookdetail;
+export default withRouter(MBookdetail);

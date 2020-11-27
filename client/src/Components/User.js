@@ -35,9 +35,6 @@ class User extends Component {
                   .then((res)=> {
                     contxt.setName('');
                     contxt.setEmail('');
-                    contxt.setPassword('');
-                    contxt.setTutorName('');
-                    contxt.setPhone('');
                     contxt.setFirebaseID('');
                     contxt.setLogin("Iniciar Sesión")
                     this.props.history.push("/");
