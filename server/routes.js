@@ -42,8 +42,8 @@ exports.getBookApi = async (req, res) => {
         console.log("Has guardado el libro "+newBook.title);
         bbdd
           .createBook(newBook)
-          .then((myJson) =>
-          res.status(200).send(myJson)
+          .then((data) =>
+          res.status(200).json(data)
           ) 
           // .catch((e) => console.log("ocurrió un error:" + e));
         }
@@ -59,7 +59,7 @@ exports.getAllMyBooks = (req, res) => {
   bbdd
     .getAllMyBooks(firebaseID)
     .then((data) =>
-      res.status(200).send(data)
+      res.status(200).json(data)
       )
     .catch((e) => console.log("ocurrió un error:" + e));
 };
@@ -73,7 +73,7 @@ exports.getAllCatalogue = (req, res) => {
   bbdd
     .getAllCatalogue(firebaseID)
     .then((data) =>
-      res.status(200).send(data)
+      res.status(200).json(data)
       )
     .catch((e) => console.log("ocurrió un error:" + e));
 };
@@ -87,7 +87,7 @@ exports.getOneBookDetail = (req, res) => {
   bbdd
     .getOneBookDetail(isbn)
     .then((data) =>
-      res.status(200).send(data)
+      res.status(200).json(data)
       )
     .catch((e) => console.log("ocurrió un error:" + e));
 };
@@ -102,7 +102,7 @@ exports.getBookTitle = (req, res) => {
   bbdd
     .getBookTitle(isbn, firebaseID)
     .then((data) =>
-      res.status(200).send(data)
+      res.status(200).json(data)
       )
     .catch((e) => console.log("ocurrió un error:" + e));
 };
@@ -114,14 +114,10 @@ exports.updateBookPhase = async (req, res) => {
   let isbn=req.params.isbn;
   let firebaseID=req.params.firebaseid;
   let phase=req.params.phase;
-  console.log(isbn)
-  console.log(firebaseID)
-  console.log(phase)
-  console.log("Has cambiado el estado")
     bbdd
       .updateBookPhase(isbn, firebaseID, phase)
-      .then(() =>
-      res.status(200).redirect("/catalogue")
+      .then((data) =>
+      res.status(200).json(data)
       )
       .catch((e) => console.log("ocurrió un error:" + e));
   };

@@ -14,6 +14,7 @@ function App() {
   const [name, setName] = useState('');
   const [firebaseID, setFirebaseID] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [login, setLogin] = useState('Iniciar Sesión');
   const [err, setErr]=useState(null);
   const [isbn, setIsbn]=useState('');
@@ -23,7 +24,8 @@ function App() {
       <AuthProvider value={{
           name, setName, 
           firebaseID, setFirebaseID, 
-          email, setEmail, 
+          email, setEmail,
+          password, setPassword, 
           login, setLogin, 
           err, setErr, 
           isbn, setIsbn,

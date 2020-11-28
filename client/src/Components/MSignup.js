@@ -15,12 +15,14 @@ class MSignup extends Component {
     };
     this.setName=this.setName.bind(this);
     this.setEmail=this.setEmail.bind(this);
+    this.setPassword=this.setPassword.bind(this);
     this.setPhone=this.setPhone.bind(this);
     this.createUser=this.createUser.bind(this);
   }
 
   setName(e){this.setState({name: e.target.value})}
   setEmail(e){this.setState({email: e.target.value})}
+  setPassword(e){this.setState({password: e.target.value})}
   setPhone(e){this.setState({phone: e.target.value})}
 
 
@@ -29,7 +31,8 @@ class MSignup extends Component {
       firebaseID: this.state.firebaseID,
       name:this.state.name,
       tutorName:this.state.tutorName,
-      phone:this.state.phone
+      phone:this.state.phone,
+      password:this.state.password
     };
     fetch("http://localhost:5000/createuser", {
       method: "POST",
@@ -79,7 +82,7 @@ class MSignup extends Component {
                   </div>
                   <div>
                     <label className="mb-1 mt-3 grey mini">CONTRASEÑA</label>
-                    <input type="password" id="password" name="password" className="p-1 grey width100 border-blue-1"/>
+                    <input onChange={this.setPassword} type="password" id="password" name="password" className="p-1 grey width100 border-blue-1"/>
                   </div>
                   <div>
                     <label className="mb-1 mt-3 grey mini">NOMBRE PADRE/MADRE/TUTOR</label>

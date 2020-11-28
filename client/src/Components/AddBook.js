@@ -15,46 +15,47 @@ class AddBook extends Component {
     };
     this.setAddIsbn=this.setAddIsbn.bind(this);
     this.getBookApi=this.getBookApi.bind(this);
-    // this.getBookTitle=this.getBookTitle.bind(this);
   }
 
-setAddIsbn(e){this.setState({isbn: e.target.value})}
+setAddIsbn(e){
+  let addedIsbn=e.target.value.replace(/-/g,"")
+  this.setState({isbn: addedIsbn})
+}
 
-getBookApi(contxt){
+getBookApi(contxt, e){
   let newBook={
     isbn:this.state.isbn,
     firebaseID: contxt.firebaseID,
   }
+
   fetch("http://localhost:5000/getbookapi/"+newBook.isbn+"/"+newBook.firebaseID, {
     method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(newBook),
+      // .catch(err => {console.log(err);});
     })
-  
-  fetch("http://localhost:5000/getbooktitle/"+newBook.isbn+"/"+newBook.firebaseID)
+
+  .then(() => {
+    fetch("http://localhost:5000/getbooktitle/"+newBook.isbn+"/"+newBook.firebaseID)
     .then((res) => {return res.json();})
-    .then(titleJson => {
-      this.setState({info:titleJson})
-      console.log(this.state.info)
+    .then((titleJson) => {
+      this.setState({info:titleJson[0].title})
+      this.setState({message: "¡Muy bien! Has añadido el "})
+      
+    })
+    .then(()=>{
+      // setTimeout((e)=>(e.target.reset()))
+      // setTimeout(()=>document.getElementById("addBookForm").reset)
+      // document.getElementById("addBook").reset();
+      setTimeout(() => this.props.history.push('/catalogue'), 1500)
     })
     .catch(err => {console.log(err);});
-  this.setState({message: "¡Muy bien! Has añadido el libro. "})
+  })
 }
+  
 
-// getBookTitle(contxt){
-//   let newBook={
-//     isbn:this.state.isbn,
-//     firebaseID: contxt.firebaseID
-//   }
-//   fetch("http://localhost:5000/getbooktitle/"+newBook.isbn+newBook.firebaseID)
-//     .then((res) => {return res.json();})
-//     .then(titleJson => {
-//       this.setState({title:titleJson})
-//     })
-//     .catch(err => {console.log(err);});
-// }
 
 render() {
   if(this.context.login==="Iniciar Sesión"){
@@ -94,8 +95,8 @@ render() {
               >
                 <div>
                   <label className="mb-1 grey mini">ISBN</label>
-                  <input onChange={this.setAddIsbn} type="text" name="isbn" className="p-1 mb-2 grey width100 border-blue-1"/>
-                  <p className="red">{this.state.message}</p>
+                  <input id="addBookForm" onChange={this.setAddIsbn} type="text" name="isbn" className="p-1 mb-2 grey width100 border-blue-1"/>
+                  <p className="green">{this.state.message}{this.state.info}</p>
                 </div>
                 <input type="submit" value="AÑADIR" className="btn btn-blue mt-2"></input>
               </form>
@@ -109,4 +110,3 @@ render() {
 
 AddBook.contextType=AuthContext;
 export default withRouter(AddBook);
-// {this.state.title}

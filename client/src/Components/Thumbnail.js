@@ -15,14 +15,13 @@ class Thumbnail extends Component {
   }
 
 getState(){
-  if(this.state.phase==="rest")
+  if(this.state.phase===1)
   {return "¡PIDELO!"}
   else {return "NO DISPONIBLE"}
 }
 
 fixIsbn(contxt){
   contxt.setIsbn(this.props.isbn)
-  console.log(contxt.isbn)
 }
 
   render() {

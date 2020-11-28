@@ -55,7 +55,7 @@ exports.createBook = async (newBook) => {
       "${newBook.authors}",
       "${newBook.publisher}",
       "${newBook.publishedDate}",
-      "${newBook.description.substr(0,252).concat('',"...")}",
+      "${newBook.description}",
       "${newBook.categories}",
       "${newBook.language}",
       "${newBook.image}",
@@ -101,7 +101,8 @@ exports.getAllCatalogue = async (firebaseID) => {
     const res = await conn.query(`
     SELECT image, title, phase, isbn, ownerID FROM books
     WHERE NOT ownerID="${firebaseID}"
-    ORDER BY phase="rest" DESC 
+    AND phase=1
+    ORDER BY phase=1 DESC  
     `);
     return res;
   } catch (err) {
@@ -156,15 +157,16 @@ exports.getBookTitle = async (isbn, firebaseID) => {
 UPDATE BOOK PHASE FROM REST TO REQUEST
 ---------------------------------------------------------------------- */
 exports.updateBookPhase = async (isbn, firebaseID, phase) => {
-  if (phase==="rest"){
-    var change="request"
+  phase=parseInt(phase)
+  if(phase<5){
+    phase+=1
   }
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
     UPDATE books
-    SET phase="${change}"
+    SET phase=${phase}
     WHERE isbn="${isbn}" 
     AND ownerID="${firebaseID}"
     `);
@@ -173,6 +175,6 @@ exports.updateBookPhase = async (isbn, firebaseID, phase) => {
     console.log(err);
     return;
   } finally {
-    if (conn) conn.release(); //release to pool
+    if (conn) conn.release(); 
   }
 };

@@ -18,34 +18,28 @@ class MBookdetail extends Component {
       textSnippet:"-",
       isbn:"-",
       ownerID:"-",
-      phase:"-"
+      phase:undefined,
+      message1:"",
+      message2:"",
+      info:[]
     };
     this.changePhaseRequest=this.changePhaseRequest.bind (this);
   }
-
-changePhaseRequest(e){
-  e.preventDefault();
+  
+//ESTO TIENE QUE ESTAR EN EL COMPONENTDIDMOUNT?
+changePhaseRequest(){
     fetch("http://localhost:5000/updatebookphase/"+this.state.isbn+"/"+this.state.ownerID+"/"+this.state.phase)
-      .then((res) => {return res.json();})
-      .then(bookJson => 
-        {this.setState({
-          title:bookJson[0].title,
-          authors: bookJson[0].authors,
-          publisher: bookJson[0].publisher, 
-          publishedDate: bookJson[0].publishedDate, 
-          description: bookJson[0].description, 
-          categories: bookJson[0].categories, 
-          language: bookJson[0].language, 
-          image: bookJson[0].image, 
-          textSnippet: bookJson[0].textSnippet,
-          isbn:bookJson[0].isbn,
-          ownerID:bookJson[0].ownerID,
-          // phase:"request"
+      .then(()=>{
+        fetch("http://localhost:5000/getbooktitle/"+this.state.isbn+"/"+this.state.ownerID)
+        .then((res)=>{return res.json();})
+        .then((titleJson)=>{
+          this.setState({info:titleJson[0].title, message1: "Has pedido prestado el libro, ", message2:"Te llegará un correo electrónico cuando el dueño acepte tu petición."})
         })
-      }
-      )
+      })
+      .then(()=>{
+        setTimeout(() => this.props.history.push('/catalogue'), 3300)
+      })
       .catch(err => {console.log(err);});
-      console.log("debería estar redirigiendo")
 }
 
   componentDidMount(){
@@ -95,8 +89,12 @@ changePhaseRequest(e){
                 <p className="dosis uppercase pt-3 pb-1 my-0">ISBN</p>
                 <p>{this.state.isbn}</p>
               </div>
-              <button onClick={this.changePhaseRequest} className="btn btn-green uppercase m-3">Pedir prestado</button>
-            </div>
+              <div className="mb-3">
+                <button onClick={this.changePhaseRequest} className="btn btn-green uppercase ml-3 mt-3 mb-2">Pedir prestado</button>
+                <p className="green ml-3">{this.state.message1}{this.state.info}</p>
+                <p className="green ml-3">{this.state.message2}</p>
+              </div>
+              </div>
           </section>
         )}
       </AuthConsumer>
@@ -105,3 +103,4 @@ changePhaseRequest(e){
 }
 MBookdetail.contextType=AuthContext;
 export default withRouter(MBookdetail);
+
