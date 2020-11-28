@@ -7,6 +7,7 @@ class MBookdetail extends Component {
   constructor(props){
     super(props);
     this.state = {
+      bookID:"-",
       title:"-",
       authors:"-",
       publisher:"-",
@@ -26,15 +27,23 @@ class MBookdetail extends Component {
     this.changePhaseRequest=this.changePhaseRequest.bind (this);
   }
   
-//ESTO TIENE QUE ESTAR EN EL COMPONENTDIDMOUNT?
 changePhaseRequest(){
-    fetch("http://localhost:5000/updatebookphase/"+this.state.isbn+"/"+this.state.ownerID+"/"+this.state.phase)
+    fetch("http://localhost:5000/updatebookphase/"+this.state.bookID+"/"+this.state.phase)
       .then(()=>{
-        fetch("http://localhost:5000/getbooktitle/"+this.state.isbn+"/"+this.state.ownerID)
+        fetch("http://localhost:5000/getbooktitle/"+this.state.bookID)
         .then((res)=>{return res.json();})
         .then((titleJson)=>{
           this.setState({info:titleJson[0].title, message1: "Has pedido prestado el libro, ", message2:"Te llegará un correo electrónico cuando el dueño acepte tu petición."})
         })
+      })
+      .then(()=>{
+        fetch("http://localhost:5000/createLoan/"+this.state.bookID+"/"+this.context.firebaseID)
+        .then((res)=>{return res.json();})
+        // .then((titleJson)=>{
+        //   console.log(titleJson)
+        // this.setState({info:titleJson[0].title, message1: "Has pedido prestado el libro, ", message2:"Te llegará un correo electrónico cuando el dueño acepte tu petición."})
+        // })
+
       })
       .then(()=>{
         setTimeout(() => this.props.history.push('/catalogue'), 3300)
@@ -48,6 +57,7 @@ changePhaseRequest(){
       .then((res) => {return res.json();})
       .then(bookJson => 
         {this.setState({
+          bookID:bookJson[0].bookID,
           title:bookJson[0].title,
           authors: bookJson[0].authors,
           publisher: bookJson[0].publisher, 

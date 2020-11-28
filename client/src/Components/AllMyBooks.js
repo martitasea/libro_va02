@@ -40,7 +40,7 @@ componentDidMount(){
           </p>
         </a>
         <div id="allmybooks" className="collapse grey pl-2">
-          <p className="grey pl-2 pb-2">Tienes que iniciar sesión para poder ver tus libros.</p>
+          <p className="grey pb-2">Tienes que iniciar sesión para poder ver tus libros.</p>
           <Link to="/">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
           </Link>
@@ -57,11 +57,11 @@ componentDidMount(){
         </a>
         <div id="allmybooks" className="collapse grey pl-2">
           <p className="grey pl-2 pb-2">Estos son los libros disponibles para prestar a tus compañeros:</p>
-          <div className="d-flex flex-wrap justify-content-around">
+        <div className="d-flex flex-wrap justify-content-around">
             {this.getAllMyBooks()}
-          </div>
         </div>
-    </div>  
+        </div>
+      </div>  
     );
   }
 }

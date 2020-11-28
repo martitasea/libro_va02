@@ -47,10 +47,13 @@ app.get("/allcatalogue/:firebaseid", routes.getAllCatalogue);
 app.get("/onebookdetail/:isbn", routes.getOneBookDetail);
 
 // Read title from just addedbook
-app.get("/getbooktitle/:isbn/:firebaseid", routes.getBookTitle);
+app.get("/getbooktitle/:bookid", routes.getBookTitle);
 
 // Update book phase from rest to request
-app.get("/updatebookphase/:isbn/:firebaseid/:phase", routes.updateBookPhase);
+app.get("/updatebookphase/:bookid/:phase", routes.updateBookPhase);
+
+//Create loan
+app.get("/createloan/:bookid/:borrowedid", routes.createLoan);
 
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE

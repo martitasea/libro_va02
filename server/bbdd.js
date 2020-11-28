@@ -135,14 +135,13 @@ exports.getOneBookDetail = async (isbn) => {
 /* ----------------------------------------------------------------------
 READ TITLE FROM JUST ADDED BOOK
 ---------------------------------------------------------------------- */
-exports.getBookTitle = async (isbn, firebaseID) => {
+exports.getBookTitle = async (bookid) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
     SELECT title FROM books
-    WHERE isbn="${isbn}" 
-    AND ownerID="${firebaseID}"
+    WHERE bookID=${bookid} 
     `);
     return res;
   } catch (err) {
@@ -156,7 +155,8 @@ exports.getBookTitle = async (isbn, firebaseID) => {
 /* ----------------------------------------------------------------------
 UPDATE BOOK PHASE FROM REST TO REQUEST
 ---------------------------------------------------------------------- */
-exports.updateBookPhase = async (isbn, firebaseID, phase) => {
+exports.updateBookPhase = async (bookid, phase) => {
+  bookid=parseInt(bookid)
   phase=parseInt(phase)
   if(phase<5){
     phase+=1
@@ -167,8 +167,32 @@ exports.updateBookPhase = async (isbn, firebaseID, phase) => {
     const res = await conn.query(`
     UPDATE books
     SET phase=${phase}
-    WHERE isbn="${isbn}" 
-    AND ownerID="${firebaseID}"
+    WHERE bookID=${bookid} 
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); 
+  }
+};
+/* ----------------------------------------------------------------------
+CREATE LOAN
+---------------------------------------------------------------------- */
+exports.createLoan = async (bookid, borrowedid) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    INSERT INTO loans (bookID, borrowerID, dateIn, dateOut)
+    VALUES
+    (
+    ${bookid},
+    "${borrowedid}",
+    CURRENT_DATE,
+    CURRENT_DATE + INTERVAL 8 DAY
+    )
     `);
     return res;
   } catch (err) {

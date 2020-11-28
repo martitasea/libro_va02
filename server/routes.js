@@ -97,10 +97,9 @@ exports.getOneBookDetail = (req, res) => {
 READ TITLE FROM JUST ADDED BOOK
 ---------------------------------------------------------------------- */
 exports.getBookTitle = (req, res) => {
-  let isbn=req.params.isbn;
-  let firebaseID=req.params.firebaseid;
+  let bookid=req.params.bookid;
   bbdd
-    .getBookTitle(isbn, firebaseID)
+    .getBookTitle(bookid)
     .then((data) =>
       res.status(200).json(data)
       )
@@ -111,13 +110,29 @@ exports.getBookTitle = (req, res) => {
 UPDATE BOOK PHASE FROM REST TO REQUEST
 ---------------------------------------------------------------------- */
 exports.updateBookPhase = async (req, res) => {
-  let isbn=req.params.isbn;
-  let firebaseID=req.params.firebaseid;
+  let bookid=req.params.bookid;
   let phase=req.params.phase;
     bbdd
-      .updateBookPhase(isbn, firebaseID, phase)
+      .updateBookPhase(bookid, phase)
       .then((data) =>
       res.status(200).json(data)
       )
       .catch((e) => console.log("ocurrió un error:" + e));
   };
+
+  /* ----------------------------------------------------------------------
+CREATE LOAN
+---------------------------------------------------------------------- */
+exports.createLoan = async (req, res) =>{
+  let bookid=req.params.bookid;
+  let borrowedid=req.params.borrowedid;
+  bbdd
+  .createLoan(bookid, borrowedid)
+  .then((data) =>
+  res.status(200).json(data)
+  )
+  .catch((e) => console.log("ocurrió un error:" + e));  
+
+
+
+}

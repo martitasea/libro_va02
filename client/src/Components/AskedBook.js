@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
+import AuthContext from '../Context/AuthContext';
 
 class AskedBook extends Component {
   // constructor(props){
@@ -7,6 +9,23 @@ class AskedBook extends Component {
   // }
 
   render() {
+    if(this.context.login==="Iniciar Sesión"){
+      return(
+      <div className="bg-white mb-3">
+        <a href="/" data-toggle="collapse" data-target="#askedbook">
+          <p className="child blue title pt-2 pl-2 mb-0">
+            <span className="childIcon blue">f </span>Devolver un libro
+          </p>
+        </a>
+        <div id="askedbook" className="collapse grey pl-2">
+          <p className="grey pb-2">Tienes que iniciar sesión para poder devolver un libro.</p>
+          <Link to="/">
+            <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+          </Link>
+        </div>
+    </div>  
+      )
+    }
     return (
       <div className="bg-white mb-3">
       <a href="/" data-toggle="collapse" data-target="#askedbook">
@@ -31,4 +50,5 @@ class AskedBook extends Component {
   }
 }
 
+AskedBook.contextType=AuthContext;
 export default AskedBook;
