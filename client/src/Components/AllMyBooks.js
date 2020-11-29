@@ -23,8 +23,7 @@ getAllMyBooks(){
 }
 
 componentDidMount(){
-  let firebaseID=this.context.firebaseID
-  fetch("http://localhost:5000/allmybooks/"+firebaseID)
+  fetch("http://localhost:5000/allmybooks/"+this.context.firebaseID)
     .then((res) => {return res.json();})
     .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
     .catch(err => {console.log(err);});

@@ -202,3 +202,23 @@ exports.createLoan = async (bookid, borrowedid) => {
     if (conn) conn.release(); 
   }
 };
+/* ----------------------------------------------------------------------
+READ ASKED BOOKS
+---------------------------------------------------------------------- */
+exports.getAskedBooks = async (firebaseid) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT title, authors, image FROM books
+    WHERE ownerID="${firebaseid}"
+    AND phase=2
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); 
+  }
+};

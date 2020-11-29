@@ -7,23 +7,25 @@ class Notifications extends Component {
   constructor(props){
     super(props);
     this.state = {
-
+      books:[]
     };
     this.getAskedBooks=this.getAskedBooks.bind(this);
   }
 
 getAskedBooks(){
-    // return this.state.books.map((book)=>(
-      console.log("book")
-      // <Notification src="./media/dedo.jpg" title="El dedo en la nariz" author="Paula Merlán Gómez"/>
-  // ))
+    return this.state.books.map((book)=>(
+      <Notification src={book.image} title={book.title} author={book.authors}/>
+  ))
 }
 
 componentDidMount(){
-  let firebaseID=this.context.firebaseID
-  fetch("http://localhost:5000/allmybooks/"+firebaseID)
+  fetch("http://localhost:5000/getaskedbooks/"+this.context.firebaseID)
     .then((res) => {return res.json();})
-    .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
+    .then(booksJson => 
+      {console.log(booksJson)
+       this.setState({books:booksJson})
+      }
+      )
     .catch(err => {console.log(err);});
 }
 
@@ -49,7 +51,7 @@ componentDidMount(){
       <div className="bg-white mb-3">
       <a href="/" data-toggle="collapse" data-target="#notifications">
         <p className="child blue title pt-2 pl-2 mb-0">
-          <span className="childIcon blue">f </span>Todos mis libros
+          <span className="childIcon blue">f </span>Libros pendientes de préstamo
         </p>
       </a>
       <div id="notifications" className="collapse grey pl-2">

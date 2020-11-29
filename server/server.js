@@ -55,6 +55,9 @@ app.get("/updatebookphase/:bookid/:phase", routes.updateBookPhase);
 //Create loan
 app.get("/createloan/:bookid/:borrowedid", routes.createLoan);
 
+//Read asked books
+app.get("/getaskedbooks/:firebaseid", routes.getAskedBooks);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

@@ -120,7 +120,7 @@ exports.updateBookPhase = async (req, res) => {
       .catch((e) => console.log("ocurrió un error:" + e));
   };
 
-  /* ----------------------------------------------------------------------
+/* ----------------------------------------------------------------------
 CREATE LOAN
 ---------------------------------------------------------------------- */
 exports.createLoan = async (req, res) =>{
@@ -132,7 +132,16 @@ exports.createLoan = async (req, res) =>{
   res.status(200).json(data)
   )
   .catch((e) => console.log("ocurrió un error:" + e));  
+}
 
-
-
+/* ----------------------------------------------------------------------
+GET ASKED BOOKS
+---------------------------------------------------------------------- */
+exports.getAskedBooks = async (req, res) => {
+  let firebaseid=req.params.firebaseid;
+  bbdd
+  .getAskedBooks(firebaseid)
+  .then((data) =>
+  res.status(200).json(data)
+  )
 }

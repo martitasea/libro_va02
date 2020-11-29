@@ -40,6 +40,9 @@ setPassword(e){this.setState({password: e.target.value})}
                     contxt.setLogin("Cerrar Sesión");
                     this.props.history.push("/catalogue");
                   })
+                  .catch((err)=>
+                    console.log(err)
+                  )
                 }
                 }>
                 <div>

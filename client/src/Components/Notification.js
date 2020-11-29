@@ -13,12 +13,11 @@ class Notification extends Component {
             <div className="pl-3">
                 <p className="uppercase dosis py-0 my-0">{this.props.title}</p>
                 <p>{this.props.author}</p>
-                <button className="btn btn-blue">PRESTAR</button>
+                <button className="mt-2 btn btn-blue">PRESTAR</button>
             </div>
         </div>
 
     );
   }
 }
-
 export default Notification;

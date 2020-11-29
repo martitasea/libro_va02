@@ -3,10 +3,26 @@ import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 
 class AskedBook extends Component {
-  // constructor(props){
-    // super(props);
-    // this.state = {};
-  // }
+  constructor(props){
+    super(props);
+    this.state = {
+      books:[]
+    };
+  }
+
+
+
+
+componentDidMount(){
+  fetch("http://localhost:5000/getreadingbooks/"+this.context.firebaseID)
+    .then((res) => {return res.json();})
+    .then(booksJson => 
+      {console.log(booksJson)
+        this.setState({books:booksJson})
+      }
+      )
+    .catch(err => {console.log(err);});
+  }
 
   render() {
     if(this.context.login==="Iniciar Sesión"){
