@@ -161,7 +161,7 @@ exports.updateBookPhase = async (bookid, phase) => {
   phase=parseInt(phase)
   if(phase<5){
     phase+=1
-  }
+  }else phase=1
   let conn;
   try {
     conn = await pool.getConnection();
@@ -190,7 +190,7 @@ exports.createLoan = async (bookid, borrowerid) => {
     INSERT INTO loans (bookID, borrowerID, dateIn, deathLine)
     VALUES
     (
-    "${bookid}",
+    ${bookid},
     "${borrowerid}",
     CURDATE(),
     CURDATE() + INTERVAL 28 DAY
@@ -212,7 +212,7 @@ exports.getAskedBooks = async (firebaseid) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT title, authors, image FROM books
+    SELECT title, authors, image, bookID FROM books
     WHERE ownerID="${firebaseid}"
     AND phase=2
     `);
@@ -284,3 +284,24 @@ exports.deleteBook = async (book) => {
     if (conn) conn.release(); //release to pool
   }
 };
+/* ----------------------------------------------------------------------
+UPDATE LOAN
+---------------------------------------------------------------------- */
+// exports.updateLoan = async (bookid) => {
+//   bookid=parseInt(bookid)
+//   let conn;
+//   try {
+//     conn = await pool.getConnection();
+//     const res = await conn.query(`
+//     UPDATE loans
+//     SET phase=${phase}
+//     WHERE bookID=${bookid} 
+//     `);
+//     return res;
+//   } catch (err) {
+//     console.log(err);
+//     return;
+//   } finally {
+//     if (conn) conn.release(); 
+//   }
+// };

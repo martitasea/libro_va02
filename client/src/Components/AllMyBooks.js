@@ -13,7 +13,6 @@ class AllMyBooks extends Component {
       message:""
     };
     this.getAllMyBooks=this.getAllMyBooks.bind(this);
-    // this.deleteBook=this.deleteBook.bind(this);
   }
 
 getAllMyBooks(){
@@ -24,7 +23,6 @@ getAllMyBooks(){
       title={book.title}
       classIcon="prevapceptIconDelete far fa-trash-alt"
       onClick={()=>{
-        console.log("Estoy borrando el libro " + book.bookID)
         fetch("http://localhost:5000/deletebook/"+book.boodID, {
           method: "POST",
             headers: {
@@ -46,6 +44,7 @@ getAllMyBooks(){
   ))
 }
 
+// In order to reload if book is deleted (books change)
 componentWillUpdate(prevProps, prevState){
   if(prevState.books!==this.state.books){
   this.getAllMyBooks()
@@ -86,7 +85,7 @@ componentDidMount(){
         </a>
         <div id="allmybooksloggedin" className="collapse grey pl-2">
           <p className="grey pl-2 pb-2">Estos son los libros de tu biblioteca:</p>
-        <p className="ml-2 mb-2 red mediumbold">{this.state.message}</p>
+        <p className="ml-2 mb-2 redbg white mediumbold">{this.state.message}</p>
         <div className="d-flex flex-wrap justify-content-around">
             {this.getAllMyBooks()}
         </div>

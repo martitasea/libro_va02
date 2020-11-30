@@ -67,6 +67,9 @@ app.get("/getbooktitle/:bookid", routes.getBookTitle);
 // Delete one book
 app.post("/deletebook/:bookid", routes.deleteBook);
 
+// Update loan
+// app.post("/updateloan/:bookid", routes.deleteBook);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

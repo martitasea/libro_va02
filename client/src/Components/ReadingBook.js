@@ -40,8 +40,6 @@ componentDidMount(){
     .then((res) => {return res.json();})
     .then((booksJson) => {
       this.setState({books:booksJson})
-      console.log("--------------------------")
-      console.log(this.state.books)
     })
     .catch(err => {console.log(err);});
   }
@@ -72,7 +70,7 @@ componentDidMount(){
         </p>
       </a>
       <div id="askedbook" className="collapse grey pl-2">
-        <p>Actualmente tienes el siguiente libro en préstamo:</p>
+        <p className="pb-2">Actualmente tienes el siguiente libro en préstamo:</p>
         {this.getReadingBook()}
       </div>
     </div>  

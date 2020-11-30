@@ -184,3 +184,16 @@ exports.deleteBook = async (req, res) => {
       )
     .catch((e) => console.log("ocurrió un error:" + e));
 };
+
+/* ----------------------------------------------------------------------
+UPDATE LOAN
+---------------------------------------------------------------------- */
+// exports.updateLoan = async (req, res) => {
+//   let bookid=req.params.bookid;
+//     bbdd
+//       .updateLoan(bookid)
+//       .then((data) =>
+//       res.status(200).json(data)
+//       )
+//       .catch((e) => console.log("ocurrió un error:" + e));
+//   };

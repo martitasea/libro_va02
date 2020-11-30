@@ -4,7 +4,6 @@ class Book extends Component {
   constructor(props){
     super(props);
     this.state = {
-      action:this.props.action
     };
   }
 

@@ -28,7 +28,7 @@ setPassword(e){this.setState({password: e.target.value})}
       <AuthConsumer>
         {(contxt)=>(
           <div className="overlay-cyan">
-            <section className="bg-white d-flex flex-column login">
+            <section className="shadow bg-white d-flex flex-column login">
               <p className="child green title text-center my-3">Iniciar sesión</p>
               <form className="mx-3 mb-3"
                 onSubmit={(e)=>{

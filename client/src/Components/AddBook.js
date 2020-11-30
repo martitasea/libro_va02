@@ -86,6 +86,7 @@ render() {
             </a>
             <div id="addbook" className="collapse grey px-2 pb-2">
               <p>Busca en las primera páginas de tu libro el código ISBN e introdúcelo:</p>
+              <p className="greenbg white mediumbold">{this.state.message}{this.state.info}</p>
               <form method="POST" action="/getbookapi" className="my-3"
                   onSubmit={(e)=>{
                   e.preventDefault();
@@ -95,7 +96,6 @@ render() {
                 <div>
                   <label className="mb-1 grey mini">ISBN</label>
                   <input id="addBookForm" onChange={this.setAddIsbn} type="text" name="isbn" className="p-1 mb-2 grey width100 border-blue-1"/>
-                  <p className="green">{this.state.message}{this.state.info}</p>
                 </div>
                 <input type="submit" value="AÑADIR" className="btn btn-blue mt-2"></input>
               </form>

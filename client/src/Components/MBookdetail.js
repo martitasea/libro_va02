@@ -28,7 +28,7 @@ class MBookdetail extends Component {
   }
   
 changePhaseRequest(){
-    fetch("http://localhost:5000/updatebookphase/"+this.state.bookID+"/"+this.state.phase)
+    fetch("http://localhost:5000/updatebookphase/"+this.state.bookID+"/"+1)
       .then(()=>{
         fetch("http://localhost:5000/getbooktitle/"+this.state.bookID)
         .then((res)=>{return res.json();})
@@ -96,8 +96,8 @@ changePhaseRequest(){
               </div>
               <div className="mb-3">
                 <button onClick={this.changePhaseRequest} className="btn btn-green uppercase ml-3 mt-3 mb-2">Pedir prestado</button>
-                <p className="green ml-3">{this.state.message1}{this.state.info}</p>
-                <p className="green ml-3">{this.state.message2}</p>
+                <p className="greenbg white ml-3">{this.state.message1}{this.state.info}</p>
+                <p className="greenbg white ml-3">{this.state.message2}</p>
               </div>
               </div>
           </section>
