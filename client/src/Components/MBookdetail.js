@@ -39,10 +39,6 @@ changePhaseRequest(){
       .then(()=>{
         fetch("http://localhost:5000/createLoan/"+this.state.bookID+"/"+this.context.firebaseID)
         .then((res)=>{return res.json();})
-        // .then((titleJson)=>{
-        //   console.log(titleJson)
-        // this.setState({info:titleJson[0].title, message1: "Has pedido prestado el libro, ", message2:"Te llegará un correo electrónico cuando el dueño acepte tu petición."})
-        // })
       })
       .then(()=>{
         setTimeout(() => this.props.history.push('/catalogue'), 3300)

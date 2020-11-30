@@ -11,7 +11,7 @@ exports.createUser = async (req, res) => {
       bbdd
         .createUser(user)
         .then((data) =>
-        res.status(200).redirect("/catalogue")
+        res.status(200).json(data)
         )
         .catch((e) => console.log("ocurrió un error:" + e));
     };
@@ -166,6 +166,19 @@ exports.getBookTitle = (req, res) => {
   let bookid=req.params.bookid;
   bbdd
     .getBookTitle(bookid)
+    .then((data) =>
+      res.status(200).json(data)
+      )
+    .catch((e) => console.log("ocurrió un error:" + e));
+};
+
+/* ----------------------------------------------------------------------
+DELETE A BOOK
+---------------------------------------------------------------------- */
+exports.deleteBook = async (req, res) => {
+  let book = await req.body;
+  bbdd
+    .deleteBook(book)
     .then((data) =>
       res.status(200).json(data)
       )

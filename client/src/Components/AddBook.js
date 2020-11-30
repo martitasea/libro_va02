@@ -39,8 +39,8 @@ getBookApi(){
     fetch("http://localhost:5000/getaddedbooktitle/"+newBook.isbn+"/"+this.context.firebaseID)
     .then((res) => {return res.json();})
     .then((titleJson) => {
-      // console.log(titleJson)
-      this.setState({info:titleJson[0].title})
+      console.log(titleJson)
+      // this.setState({info:titleJson[0].title})
       this.setState({message: "¡Muy bien! Has añadido el libro "})
       
     })

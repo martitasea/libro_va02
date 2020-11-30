@@ -64,6 +64,9 @@ app.get("/getreadingbook/:firebaseid", routes.getReadingBook);
 // Read book title
 app.get("/getbooktitle/:bookid", routes.getBookTitle);
 
+// Delete one book
+app.post("/deletebook/:bookid", routes.deleteBook);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

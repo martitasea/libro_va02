@@ -9,9 +9,11 @@ class AllMyBooks extends Component {
     super(props);
     this.state = {
       books:[],
-      isFetch:false
+      isFetch:false,
+      message:""
     };
     this.getAllMyBooks=this.getAllMyBooks.bind(this);
+    // this.deleteBook=this.deleteBook.bind(this);
   }
 
 getAllMyBooks(){
@@ -20,10 +22,35 @@ getAllMyBooks(){
       key={book.isbn}
       src={book.image}
       title={book.title}
-      classIcon="prevapceptIconDelete far fa-trash-alt"/>
+      classIcon="prevapceptIconDelete far fa-trash-alt"
+      onClick={()=>{
+        console.log("Estoy borrando el libro " + book.bookID)
+        fetch("http://localhost:5000/deletebook/"+book.boodID, {
+          method: "POST",
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify(book),
+          })
+          .then(()=>{
+            this.setState({message:"Has borrado el libro con éxito."})  
+          })
+          .then(()=>{
+            fetch("http://localhost:5000/allmybooks/"+this.context.firebaseID)
+            .then((res) => {return res.json();})
+            .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
+            .catch(err => {console.log(err);});
+          })
+          }}      
+      />
   ))
 }
 
+componentWillUpdate(prevProps, prevState){
+  if(prevState.books!==this.state.books){
+  this.getAllMyBooks()
+}
+}
 
 componentDidMount(){
   fetch("http://localhost:5000/allmybooks/"+this.context.firebaseID)
@@ -58,7 +85,8 @@ componentDidMount(){
           </p>
         </a>
         <div id="allmybooksloggedin" className="collapse grey pl-2">
-          <p className="grey pl-2 pb-2">Estos son los libros disponibles para prestar a tus compañeros:</p>
+          <p className="grey pl-2 pb-2">Estos son los libros de tu biblioteca:</p>
+        <p className="ml-2 mb-2 red mediumbold">{this.state.message}</p>
         <div className="d-flex flex-wrap justify-content-around">
             {this.getAllMyBooks()}
         </div>

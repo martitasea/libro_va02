@@ -9,7 +9,8 @@ class ReadingBook extends Component {
     this.state = {
       books:[]
     };
-    this.getReadingBook=this.getReadingBook.bind(this);    
+    this.getReadingBook=this.getReadingBook.bind(this);  
+    this.returnBook=this.returnBook.bind(this);   
   }
 
 getReadingBook(){
@@ -22,12 +23,16 @@ getReadingBook(){
         />
         <div className="pl-3">
           <p className="pt-3 pb-2 my-0">Fecha límite de devolución:</p>
-          <p className="red">{book.dateOut}</p>
-          <button className="btn btn-blue">QUIERO DEVOLVERLO</button>
+          <p className="red">{book.deathLine}</p>
+          <button onClick={this.returnBook}className="btn btn-blue">QUIERO DEVOLVERLO</button>
           <p className="red mini pt-2">Llévalo al mostrador habilitado en el colegio el día {book.dateIn}</p>
         </div>
       </div>
   ))
+}
+
+returnBook(){
+  console.log("Estoy devolviendo el libro")
 }
 
 componentDidMount(){

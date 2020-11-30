@@ -18,9 +18,14 @@ getAskedBooks(){
       key={book.isbn}
       src={book.image}
       title={book.title}
-      classIcon="prevapceptIconOK fas fa-check-square"/>
+      classIcon="prevapceptIconOK fas fa-check-square"
+      onClick={this.loanBook}/>
 
   ))
+}
+
+loanBook(){
+  console.log("Estoy prestando el libro")
 }
 
 componentDidMount(){
@@ -60,8 +65,6 @@ componentDidMount(){
         <p className="grey pl-2 pt-1 pb-2">Para confirmar el préstamo haz click en <i class="prevapceptIconOK fas fa-check-square"></i></p>
         
       <div className="d-flex flex-wrap justify-content-around">
-        {this.getAskedBooks()}
-        <div></div>
         {this.getAskedBooks()}
       </div>
       </div>

@@ -254,7 +254,27 @@ exports.getBookTitle = async (bookid) => {
     conn = await pool.getConnection();
     const res = await conn.query(`
     SELECT title FROM books
-    WHERE bookID="${bookid}"
+    WHERE bookID=${bookid}
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+/* ----------------------------------------------------------------------
+DELETE A BOOK
+---------------------------------------------------------------------- */
+exports.deleteBook = async (book) => {
+  // bookid=parseInt(bookid)
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    DELETE FROM books 
+    WHERE bookID=${book.bookID}
     `);
     return res;
   } catch (err) {
