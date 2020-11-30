@@ -100,7 +100,7 @@ exports.getAddedBookTitle = (req, res) => {
   let isbn=req.params.isbn;
   let firebaseid=req.params.firebaseid;
   bbdd
-    .getBookTitle(isbn, firebaseid)
+    .getAddedBookTitle(isbn, firebaseid)
     .then((data) =>
       res.status(200).json(data)
       )

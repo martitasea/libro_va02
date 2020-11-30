@@ -39,8 +39,9 @@ getBookApi(){
     fetch("http://localhost:5000/getaddedbooktitle/"+newBook.isbn+"/"+this.context.firebaseID)
     .then((res) => {return res.json();})
     .then((titleJson) => {
-      console.log(titleJson)
-      // this.setState({info:titleJson[0].title})
+      // console.log("++++++++++++++")
+      // console.log(titleJson)
+      this.setState({info:titleJson[0].title})
       this.setState({message: "¡Muy bien! Has añadido el libro "})
       
     })
@@ -48,7 +49,7 @@ getBookApi(){
       // setTimeout((e)=>(e.target.reset()))
       // setTimeout(()=>document.getElementById("addBookForm").reset)
       // document.getElementById("addBook").reset();
-      setTimeout(() => this.props.history.push('/catalogue'), 1500)
+      setTimeout(() => this.props.history.push('/catalogue'), 2500)
     })
     .catch(err => {console.log(err);});
   })
@@ -86,7 +87,9 @@ render() {
             </a>
             <div id="addbook" className="collapse grey px-2 pb-2">
               <p>Busca en las primera páginas de tu libro el código ISBN e introdúcelo:</p>
-              <p className="greenbg white mediumbold">{this.state.message}{this.state.info}</p>
+              <p className="green mediumbold mb-1">{this.state.message}</p>
+              <p className="greenbg white">{this.state.info}</p>
+              
               <form method="POST" action="/getbookapi" className="my-3"
                   onSubmit={(e)=>{
                   e.preventDefault();

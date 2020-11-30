@@ -7,10 +7,10 @@ class ReadingBook extends Component {
   constructor(props){
     super(props);
     this.state = {
-      books:[]
+      books:[],
+      message:""
     };
-    this.getReadingBook=this.getReadingBook.bind(this);  
-    this.returnBook=this.returnBook.bind(this);   
+    this.getReadingBook=this.getReadingBook.bind(this);   
   }
 
 getReadingBook(){
@@ -22,17 +22,20 @@ getReadingBook(){
         title={book.title}
         />
         <div className="pl-3">
-          <p className="pt-3 pb-2 my-0">Fecha límite de devolución:</p>
-          <p className="red">{book.deathLine}</p>
-          <button onClick={this.returnBook}className="btn btn-blue">QUIERO DEVOLVERLO</button>
-          <p className="red mini pt-2">Llévalo al mostrador habilitado en el colegio el día {book.dateIn}</p>
+          <p className="pt-3 pb-2 my-0">Tienes que devolverlo antes del:</p>
+          <p className="heavy blue pb-2">{book.deathLine.slice(0,10)}</p>
+          <button className="btn btn-blue" onClick={()=>{
+            fetch("http://localhost:5000/updatebookphase/"+book.bookID+"/"+4)
+            .then(()=>{
+              this.setState({message: "Entrégalo el próximo día de cole al mostrador del AMPA"})
+              })
+            .catch(err => {console.log(err);});
+            }  
+          }>DEVOLVERLO YA</button>
+          <p className="greenbg white mt-2 mr-2 mediumbold">{this.state.message}</p>
         </div>
       </div>
   ))
-}
-
-returnBook(){
-  console.log("Estoy devolviendo el libro")
 }
 
 componentDidMount(){

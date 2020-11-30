@@ -232,7 +232,7 @@ exports.getReadingBook = async (firebaseid) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT books.title, books.authors, books.image, loans.dateIn, loans.deathLine FROM books, loans
+    SELECT books.title, books.authors, books.image, books.bookID, loans.dateIn, loans.deathLine FROM books, loans
     WHERE books.phase=4 AND loans.borrowerID="${firebaseid}"
     `);
     return res;
