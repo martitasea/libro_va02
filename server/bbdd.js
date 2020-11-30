@@ -50,7 +50,7 @@ exports.createBook = async (newBook) => {
     (
       "${newBook.firebaseID}",
       "${newBook.isbn}",
-      "rest",
+      1,
       "${newBook.title}",
       "${newBook.authors}",
       "${newBook.publisher}",
@@ -79,7 +79,7 @@ exports.getAllMyBooks = async (firebaseID) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT image,title FROM books
+    SELECT image,title, bookID FROM books
       WHERE ownerID="${firebaseID}"
     `);
     return res;
@@ -99,7 +99,7 @@ exports.getAllCatalogue = async (firebaseID) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT image, title, phase, isbn, ownerID FROM books
+    SELECT image, title, phase, isbn, ownerID, bookID FROM books
     WHERE NOT ownerID="${firebaseID}"
     AND phase=1
     ORDER BY phase=1 DESC  
@@ -133,15 +133,16 @@ exports.getOneBookDetail = async (isbn) => {
   }
 };
 /* ----------------------------------------------------------------------
-READ TITLE FROM JUST ADDED BOOK
+GET BOOK TITLE
 ---------------------------------------------------------------------- */
-exports.getBookTitle = async (bookid) => {
+exports.getAddedBookTitle = async (isbn, firebaseid) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
     SELECT title FROM books
-    WHERE bookID=${bookid} 
+    WHERE isbn="${isbn}"
+    AND ownerID="${firebaseid}"
     `);
     return res;
   } catch (err) {
@@ -180,18 +181,19 @@ exports.updateBookPhase = async (bookid, phase) => {
 /* ----------------------------------------------------------------------
 CREATE LOAN
 ---------------------------------------------------------------------- */
-exports.createLoan = async (bookid, borrowedid) => {
+exports.createLoan = async (bookid, borrowerid) => {
+  bookid=parseInt(bookid)
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    INSERT INTO loans (bookID, borrowerID, dateIn, dateOut)
+    INSERT INTO loans (bookID, borrowerID, dateIn, deathLine)
     VALUES
     (
-    ${bookid},
-    "${borrowedid}",
-    CURRENT_DATE,
-    CURRENT_DATE + INTERVAL 8 DAY
+    "${bookid}",
+    "${borrowerid}",
+    CURDATE(),
+    CURDATE() + INTERVAL 28 DAY
     )
     `);
     return res;
@@ -220,5 +222,45 @@ exports.getAskedBooks = async (firebaseid) => {
     return;
   } finally {
     if (conn) conn.release(); 
+  }
+};
+/* ----------------------------------------------------------------------
+GET READING BOOKS
+---------------------------------------------------------------------- */
+exports.getReadingBook = async (firebaseid) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT books.title, books.authors, books.image, loans.dateIn, loans.deathLine FROM books, loans
+    WHERE books.phase=4 AND loans.borrowerID="${firebaseid}"
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); 
+  }
+};
+
+/* ----------------------------------------------------------------------
+GET BOOK TITLE
+---------------------------------------------------------------------- */
+exports.getBookTitle = async (bookid) => {
+  bookid=parseInt(bookid)
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT title FROM books
+    WHERE bookID="${bookid}"
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
   }
 };

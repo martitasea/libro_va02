@@ -37,7 +37,7 @@ exports.getBookApi = async (req, res) => {
           categories:myJson.items[0].volumeInfo.categories[0],
           language:myJson.items[0].volumeInfo.language,
           image:myJson.items[0].volumeInfo.imageLinks.thumbnail,
-          textSnippet:myJson.items[0].searchInfo.textSnippet
+          textSnippet:myJson.items[0].searchInfo.textSnippet,
         }
         console.log("Has guardado el libro "+newBook.title);
         bbdd
@@ -96,10 +96,11 @@ exports.getOneBookDetail = (req, res) => {
 /* ----------------------------------------------------------------------
 READ TITLE FROM JUST ADDED BOOK
 ---------------------------------------------------------------------- */
-exports.getBookTitle = (req, res) => {
-  let bookid=req.params.bookid;
+exports.getAddedBookTitle = (req, res) => {
+  let isbn=req.params.isbn;
+  let firebaseid=req.params.firebaseid;
   bbdd
-    .getBookTitle(bookid)
+    .getBookTitle(isbn, firebaseid)
     .then((data) =>
       res.status(200).json(data)
       )
@@ -125,9 +126,9 @@ CREATE LOAN
 ---------------------------------------------------------------------- */
 exports.createLoan = async (req, res) =>{
   let bookid=req.params.bookid;
-  let borrowedid=req.params.borrowedid;
+  let borrowerid=req.params.borrowerid;
   bbdd
-  .createLoan(bookid, borrowedid)
+  .createLoan(bookid, borrowerid)
   .then((data) =>
   res.status(200).json(data)
   )
@@ -145,3 +146,28 @@ exports.getAskedBooks = async (req, res) => {
   res.status(200).json(data)
   )
 }
+
+/* ----------------------------------------------------------------------
+GET READING BOOKS
+---------------------------------------------------------------------- */
+exports.getReadingBook = async (req, res) => {
+  let firebaseid=req.params.firebaseid;
+  bbdd
+  .getReadingBook(firebaseid)
+  .then((data) =>
+  res.status(200).json(data)
+  )
+}
+
+/* ----------------------------------------------------------------------
+READ BOOK TITLE
+---------------------------------------------------------------------- */
+exports.getBookTitle = (req, res) => {
+  let bookid=req.params.bookid;
+  bbdd
+    .getBookTitle(bookid)
+    .then((data) =>
+      res.status(200).json(data)
+      )
+    .catch((e) => console.log("ocurrió un error:" + e));
+};

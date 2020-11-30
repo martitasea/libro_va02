@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
-import Notification from './Notification';
+import Book from './Book';
 
-class Notifications extends Component {
+class AskedBooks extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -14,31 +14,32 @@ class Notifications extends Component {
 
 getAskedBooks(){
     return this.state.books.map((book)=>(
-      <Notification src={book.image} title={book.title} author={book.authors}/>
+      <Book
+      key={book.isbn}
+      src={book.image}
+      title={book.title}
+      classIcon="prevapceptIconOK fas fa-check-square"/>
+
   ))
 }
 
 componentDidMount(){
   fetch("http://localhost:5000/getaskedbooks/"+this.context.firebaseID)
     .then((res) => {return res.json();})
-    .then(booksJson => 
-      {console.log(booksJson)
-       this.setState({books:booksJson})
-      }
-      )
+    .then(booksJson => {this.setState({books:booksJson})})
     .catch(err => {console.log(err);});
 }
 
   render() {
     if(this.context.login==="Iniciar Sesión"){
       return(
-      <div className="bg-white mb-3">
-        <a href="/" data-toggle="collapse" data-target="#notifications">
+      <div className="shadow bg-white mb-3">
+        <a href="/" data-toggle="collapse" data-target="#notificationsloggedout">
           <p className="child blue title pt-2 pl-2 mb-0">
-            <span className="childIcon blue">f </span>Libros pendientes de préstamo
+            <span className="childIcon blue">f </span>Préstamos
           </p>
         </a>
-        <div id="notifications" className="collapse grey pl-2">
+        <div id="notificationsloggedout" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder ver los libros pendientes de préstamo.</p>
           <Link to="/">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
@@ -48,15 +49,19 @@ componentDidMount(){
       )
     }
     return (
-      <div className="bg-white mb-3">
-      <a href="/" data-toggle="collapse" data-target="#notifications">
+      <div className="shadow bg-white mb-3">
+      <a href="/" data-toggle="collapse" data-target="#notificationsloggedin">
         <p className="child blue title pt-2 pl-2 mb-0">
-          <span className="childIcon blue">f </span>Libros pendientes de préstamo
+          <span className="childIcon blue">f </span>Préstamos
         </p>
       </a>
-      <div id="notifications" className="collapse grey pl-2">
-        <p className="grey pl-2 pb-2">Te han pedido prestados los siguientes libros: (Confirma su prestamo):</p>
+      <div id="notificationsloggedin" className="collapse grey pl-2">
+        <p className="grey pl-2">Te han pedido prestados los siguientes libros: </p>
+        <p className="grey pl-2 pt-1 pb-2">Para confirmar el préstamo haz click en <i class="prevapceptIconOK fas fa-check-square"></i></p>
+        
       <div className="d-flex flex-wrap justify-content-around">
+        {this.getAskedBooks()}
+        <div></div>
         {this.getAskedBooks()}
       </div>
       </div>
@@ -65,5 +70,5 @@ componentDidMount(){
   }
 }
 
-Notifications.contextType=AuthContext;
-export default Notifications;
+AskedBooks.contextType=AuthContext;
+export default AskedBooks;

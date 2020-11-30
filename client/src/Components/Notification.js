@@ -8,15 +8,12 @@ class Notification extends Component {
 
   render() {
     return (
-        <div className="d-flex justify-content-start mb-3">
-            <img src={this.props.src} alt={this.props.title} className="book col-5"/>
-            <div className="pl-3">
-                <p className="uppercase dosis py-0 my-0">{this.props.title}</p>
-                <p>{this.props.author}</p>
-                <button className="mt-2 btn btn-blue">PRESTAR</button>
-            </div>
-        </div>
-
+      <div className="pl-3">
+        <p className="py-0 my-0">Fecha límite de devolución:</p>
+        <p className="red">{this.props.dateIn}</p>
+        <button className="btn btn-blue">QUIERO DEVOLVERLO</button>
+        <p className="red mini">Llévalo al mostrador habilitado en el colegio el día 20 de Diciembre de 2020</p>
+      </div>
     );
   }
 }

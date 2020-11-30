@@ -25,6 +25,9 @@ COLORS
 .grey{
   color: #707070;
 }
+.redbg{
+  background-color: red;
+}
 /* ------------------------------------
 FONTS 
 ---------------------------------------*/
@@ -154,6 +157,9 @@ HEADER
 .width70{
   width: 70%;
 }
+.width30{
+  width: 70%;
+}
 form.search{
   height: 40px;
 }
@@ -202,6 +208,9 @@ MYBOOK
   height: 125px;
   margin:0px;
   padding: 0px;
+}
+.title-icon{
+  width: 100px;
 }
 /* ------------------------------------
 MBOOKDETAIL 
@@ -294,4 +303,19 @@ FOOTER
 ---------------------------------------*/
 .bg-cyan{
   background-color:#E1F7FB;
+}
+/* ------------------------------------
+DELETE APCEPT ICON
+---------------------------------------*/
+.prevapceptIconOK{
+  font-size: 20px;
+  color: #cccaca;
+}
+.prevapceptIconDelete{
+  font-size: 15px;
+  color: #b5b3b3;
+}
+.closeIcon{
+  font-size: 15px;
+  color:  #EE7A71;
 }

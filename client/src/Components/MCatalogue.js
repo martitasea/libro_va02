@@ -18,7 +18,7 @@ class MCatalogue extends Component {
 getAllCatalogue(){
   return this.state.books.map((book)=>(
   <Thumbnail
-    key={book.isbn}
+    key={book.bookID}
     src={book.image}
     title={book.title}
     phase={book.phase}

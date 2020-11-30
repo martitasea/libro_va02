@@ -47,16 +47,22 @@ app.get("/allcatalogue/:firebaseid", routes.getAllCatalogue);
 app.get("/onebookdetail/:isbn", routes.getOneBookDetail);
 
 // Read title from just addedbook
-app.get("/getbooktitle/:bookid", routes.getBookTitle);
+app.get("/getaddedbooktitle/:isbn/:firebaseid", routes.getAddedBookTitle);
 
 // Update book phase from rest to request
 app.get("/updatebookphase/:bookid/:phase", routes.updateBookPhase);
 
 //Create loan
-app.get("/createloan/:bookid/:borrowedid", routes.createLoan);
+app.get("/createloan/:bookid/:borrowerid", routes.createLoan);
 
 //Read asked books
 app.get("/getaskedbooks/:firebaseid", routes.getAskedBooks);
+
+//Read reading books
+app.get("/getreadingbook/:firebaseid", routes.getReadingBook);
+
+// Read book title
+app.get("/getbooktitle/:bookid", routes.getBookTitle);
 
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
@@ -156,7 +162,7 @@ app.get("/getaskedbooks/:firebaseid", routes.getAskedBooks);
 //         bookID INT NOT NULL,
 //         borrowerID VARCHAR(30) NOT NULL,
 //         dateIn DATE NOT NULL,
-//         dateOut DATE NOT NULL,
+//         deathLine DATE NOT NULL,
 //         CONSTRAINT FK_borrowerbook
 //             FOREIGN KEY (borrowerID) REFERENCES users (firebaseID),
 //         CONSTRAINT FK_bookID

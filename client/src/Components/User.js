@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Notifications from './Notifications';
+import AskedBooks from './AskedBooks';
 import AddBook from './AddBook';
-import AskedBook from './AskedBook';
+import ReadingBook from './ReadingBook';
 import AllMyBooks from './AllMyBooks';
 import {AuthConsumer} from '../Context/AuthContext';
 import { auth } from '../firebaseConfig';
@@ -44,8 +44,8 @@ class User extends Component {
                  </a>
             </div>
           </div>
-          <Notifications/>
-          <AskedBook/>
+          <AskedBooks/>
+          <ReadingBook/>
           <AllMyBooks/>
           <AddBook/>
         </div>

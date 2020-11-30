@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
-import MyBook from './MyBook';
+import Book from './Book';
 
 
 class AllMyBooks extends Component {
@@ -16,11 +16,14 @@ class AllMyBooks extends Component {
 
 getAllMyBooks(){
     return this.state.books.map((book)=>(
-    <MyBook
+    <Book
+      key={book.isbn}
       src={book.image}
-      title={book.title}/>
+      title={book.title}
+      classIcon="prevapceptIconDelete far fa-trash-alt"/>
   ))
 }
+
 
 componentDidMount(){
   fetch("http://localhost:5000/allmybooks/"+this.context.firebaseID)
@@ -32,13 +35,13 @@ componentDidMount(){
   render() {
     if(this.context.login==="Iniciar Sesión"){
       return(
-      <div className="bg-white mb-3">
-        <a href="/" data-toggle="collapse" data-target="#allmybooks">
+      <div className="shadow bg-white mb-3">
+        <a href="/" data-toggle="collapse" data-target="#allmybooksloggedout">
           <p className="child blue title pt-2 pl-2 mb-0">
-            <span className="childIcon blue">f </span>Todos mis libros
+            <span className="childIcon blue">f </span>MI BIBLIOTECA
           </p>
         </a>
-        <div id="allmybooks" className="collapse grey pl-2">
+        <div id="allmybooksloggedout" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder ver tus libros.</p>
           <Link to="/">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
@@ -48,13 +51,13 @@ componentDidMount(){
       )
     }
     return (
-      <div className="bg-white mb-3">
-        <a href="/" data-toggle="collapse" data-target="#allmybooks">
+      <div className="shadow bg-white mb-3">
+        <a href="/" data-toggle="collapse" data-target="#allmybooksloggedin">
           <p className="child blue title pt-2 pl-2 mb-0">
-            <span className="childIcon blue">f </span>Todos mis libros
+            <span className="childIcon blue">f </span>MI BIBLIOTECA
           </p>
         </a>
-        <div id="allmybooks" className="collapse grey pl-2">
+        <div id="allmybooksloggedin" className="collapse grey pl-2">
           <p className="grey pl-2 pb-2">Estos son los libros disponibles para prestar a tus compañeros:</p>
         <div className="d-flex flex-wrap justify-content-around">
             {this.getAllMyBooks()}

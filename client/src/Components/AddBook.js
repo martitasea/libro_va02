@@ -8,6 +8,7 @@ class AddBook extends Component {
   constructor(props){
     super(props);
     this.state = {
+      bookID:"",
       isbn:"",
       firebaseID:"",
       message:"",
@@ -22,27 +23,25 @@ setAddIsbn(e){
   this.setState({isbn: addedIsbn})
 }
 
-getBookApi(contxt, e){
+getBookApi(){
   let newBook={
     isbn:this.state.isbn,
-    firebaseID: contxt.firebaseID,
+    firebaseID: this.context.firebaseID,
   }
-
-  fetch("http://localhost:5000/getbookapi/"+newBook.isbn+"/"+newBook.firebaseID, {
+  fetch("http://localhost:5000/getbookapi/"+this.state.isbn+"/"+this.context.firebaseID, {
     method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(newBook),
-      // .catch(err => {console.log(err);});
     })
-
   .then(() => {
-    fetch("http://localhost:5000/getbooktitle/"+newBook.isbn+"/"+newBook.firebaseID)
+    fetch("http://localhost:5000/getaddedbooktitle/"+newBook.isbn+"/"+this.context.firebaseID)
     .then((res) => {return res.json();})
     .then((titleJson) => {
+      // console.log(titleJson)
       this.setState({info:titleJson[0].title})
-      this.setState({message: "¡Muy bien! Has añadido el "})
+      this.setState({message: "¡Muy bien! Has añadido el libro "})
       
     })
     .then(()=>{
@@ -61,10 +60,10 @@ render() {
   if(this.context.login==="Iniciar Sesión"){
   
     return (
-      <div className="bg-white mb-5">
+      <div className="shadow bg-white mb-5">
         <a href="/" data-toggle="collapse" data-target="#addbook">
           <p className="child blue title pt-2 pl-2 mb-0">
-            <span className="childIcon blue">f </span>Añadir un libro
+            <span className="childIcon blue">f </span>Añadir
           </p>
         </a>
 
@@ -79,10 +78,10 @@ render() {
     return (
       <AuthConsumer>
         {(contxt)=>(
-          <div className="bg-white mb-5">
+          <div className="shadow bg-white mb-5">
             <a href="/" data-toggle="collapse" data-target="#addbook">
               <p className="child blue title pt-2 pl-2 mb-0">
-                <span className="childIcon blue">f </span>Añadir un libro
+                <span className="childIcon blue">f </span>Añadir
               </p>
             </a>
             <div id="addbook" className="collapse grey px-2 pb-2">
