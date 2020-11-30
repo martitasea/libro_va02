@@ -31,8 +31,11 @@ app.use(cors())
 //------------------------------------------------------------------------------
 //ROUTES
 //------------------------------------------------------------------------------
-//Create user from signup form
+// Create user from signup form
 app.post("/createuser", routes.createUser);
+
+// Get user name
+app.get("/getusername/:firebaseid", routes.getUserName);
 
 // Read one book from google API
 app.post("/getbookapi/:isbn/:firebaseid", routes.getBookApi);

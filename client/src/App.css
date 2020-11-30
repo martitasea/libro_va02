@@ -138,8 +138,11 @@ Z-INDEX
 /* ------------------------------------
 MARGIN
 ---------------------------------------*/
-.margin-header{
-  margin-top: 8.25em;
+.margin-user{
+  margin-top: 1.50em;
+}
+.margin-catalogue{
+  margin-top: 0.5em;
 }
 .fondo{
   background-color: red;
@@ -154,9 +157,16 @@ HEADER
   z-index: 40;
   background-color: #E1F7FB;
 }
-.userIcon, .questionIcon{
+.userIcon{
   font-size: 30px;
-  color: #29A18C;
+  color:#195392;
+  /* color: #29A18C; */
+  /* background-color: red; */
+}
+.questionIcon{
+  font-size: 30px;
+  color:#EE7A71;
+  /* color: #29A18C; */
   /* background-color: red; */
 }
 .loupe{
@@ -250,17 +260,17 @@ MBOOKDETAIL
 MINSTRUCTIONS 
 ---------------------------------------*/
 .instructions{
-  width: 350px;
+  width: 390px;
   margin-left: 50%;
-  left: -175px;
-  top: 6em;
+  left: -195px;
+  top: 5em;
 }
 .overflow{
   overflow: scroll;
 }
 .textinstructions{
   /* width: 320px; */
-  height: 65vh;
+  height: 70vh;
   /* margin-top: 10em; */
 }
 

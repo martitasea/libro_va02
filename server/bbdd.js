@@ -38,6 +38,26 @@ exports.createUser = async (user) => {
 };
 
 /* ----------------------------------------------------------------------
+GET USER NAME
+---------------------------------------------------------------------- */
+exports.getUserName = async (firebaseID) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT name FROM users
+      WHERE firebaseID="${firebaseID}"
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+};
+
+/* ----------------------------------------------------------------------
 CREATE ONE BOOK FORM API GOOGLE
 ---------------------------------------------------------------------- */
 exports.createBook = async (newBook) => {

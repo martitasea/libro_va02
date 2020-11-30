@@ -9,7 +9,7 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className="text-center child grey fixed-bottom bg-cyan mt-1 py-1">
+      <footer className="text-center child grey fixed-bottom bg-cyan mt-1 py-2">
         COLEGIO ÁGORA
       </footer>
     );

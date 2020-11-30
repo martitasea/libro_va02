@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter, Link} from "react-router-dom";
 import AuthConsumer from '../Context/AuthContext';
+import AuthContext from '../Context/AuthContext';
 import { auth } from '../firebaseConfig';
 
 
@@ -40,6 +41,13 @@ setPassword(e){this.setState({password: e.target.value})}
                     contxt.setLogin("Cerrar Sesión");
                     this.props.history.push("/catalogue");
                   })
+                  .then(()=>{
+                    fetch("http://localhost:5000/getusername/"+this.context.firebaseID)
+                    .then((res) => {return res.json();})
+                    .then((user) => {
+                      contxt.setName(user[0].name)                      
+                    })
+                  })
                   .catch((err)=>
                     console.log(err)
                   )
@@ -68,5 +76,5 @@ setPassword(e){this.setState({password: e.target.value})}
     );
   }
 }          
-
+MLogin.contextType=AuthContext;
 export default withRouter(MLogin);

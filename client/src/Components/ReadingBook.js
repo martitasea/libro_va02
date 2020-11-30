@@ -23,7 +23,8 @@ getReadingBook(){
         />
         <div className="pl-3">
           <p className="pt-3 pb-2 my-0">Tienes que devolverlo antes del:</p>
-          <p className="heavy blue pb-2">{book.deathLine.slice(0,10)}</p>
+          
+          <p className="heavy red pb-2"><i class="fas fa-exclamation-triangle"></i><span>  </span>{book.deathLine.slice(0,10)}</p>
           <button className="btn btn-blue" onClick={()=>{
             fetch("http://localhost:5000/updatebookphase/"+book.bookID+"/"+4)
             .then(()=>{
@@ -69,7 +70,7 @@ componentDidMount(){
       <div className="shadow bg-white mb-3">
       <a href="/" data-toggle="collapse" data-target="#askedbook">
         <p className="child blue title pt-2 pl-2 mb-0">
-          <span className="childIcon blue">f </span>Leyéndome
+          <span className="childIcon blue">f </span>Leyendo
         </p>
       </a>
       <div id="askedbook" className="collapse grey pl-2">

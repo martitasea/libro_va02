@@ -9,6 +9,8 @@ class AskedBooks extends Component {
     this.state = {
       books:[], 
       message1:"",
+      message2:"",
+      message3:"",
       info:""
     };
     this.getAskedBooks=this.getAskedBooks.bind(this);
@@ -27,7 +29,7 @@ getAskedBooks(){
           fetch("http://localhost:5000/getbooktitle/"+book.bookID)
           .then((res)=>{return res.json();})
           .then((titleJson)=>{
-            this.setState({info:titleJson[0].title, message1: "Se ha confirmado el préstamo del libro: ", message2: "Entrégalo el próximo día de cole al mostrador del AMPA"})
+            this.setState({info:titleJson[0].title, message1: "Se ha confirmado el préstamo del libro: ", message2: " Entrégalo el próximo día de cole en el AMPA", message3:<i class="fas fa-exclamation-triangle"></i>})
           })
         })
         .then(()=>{
@@ -84,7 +86,7 @@ componentDidMount(){
         <p className="grey pl-2">Te han pedido prestados los siguientes libros: </p>
         <p className="grey pl-2 pt-1 pb-2">Para confirmar el préstamo haz click en <i class="prevapceptIconOK fas fa-check-square"></i></p>
         <p className="greenbg white px-2 mb-2">{this.state.message1}{this.state.info}</p>
-        <p className="greenbg white px-2 mb-2">{this.state.message2}</p>
+        <p className="redbg white px-2 mb-2"><span>{this.state.message3}</span>{this.state.message2}</p>
       <div className="d-flex flex-wrap justify-content-around">
         {this.getAskedBooks()}
       </div>

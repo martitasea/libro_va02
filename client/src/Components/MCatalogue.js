@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Thumbnail from './Thumbnail';
 import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
@@ -51,11 +51,16 @@ componentDidMount(){
         </div>
       )}
       return (
-        <div className="mcatalogue container mt-3 sheet mb-5">
+        <Fragment>
+          <p className="margin-catalogue child blue title pt-2 pl-2">
+          <span className="childIcon blue">f </span>CaTáLoGo
+          </p>
+        <div className="container sheet">
           <div className="row d-flex justify-content-center">
             {this.getAllCatalogue()}
           </div>
         </div>
+        </Fragment>
       );
     }
   }

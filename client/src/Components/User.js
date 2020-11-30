@@ -20,7 +20,7 @@ class User extends Component {
       <AuthConsumer>
         {(contxt)=>(
           <div>
-          <div className="d-flex  justify-content-between align-items-center margin-header mb-2">
+          <div className="d-flex justify-content-between align-items-center margin-user mb-0">
             <p className="child blue title ml-2 mb-2">
               <span className="childIcon blue">s </span>
               Hola {contxt.name}!

@@ -16,6 +16,18 @@ exports.createUser = async (req, res) => {
         .catch((e) => console.log("ocurrió un error:" + e));
     };
 
+/* ----------------------------------------------------------------------
+GET USER NAME
+---------------------------------------------------------------------- */
+exports.getUserName = async (req, res) => {
+  let firebaseID = req.params.firebaseid;
+    bbdd
+      .getUserName(firebaseID)
+      .then((data) =>
+      res.status(200).json(data)
+      )
+      .catch((e) => console.log("ocurrió un error:" + e));
+  };
 
 /* ----------------------------------------------------------------------
 READ ONE BOOK FROM GOOGLE API
