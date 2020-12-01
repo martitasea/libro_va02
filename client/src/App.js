@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Router, Switch} from "react-router-dom";
+import { Sidenav } from 'rsuite';
+import 'rsuite/lib/styles/index.less'; 
 import Login from "./Views/Login";
 import Instructions from "./Views/Instructions";
 import Signup from "./Views/Signup";
@@ -10,6 +12,7 @@ import Adminarea from "./Views/Adminarea";
 import {AuthProvider} from './Context/AuthContext';
 import './App.css';
 
+
 function App() {
   const [name, setName] = useState('');
   const [firebaseID, setFirebaseID] = useState('');
@@ -18,10 +21,11 @@ function App() {
   const [login, setLogin] = useState('Iniciar Sesión');
   const [err, setErr]=useState(null);
   const [isbn, setIsbn]=useState('');
+  const [sidebar, setSidebar]=useState(false);
 
   return (
     <div className="background">
-      <AuthProvider value={{
+    <AuthProvider value={{
           name, setName, 
           firebaseID, setFirebaseID, 
           email, setEmail,
@@ -29,6 +33,7 @@ function App() {
           login, setLogin, 
           err, setErr, 
           isbn, setIsbn,
+          sidebar, setSidebar
           }}>
         <BrowserRouter>
           <Switch>

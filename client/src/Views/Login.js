@@ -17,7 +17,7 @@ class Login extends Component {
         <Header/>
         <MLogin/>
         <MCatalogue/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }

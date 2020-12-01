@@ -15,7 +15,7 @@ class Userarea extends Component {
       <div>
         <Header/>
         <User/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }

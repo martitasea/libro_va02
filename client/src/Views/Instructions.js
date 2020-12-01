@@ -15,7 +15,7 @@ class Instructions extends Component {
       <div>
         <Header/>
         <MInstructions/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }

@@ -129,12 +129,12 @@ BORDERS
 /* ------------------------------------
 Z-INDEX
 ---------------------------------------*/
-/* .z1{
+.z1{
   z-index: 1;
 }
 .z10{
   z-index: 10;
-} */
+}
 /* ------------------------------------
 MARGIN
 ---------------------------------------*/
@@ -168,6 +168,10 @@ HEADER
   color:#EE7A71;
   /* color: #29A18C; */
   /* background-color: red; */
+}
+.logoutIcon{
+  font-size: 18px;
+  color:#195392;
 }
 .loupe{
   font-size: 24px;
@@ -218,7 +222,7 @@ MLOGIN
   width: 350px;
   margin-left: 50%;
   left: -175px;
-  top: 13em;
+  top: 10em;
 }
 /* ------------------------------------
 MYBOOK 
@@ -343,4 +347,58 @@ DELETE APCEPT ICON
 .closeIcon{
   font-size: 15px;
   color:  #EE7A71;
+}
+/* ------------------------------------
+NAVBAR 
+---------------------------------------*/
+.navbar{
+  /* background-color:red; */
+  /* height: 80px; */
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.menu-bars{
+  /* margin-left: 2rem; */
+  /* font-size: 2rem; */
+  background: none;
+}
+.nav-menu{
+  background-color:white;
+  margin-left: -10px;
+  width: 200px;
+  height: 100vh;
+  display:flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 50;
+  top:0;
+  left:-100%;
+  transition: 850ms;
+}
+.nav-menu.active{
+  left:0;
+  transition: 350ms;
+}
+.nav-text{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; 
+  padding: 8px 0px 8px 16px;
+  height: 60px;
+}
+.nav-menu-items{
+  width: 100%;
+}
+.navbar-toogle{
+  background-color: red;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.school{
+  margin-top: 54vh;
+  text-align: center;
 }

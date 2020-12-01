@@ -17,7 +17,7 @@ class Signup extends Component {
         <Header/>
         <MSignup/>
         <MCatalogue/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }

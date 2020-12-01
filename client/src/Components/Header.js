@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import {AuthConsumer} from '../Context/AuthContext';
+import NavBar from "./NavBar";
 
 class Header extends Component {
   render() {
     return (
       <div className="d-flex justify-content-between align-items-center">
         {/* <Link to="/userarea"> */}
-          <i onClick={(e)=>{
+        <NavBar/>
+          {/* <i onClick={(e)=>{
             e.preventDefault()
-            console.log("HOla")
+            console.log("Hola")
           }}
-          className="fas fa-bars userIcon"></i>
+          className="fas fa-bars userIcon"></i> */}
         {/* </Link> */}
         <Link to="/catalogue">
           <img src="./media/logo.svg" alt="Logo Libro va" className="logo"/>

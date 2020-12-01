@@ -16,7 +16,7 @@ class Catalogue extends Component {
       <div>
         <Header/>
         <MCatalogue/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }

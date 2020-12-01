@@ -15,7 +15,7 @@ class Bookdetail extends Component {
       <div>
         <Header/>
         <MBookdetail/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }

@@ -21,11 +21,11 @@ class User extends Component {
         {(contxt)=>(
           <div>
           <div className="d-flex justify-content-between align-items-center margin-user mb-0">
-            <p className="child blue title ml-2 mb-2">
+            {/* <p className="child blue title ml-2 mb-2">
               <span className="childIcon blue">s </span>
               Hola {contxt.name}!
               <span className="childIcon blue"> s</span>
-            </p>
+            </p> */}
             <div className="d-flex justify-content-end">
               <p className="childIcon title mt-1 grey">V  </p>
               <a href="/" type="button" className="dosis medium grey mt-1 ml-1"
