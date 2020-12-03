@@ -15,7 +15,7 @@ class Thumbnail extends Component {
   }
 
 getState(){
-  if(this.state.phase===1)
+  if(this.state.phase===undefined)
   {return "¡PIDELO!"}
   else {return "NO DISPONIBLE"}
 }

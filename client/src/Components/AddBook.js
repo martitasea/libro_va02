@@ -28,7 +28,7 @@ getBookApi(){
     isbn:this.state.isbn,
     firebaseID: this.context.firebaseID,
   }
-  fetch("http://localhost:5000/getbookapi/"+this.state.isbn+"/"+this.context.firebaseID, {
+  fetch(`http://localhost:5000/getbookapi/${this.state.isbn}/${this.context.firebaseID}`, {
     method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -36,7 +36,7 @@ getBookApi(){
       body: JSON.stringify(newBook),
     })
   .then(() => {
-    fetch("http://localhost:5000/getaddedbooktitle/"+newBook.isbn+"/"+this.context.firebaseID)
+    fetch(`http://localhost:5000/getaddedbooktitle/${newBook.isbn}/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
     .then((titleJson) => {
       // console.log("++++++++++++++")
@@ -49,7 +49,7 @@ getBookApi(){
       // setTimeout((e)=>(e.target.reset()))
       // setTimeout(()=>document.getElementById("addBookForm").reset)
       // document.getElementById("addBook").reset();
-      setTimeout(() => this.props.history.push('/catalogue'), 2500)
+      setTimeout(() => this.props.history.push('/'), 2500)
     })
     .catch(err => {console.log(err);});
   })
@@ -70,7 +70,7 @@ render() {
 
         <div id="addbook" className="collapse grey px-2 pb-2">
           <p>Necesitas iniciar sesión para poder registrar un libro:</p>
-          <Link to="/">
+          <Link to="/login">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
           </Link>
         </div>

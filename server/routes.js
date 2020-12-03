@@ -125,8 +125,9 @@ UPDATE BOOK PHASE FROM REST TO REQUEST
 exports.updateBookPhase = async (req, res) => {
   let bookid=req.params.bookid;
   let phase=req.params.phase;
+  let date=req.params.date;
     bbdd
-      .updateBookPhase(bookid, phase)
+      .updateBookPhase(bookid, phase, date)
       .then((data) =>
       res.status(200).json(data)
       )
@@ -198,14 +199,14 @@ exports.deleteBook = async (req, res) => {
 };
 
 /* ----------------------------------------------------------------------
-UPDATE LOAN
+GET LOAN HISTORY
 ---------------------------------------------------------------------- */
-// exports.updateLoan = async (req, res) => {
-//   let bookid=req.params.bookid;
-//     bbdd
-//       .updateLoan(bookid)
-//       .then((data) =>
-//       res.status(200).json(data)
-//       )
-//       .catch((e) => console.log("ocurrió un error:" + e));
-//   };
+exports.getLoanHistory = async (req, res) => {
+  let phase = await req.params.phase;
+  bbdd
+    .getLoanHistory(phase)
+    .then((data) =>
+      res.status(200).json(data)
+      )
+      .catch((e) => console.log("ocurrió un error:" + e));
+  };

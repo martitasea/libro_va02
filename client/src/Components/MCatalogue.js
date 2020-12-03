@@ -29,7 +29,7 @@ getAllCatalogue(){
 
 
 componentDidMount(){
-  fetch("http://localhost:5000/allcatalogue/"+this.context.firebaseID)
+  fetch(`http://localhost:5000/allcatalogue/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
     .then(booksJson => {
       this.setState({books:booksJson, firebaseID:this.context.firebaseID})
@@ -43,7 +43,7 @@ componentDidMount(){
         <div className="mcatalogue container mt-5 sheet mb-5">
           <div className="row d-flex justify-content-center">
             <img src="./media/ReadingSideDoodle03-2.svg" alt="" className="mt-3 doodle"/>
-            <Link to="/">
+            <Link to="/login">
               <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"></input>
             </Link>
             <p className="mt-4 child title blue text-center">Lo siento para ver el catálogo tienes que iniciar sesión</p>

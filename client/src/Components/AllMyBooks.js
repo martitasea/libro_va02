@@ -23,7 +23,7 @@ getAllMyBooks(){
       title={book.title}
       classIcon="prevapceptIconDelete far fa-trash-alt"
       onClick={()=>{
-        fetch("http://localhost:5000/deletebook/"+book.boodID, {
+        fetch(`http://localhost:5000/deletebook/${book.boodID}`, {
           method: "POST",
             headers: {
               "Content-Type": "application/json;charset=utf-8",
@@ -34,7 +34,7 @@ getAllMyBooks(){
             this.setState({message:"Has borrado el libro con éxito."})  
           })
           .then(()=>{
-            fetch("http://localhost:5000/allmybooks/"+this.context.firebaseID)
+            fetch(`http://localhost:5000/allmybooks/${this.context.firebaseID}`)
             .then((res) => {return res.json();})
             .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
             .catch(err => {console.log(err);});
@@ -52,7 +52,7 @@ componentWillUpdate(prevProps, prevState){
 }
 
 componentDidMount(){
-  fetch("http://localhost:5000/allmybooks/"+this.context.firebaseID)
+  fetch(`http://localhost:5000/allmybooks/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
     .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
     .catch(err => {console.log(err);});
@@ -69,7 +69,7 @@ componentDidMount(){
         </a>
         <div id="allmybooksloggedout" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder ver tus libros.</p>
-          <Link to="/">
+          <Link to="/login">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
           </Link>
         </div>

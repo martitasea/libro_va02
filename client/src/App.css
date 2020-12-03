@@ -114,6 +114,9 @@ A TAGS
 a{
   text-decoration: none !important;
 }
+a:hover{
+  color: #29A18C;
+}
 /* ------------------------------------
 BORDERS
 ---------------------------------------*/
@@ -274,7 +277,7 @@ MINSTRUCTIONS
 }
 .textinstructions{
   /* width: 320px; */
-  height: 70vh;
+  height: 76.5vh;
   /* margin-top: 10em; */
 }
 
@@ -344,6 +347,9 @@ DELETE APCEPT ICON
   font-size: 15px;
   color: #b5b3b3;
 }
+.prevapceptIconDelete:hover{
+  color: #EE7A71;
+}
 .closeIcon{
   font-size: 15px;
   color:  #EE7A71;
@@ -402,3 +408,15 @@ NAVBAR
   margin-top: 54vh;
   text-align: center;
 }
+/* ------------------------------------
+TABLE 
+---------------------------------------*/
+.table{
+ margin-top: 2em;
+}
+.tablita{
+  width:7
+}
+/* .tablita .tr{
+  margin-left:30px;
+} */

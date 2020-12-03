@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 import Book from './Book';
 
@@ -24,16 +24,16 @@ getAskedBooks(){
       title={book.title}
       classIcon="prevapceptIconOK fas fa-check-square"
       onClick={()=>{
-        fetch("http://localhost:5000/updatebookphase/"+book.bookID+"/"+2)
+        fetch(`http://localhost:5000/updatebookphase/${book.bookID}/2/dateLoan`)
         .then(()=>{
-          fetch("http://localhost:5000/getbooktitle/"+book.bookID)
+          fetch(`http://localhost:5000/getbooktitle/${book.bookID}`)
           .then((res)=>{return res.json();})
           .then((titleJson)=>{
             this.setState({info:titleJson[0].title, message1: "Se ha confirmado el préstamo del libro: ", message2: " Entrégalo el próximo día de cole en el AMPA", message3:<i class="fas fa-exclamation-triangle"></i>})
           })
         })
         .then(()=>{
-          fetch("http://localhost:5000/getaskedbooks/"+this.context.firebaseID)
+          fetch(`http://localhost:5000/getaskedbooks/${this.context.firebaseID}`)
           .then((res) => {return res.json();})
           .then(booksJson => {this.setState({books:booksJson})})
           .catch(err => {console.log(err);});
@@ -51,7 +51,7 @@ componentWillUpdate(prevProps, prevState){
 }
 
 componentDidMount(){
-  fetch("http://localhost:5000/getaskedbooks/"+this.context.firebaseID)
+  fetch(`http://localhost:5000/getaskedbooks/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
     .then(booksJson => {this.setState({books:booksJson})})
     .catch(err => {console.log(err);});
@@ -68,7 +68,7 @@ componentDidMount(){
         </a>
         <div id="notificationsloggedout" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder ver los libros pendientes de préstamo.</p>
-          <Link to="/">
+          <Link to="/login">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
           </Link>
         </div>

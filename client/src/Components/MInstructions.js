@@ -28,7 +28,7 @@ class MInstructions extends Component {
         Para registrarte es necesario que introduzcas un correo electrónico, tuyo, o de tutor, así como un número de teléfono.
           Con e objetivo de preservar la identidad y la seguridad de todos los niños, en el registro, se cotejará el nombre del niño con el de la base de datos de alumnos del colegio. No permitiendo registrarse si no se es alumno.
         </p>
-        <Link to="/catalogue">
+        <Link to="/">
           <button className="btn btn-green mt-3">IR AL CATÁLOGO</button>
         </Link>      
         </article>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import MInstructions from '../Components/MInstructions';
-import Footer from '../Components/Footer';
+// import Footer from '../Components/Footer';
 
 
 class Instructions extends Component {

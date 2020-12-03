@@ -52,8 +52,8 @@ app.get("/onebookdetail/:isbn", routes.getOneBookDetail);
 // Read title from just addedbook
 app.get("/getaddedbooktitle/:isbn/:firebaseid", routes.getAddedBookTitle);
 
-// Update book phase from rest to request
-app.get("/updatebookphase/:bookid/:phase", routes.updateBookPhase);
+// Update book a from rest to request
+app.get("/updatebookphase/:bookid/:phase/:date", routes.updateBookPhase);
 
 //Create loan
 app.get("/createloan/:bookid/:borrowerid", routes.createLoan);
@@ -70,9 +70,11 @@ app.get("/getbooktitle/:bookid", routes.getBookTitle);
 // Delete one book
 app.post("/deletebook/:bookid", routes.deleteBook);
 
+// Get all loans
+app.get("/getloanhistory/:phase", routes.getLoanHistory);
+
 // Update loan
 // app.post("/updateloan/:bookid", routes.deleteBook);
-
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------
@@ -87,6 +89,7 @@ app.post("/deletebook/:bookid", routes.deleteBook);
 //           name VARCHAR(300) NOT NULL,
 //           tutorName VARCHAR(30) NOT NULL,
 //           phone INT(9) NOT NULL,
+//           rol VARCHAR (10) NOT NULL DEFAULT user,
 //           PRIMARY KEY (firebaseID)
 //           );
 //         `)
@@ -170,7 +173,12 @@ app.post("/deletebook/:bookid", routes.deleteBook);
 //         loanID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 //         bookID INT NOT NULL,
 //         borrowerID VARCHAR(30) NOT NULL,
-//         dateIn DATE NOT NULL,
+//         phase VARCHAR (20) NOT NULL,
+//         dateRequest DATE NOT NULL,
+//         dateLoan DATE NOT NULL,
+//         dateReading DATE NOT NULL,
+//         dateReturn DATE NOT NULL,
+//         dateRest DATE NOT NULL,
 //         deathLine DATE NOT NULL,
 //         CONSTRAINT FK_borrowerbook
 //             FOREIGN KEY (borrowerID) REFERENCES users (firebaseID),
@@ -186,19 +194,6 @@ app.post("/deletebook/:bookid", routes.deleteBook);
 //     }
 // }
 // asyncFunction();
-
-//------------------------------------------------------------------------------
-// MIDDLEWARE
-//------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
-// ROUTES
-//------------------------------------------------------------------------------
-// app.get("/items/:orderby/:order/:range", rutes.getItems);
-// app.get("/manufacturers/:itemid", rutes.getManufacturers);
-// app.get("/search/:term", rutes.getItemsTerm);
-
 
 //------------------------------------------------------------------------------
 // DEFINICIÓN DEL PUERTO AL QUE TIENEN QUE ATENDER

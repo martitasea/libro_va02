@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { AuthConsumer } from '../Context/AuthContext';
 import {withRouter} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 
@@ -26,29 +25,32 @@ class MBookdetail extends Component {
     };
     this.changePhaseRequest=this.changePhaseRequest.bind (this);
   }
-  
-changePhaseRequest(){
-    fetch("http://localhost:5000/updatebookphase/"+this.state.bookID+"/"+1)
-      .then(()=>{
-        fetch("http://localhost:5000/getbooktitle/"+this.state.bookID)
-        .then((res)=>{return res.json();})
-        .then((titleJson)=>{
-          this.setState({info:titleJson[0].title, message1: "Has pedido prestado el libro, ", message2:"Te llegará un correo electrónico cuando el dueño acepte tu petición."})
-        })
+
+
+  changePhaseRequest(){
+    fetch(`http://localhost:5000/createLoan/${this.state.bookID}/${this.context.firebaseID}`)
+    .then((res)=>{return res.json();})
+    .then(()=>{
+      fetch(`http://localhost:5000/getbooktitle/${this.state.bookID}`)
+      .then((res)=>{return res.json();})
+      .then((titleJson)=>{
+        console.log(titleJson)
+        this.setState(
+          {info:titleJson[0].title, 
+           message1: "Has pedido prestado el libro, ", 
+           message2:"Te llegará un correo electrónico cuando el dueño acepte tu petición."}
+           )
       })
       .then(()=>{
-        fetch("http://localhost:5000/createLoan/"+this.state.bookID+"/"+this.context.firebaseID)
-        .then((res)=>{return res.json();})
-      })
-      .then(()=>{
-        setTimeout(() => this.props.history.push('/catalogue'), 3300)
+        setTimeout(() => this.props.history.push('/'), 3300)
       })
       .catch(err => {console.log(err);});
+  })
 }
 
   componentDidMount(){
     let isbn=this.context.isbn
-    fetch("http://localhost:5000/onebookdetail/"+isbn)
+    fetch(`http://localhost:5000/onebookdetail/${isbn}`)
       .then((res) => {return res.json();})
       .then(bookJson => 
         {this.setState({
@@ -74,8 +76,6 @@ changePhaseRequest(){
 
   render() {
     return (
-      <AuthConsumer>
-        {(contxt)=>(
             <section className="container bg-white m-2 bookdetail">
             <div className="row">
               <img src={this.state.image} alt={this.state.title} className="book my-3 ml-3 col-5"></img>
@@ -101,8 +101,6 @@ changePhaseRequest(){
               </div>
               </div>
           </section>
-        )}
-      </AuthConsumer>
     );
   }
 }

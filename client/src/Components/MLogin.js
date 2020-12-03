@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {withRouter, Link} from "react-router-dom";
-import AuthConsumer from '../Context/AuthContext';
 import AuthContext from '../Context/AuthContext';
 import { auth } from '../firebaseConfig';
 
@@ -10,8 +9,8 @@ class MLogin extends Component {
     super(props);
     this.state = {
       name:"",
-      email:"",
-      password:"",
+      email:"admin@gmail.com",
+      password:"123456",
       tutorName:"",
       phone:"",
       firebaseID:"",
@@ -26,26 +25,27 @@ setPassword(e){this.setState({password: e.target.value})}
 
   render() {
     return (
-      <AuthConsumer>
-        {(contxt)=>(
           <div className="overlay-cyan">
             <section className="shadow bg-white d-flex flex-column login">
               <p className="child green title text-center my-3">Iniciar sesión</p>
               <form className="mx-3 mb-3"
                 onSubmit={(e)=>{
+                  
                   e.preventDefault();
                   auth.signInWithEmailAndPassword(this.state.email, this.state.password)
                   .then((res)=> {
-                    contxt.setEmail(this.state.email);
-                    contxt.setFirebaseID(res.user.uid);
-                    contxt.setLogin("Cerrar Sesión");
-                    this.props.history.push("/catalogue");
+                    this.context.setEmail(this.state.email);
+                    this.context.setFirebaseID(res.user.uid);
+                    this.context.setLogin("Cerrar Sesión");
+                    if(this.context.firebaseID!=="6THbQtBfDDS8Cu5KNf8r9lK8IEg2"){
+                      this.props.history.push("/");
+                    }
                   })
                   .then(()=>{
-                    fetch("http://localhost:5000/getusername/"+this.context.firebaseID)
+                    fetch(`http://localhost:5000/getusername/${this.context.firebaseID}`)
                     .then((res) => {return res.json();})
                     .then((user) => {
-                      contxt.setName(user[0].name)                      
+                      this.context.setName(user[0].name)                      
                     })
                   })
                   .catch((err)=>
@@ -71,8 +71,6 @@ setPassword(e){this.setState({password: e.target.value})}
               </form>
             </section>
           </div>
-        )}
-      </AuthConsumer>
     );
   }
 }          

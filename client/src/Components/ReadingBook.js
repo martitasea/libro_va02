@@ -26,7 +26,7 @@ getReadingBook(){
           
           <p className="heavy red pb-2"><i class="fas fa-exclamation-triangle"></i><span>  </span>{book.deathLine.slice(0,10)}</p>
           <button className="btn btn-blue" onClick={()=>{
-            fetch("http://localhost:5000/updatebookphase/"+book.bookID+"/"+4)
+            fetch(`http://localhost:5000/updatebookphase/${book.bookID}/4/dateReturn`)
             .then(()=>{
               this.setState({message: "Entrégalo el próximo día de cole al mostrador del AMPA"})
               })
@@ -40,7 +40,7 @@ getReadingBook(){
 }
 
 componentDidMount(){
-  fetch("http://localhost:5000/getreadingbook/"+this.context.firebaseID)
+  fetch(`http://localhost:5000/getreadingbook/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
     .then((booksJson) => {
       this.setState({books:booksJson})
@@ -59,7 +59,7 @@ componentDidMount(){
         </a>
         <div id="askedbook" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder devolver un libro.</p>
-          <Link to="/">
+          <Link to="/login">
             <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
           </Link>
         </div>

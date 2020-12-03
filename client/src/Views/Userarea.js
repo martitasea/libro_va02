@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import User from '../Components/User';
-import Footer from '../Components/Footer';
+// import Footer from '../Components/Footer';
 
 
 class Userarea extends Component {

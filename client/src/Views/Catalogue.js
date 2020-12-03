@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import MCatalogue from '../Components/MCatalogue';
-import Footer from '../Components/Footer';
+// import Footer from '../Components/Footer';
 
 
 class Catalogue extends Component {
@@ -14,7 +14,7 @@ class Catalogue extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header name={this.context.name}/>
         <MCatalogue/>
         {/* <Footer/> */}
       </div>

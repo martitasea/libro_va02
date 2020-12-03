@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import MBookdetail from '../Components/MBookdetail';
-import Footer from '../Components/Footer';
+// import Footer from '../Components/Footer';
 
 
 class Bookdetail extends Component {
