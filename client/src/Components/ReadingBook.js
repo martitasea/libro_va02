@@ -60,7 +60,7 @@ componentDidMount(){
         <div id="askedbook" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder devolver un libro.</p>
           <Link to="/login">
-            <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+            <button type="text" className="btn btn-green my-2 px-2">INICIAR SESIÓN</button>
           </Link>
         </div>
     </div>  

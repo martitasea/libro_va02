@@ -86,7 +86,7 @@ class MSignup extends Component {
                   </div>
                   <div>
                     <label className="mb-1 mt-3 grey mini">CONTRASEÑA</label>
-                    <input onChange={this.setPassword} type="password" id="password" name="password" className="p-1 grey width100 border-blue-1"/>
+                    <input onChange={this.setPassword} type="password" id="password" name="password" className="p-1 grey width100 border-blue-1" autoComplete="new-password"/>
                   </div>
                   <div>
                     <label className="mb-1 mt-3 grey mini">NOMBRE PADRE/MADRE/TUTOR</label>

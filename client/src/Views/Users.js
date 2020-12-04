@@ -12,13 +12,10 @@ class Users extends Component {
   }
 
   render() {
-    // if(this.context.firebaseID==="6THbQtBfDDS8Cu5KNf8r9lK8IEg2"){
    return(
     <div>
       <Header/>
-      <ListUsers/>+
-
-      
+      <ListUsers/>      
     </div>
       )}
 }

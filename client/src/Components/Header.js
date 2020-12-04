@@ -11,7 +11,7 @@ class Header extends Component {
   }
 
   render() {
-    if(this.context.firebaseID!=="6THbQtBfDDS8Cu5KNf8r9lK8IEg2"){
+    if(this.context.rol!=="admin"){
       return (
         <div className="d-flex justify-content-between align-items-center">
           <NavBar  

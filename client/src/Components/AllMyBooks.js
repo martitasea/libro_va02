@@ -18,7 +18,7 @@ class AllMyBooks extends Component {
 getAllMyBooks(){
     return this.state.books.map((book)=>(
     <Book
-      key={book.isbn}
+      key={book.bookID}
       src={book.image}
       title={book.title}
       classIcon="prevapceptIconDelete far fa-trash-alt"
@@ -70,7 +70,7 @@ componentDidMount(){
         <div id="allmybooksloggedout" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder ver tus libros.</p>
           <Link to="/login">
-            <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+            <button type="text" className="btn btn-green my-2 px-2">INICIAR SESIÓN</button>
           </Link>
         </div>
     </div>  

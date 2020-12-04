@@ -34,7 +34,7 @@ Con el fin de delimitar y asignar claramente la responsabilidad del libro en cad
 | 5  | Pendiente de devolución  | El adulto confirma la entrega | Adulto | 🔄 Se produce el intercambio físico |
 | 1  | ...  | ...  | ... |...|
 
-<img src="https://github.com/martitasea/libro_va/blob/main/client/public/media/cicloFases.png" alt="Fases" width="300px">
+<img src="https://github.com/martitasea/libro_va/blob/main/client/public/media/cicloFases.png" alt="Fases" width="500px">
 
 ## ¿Qué puede hacer un usuario en LibroVa? (y que no)
 

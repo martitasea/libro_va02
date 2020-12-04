@@ -32,6 +32,7 @@ componentDidMount(){
     .then(booksJson => {
       this.setState({books:booksJson, firebaseID:this.context.firebaseID})
     })
+    .then(this.getAllCatalogue())
     .catch(err => {console.log(err);});
 }
 
@@ -42,7 +43,8 @@ componentDidMount(){
           <div className="row d-flex justify-content-center">
             <img src="./media/ReadingSideDoodle03-2.svg" alt="" className="mt-3 doodle"/>
             <Link to="/login">
-              <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"></input>
+              <button type="text" className="btn btn-green my-2 px-2">INICIAR SESIÓN</button>
+
             </Link>
             <p className="mt-4 child title blue text-center">Lo siento para ver el catálogo tienes que iniciar sesión</p>
           </div>

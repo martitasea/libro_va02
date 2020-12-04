@@ -37,20 +37,22 @@ setPassword(e){this.setState({password: e.target.value})}
                     this.context.setEmail(this.state.email);
                     this.context.setFirebaseID(res.user.uid);
                     this.context.setLogin("Cerrar Sesión");
-                    if(this.context.firebaseID!=="6THbQtBfDDS8Cu5KNf8r9lK8IEg2"){
-                      this.props.history.push("/");
-                    }
                   })
                   .then(()=>{
                     fetch(`http://localhost:5000/getusername/${this.context.firebaseID}`)
                     .then((res) => {return res.json();})
                     .then((user) => {
                       this.context.setName(user[0].name)
-                      // if(user.rol!=="admin"){
-                      //   this.props.history.push("/")
-                      // }                      
+                      this.context.setRol(user[0].rol)
                     })
-                  })
+                    .then(()=>{
+                      if(this.context.rol==="admin"){
+                        this.props.history.push("/admin")
+                      }else{
+                        this.props.history.push("/")
+                      }                     
+                     })
+                    })
                   .catch((err)=>
                   {if(err.code==="auth/user-not-found")
                   {this.setState({err:"No hay ningún usuario registrado con ese correo, prueba con otro."})}
@@ -64,7 +66,7 @@ setPassword(e){this.setState({password: e.target.value})}
                 </div>
                 <div>
                   <label className="mb-1 mt-3 grey mini">CONTRASEÑA</label>
-                  <input onChange={this.setPassword} type="password" id="password" className="p-1 grey width100 border-blue-1"/>
+                  <input onChange={this.setPassword} type="password" id="password" className="p-1 grey width100 border-blue-1" autoComplete="new-password"/>
                   <p className="dosis mini grey mt-2">{this.state.login}</p>
                   <p className="dosis mini red mt-2">{this.state.err}</p>
                 </div>

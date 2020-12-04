@@ -16,7 +16,12 @@ class AddBook extends Component {
     };
     this.setAddIsbn=this.setAddIsbn.bind(this);
     this.getBookApi=this.getBookApi.bind(this);
+    this.inputChange=this.inputChange.bind(this)
   }
+
+inputChange(e){
+  const change=e.target.value;
+}
 
 setAddIsbn(e){
   let addedIsbn=e.target.value.replace(/-/g,"")
@@ -71,7 +76,7 @@ render() {
         <div id="addbook" className="collapse grey px-2 pb-2">
           <p>Necesitas iniciar sesión para poder registrar un libro:</p>
           <Link to="/login">
-            <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+            <button type="text" className="btn btn-green my-2 px-2">INICIAR SESIÓN</button>
           </Link>
         </div>
       </div>  
@@ -100,7 +105,7 @@ render() {
                   <label className="mb-1 grey mini">ISBN</label>
                   <input id="addBookForm" onChange={this.setAddIsbn} type="text" name="isbn" className="p-1 mb-2 grey width100 border-blue-1"/>
                 </div>
-                <input type="submit" value="AÑADIR" className="btn btn-blue mt-2"></input>
+                  <input type="submit" value="AÑADIR" className="btn btn-blue mt-2" onChange={(e)=>this.inputChange(e)}></input>
               </form>
             </div>
           </div>

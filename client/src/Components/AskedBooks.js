@@ -50,7 +50,7 @@ componentWillUpdate(prevProps, prevState){
 }
 }
 
-componentDidMount(){
+componentDidUpdate(){
   fetch(`http://localhost:5000/getaskedbooks/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
     .then(booksJson => {this.setState({books:booksJson})})
@@ -69,7 +69,7 @@ componentDidMount(){
         <div id="notificationsloggedout" className="collapse grey pl-2">
           <p className="grey pb-2">Tienes que iniciar sesión para poder ver los libros pendientes de préstamo.</p>
           <Link to="/login">
-            <input type="text" value="INICIAR SESIÓN" className="btn btn-green my-2 px-2"/>
+            <button type="text" className="btn btn-green my-2 px-2">INICIAR SESIÓN</button>
           </Link>
         </div>
     </div>  

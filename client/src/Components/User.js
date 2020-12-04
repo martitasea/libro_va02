@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AddBook from './AddBook';
 import ReadingBook from './ReadingBook';
 import AllMyBooks from './AllMyBooks';
+import AskedBooks from './AskedBooks';
 
 class User extends Component {
   constructor(props){
@@ -15,6 +16,7 @@ class User extends Component {
        <div>
           <div className="d-flex margin-user mb-0">
           </div>
+          <AskedBooks/>
           <ReadingBook/>
           <AllMyBooks/>
           <AddBook/>

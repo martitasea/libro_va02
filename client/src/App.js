@@ -15,6 +15,7 @@ import './App.css';
 
 
 function App() {
+  const [rol, setRol] = useState('');
   const [name, setName] = useState('');
   const [firebaseID, setFirebaseID] = useState('');
   const [email, setEmail] = useState('');
@@ -25,38 +26,22 @@ function App() {
   const [isbn, setIsbn]=useState('');
   const [sidebar, setSidebar]=useState(false);
 
-  // if(firebaseID==="6THbQtBfDDS8Cu5KNf8r9lK8IEg2"){
-  //   return (
-      
-  //       <BrowserRouter>
-  //           <Route exact path="/admin" component={Table}/>
-  //       </BrowserRouter>
-  //       // <Header/>
-  //       //<LoanTable/>
-  //       //<ReturnTable/>
- 
-  //       // <BrowserRouter>
-  //       //   <Switch>
-  //       //     <Route exact path="/" component={Table}/>
-  //       //   </Switch>
-  //       // </BrowserRouter>
-        
 
-  //   )
-  // }
+  
   return (
     <div className="background">
     <AuthProvider value={{
-          name, setName, 
-          firebaseID, setFirebaseID, 
-          email, setEmail,
-          password, setPassword,
-          tutorName, setTutorName, 
-          login, setLogin, 
-          err, setErr, 
-          isbn, setIsbn,
-          sidebar, setSidebar
-          }}>
+      rol, setRol,
+      name, setName, 
+      firebaseID, setFirebaseID, 
+      email, setEmail,
+      password, setPassword,
+      tutorName, setTutorName, 
+      login, setLogin, 
+      err, setErr, 
+      isbn, setIsbn,
+      sidebar, setSidebar
+    }}>                   
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Catalogue}/>
@@ -69,7 +54,7 @@ function App() {
             <Route exact path="/charts" component={Charts}/>
             <Route exact path="/users" component={Users}/>
           </Switch>
-      {firebaseID==="6THbQtBfDDS8Cu5KNf8r9lK8IEg2" ? <Redirect to="/admin"/> : <Redirect to="/"/>}
+      {rol==="admin" ? <Redirect to="/admin"/> : <Redirect to="/"/>}
         </BrowserRouter>
       </AuthProvider>
     </div>
