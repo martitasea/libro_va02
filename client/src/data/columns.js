@@ -101,8 +101,8 @@ export const columns=[
     }
     },  
     { 
-      title: "Deathline",
-      field: "DeathLine" ,
+      title: "Deadline",
+      field: "DeadLine" ,
       headerStyle: {
         backgroundColor: "#195392",
         color: "white",

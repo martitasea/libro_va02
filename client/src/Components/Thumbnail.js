@@ -28,7 +28,7 @@ fixIsbn(contxt){
     return (
       <AuthConsumer>
         {(contxt)=>(
-            <div className="col-4 col-sm-3 col-md-2 p-1">
+            <div key={this.props.key} className="col-4 col-sm-3 col-md-2 p-1">
             <Link to="/bookdetail">
               <div className="bg-white shadow m-1 d-flex flex-column align-items-center file-thumbnail" 
               onClick={(e)=>{

@@ -10,6 +10,7 @@ class MSignup extends Component {
     this.state = {
       name:"",
       email:"",
+      tutorName:"",
       firebaseID:"",
       err:"",
     };
@@ -17,6 +18,7 @@ class MSignup extends Component {
     this.setEmail=this.setEmail.bind(this);
     this.setPassword=this.setPassword.bind(this);
     this.setPhone=this.setPhone.bind(this);
+    this.setTutorName=this.setTutorName.bind(this);
     this.createUser=this.createUser.bind(this);
   }
 
@@ -24,11 +26,13 @@ class MSignup extends Component {
   setEmail(e){this.setState({email: e.target.value})}
   setPassword(e){this.setState({password: e.target.value})}
   setPhone(e){this.setState({phone: e.target.value})}
+  setTutorName(e){this.setState({tutorName: e.target.value})}
 
 
   createUser(contxt){
     let user = {
       firebaseID: this.state.firebaseID,
+      email:this.state.email,
       name:this.state.name,
       tutorName:this.state.tutorName,
       phone:this.state.phone,
@@ -86,7 +90,7 @@ class MSignup extends Component {
                   </div>
                   <div>
                     <label className="mb-1 mt-3 grey mini">NOMBRE PADRE/MADRE/TUTOR</label>
-                    <input type="text" id="tutorName" name="tutorName" className="p-1 grey width100 border-blue-1"/>
+                    <input onChange={this.setTutorName} type="text" id="tutorName" name="tutorName" className="p-1 grey width100 border-blue-1"/>
                   </div>
                   <div>
                     <label className="mb-1 mt-3 grey mini">TELÉFONO PADRE/MADRE/TUTOR</label>

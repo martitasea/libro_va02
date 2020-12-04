@@ -14,11 +14,10 @@ class MCatalogue extends Component {
     this.getAllCatalogue=this.getAllCatalogue.bind(this);
   }
 
-
 getAllCatalogue(){
   return this.state.books.map((book)=>(
   <Thumbnail
-    key={book.bookID}
+    key={book.isbn}
     src={book.image}
     title={book.title}
     phase={book.phase}
@@ -26,7 +25,6 @@ getAllCatalogue(){
   />
   ))
 }
-
 
 componentDidMount(){
   fetch(`http://localhost:5000/allcatalogue/${this.context.firebaseID}`)

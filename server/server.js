@@ -73,6 +73,9 @@ app.post("/deletebook/:bookid", routes.deleteBook);
 // Get all loans
 app.get("/getloanhistory/:phase", routes.getLoanHistory);
 
+// Get all users
+app.get("/getallusers", routes.getAllUsers);
+
 // Update loan
 // app.post("/updateloan/:bookid", routes.deleteBook);
 //------------------------------------------------------------------------------
@@ -179,7 +182,7 @@ app.get("/getloanhistory/:phase", routes.getLoanHistory);
 //         dateReading DATE NOT NULL,
 //         dateReturn DATE NOT NULL,
 //         dateRest DATE NOT NULL,
-//         deathLine DATE NOT NULL,
+//         deadLine DATE NOT NULL,
 //         CONSTRAINT FK_borrowerbook
 //             FOREIGN KEY (borrowerID) REFERENCES users (firebaseID),
 //         CONSTRAINT FK_bookID

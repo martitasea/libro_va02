@@ -358,21 +358,35 @@ DELETE APCEPT ICON
 NAVBAR 
 ---------------------------------------*/
 .navbar{
-  /* background-color:red; */
-  /* height: 80px; */
   display:flex;
   justify-content: flex-start;
   align-items: center;
 }
 .menu-bars{
-  /* margin-left: 2rem; */
-  /* font-size: 2rem; */
   background: none;
 }
+/* .nav-bar-item{
+  background-color:  #29A18C;
+  color:white;
+
+} */
+.nav-bar-item:hover{
+  background-color:  #29A18C;
+  color:white;
+}
+/* .border-green-2{
+  border: 2px solid #29A18C;
+}
+.border-blue-1{
+  border: 1px solid #195392;
+}
+.border-blue-2{
+  border: 2px solid #195392;
+} */
 .nav-menu{
   background-color:white;
   margin-left: -10px;
-  width: 200px;
+  width: 220px;
   height: 100vh;
   display:flex;
   justify-content: center;
@@ -414,9 +428,3 @@ TABLE
 .table{
  margin-top: 2em;
 }
-.tablita{
-  width:7
-}
-/* .tablita .tr{
-  margin-left:30px;
-} */

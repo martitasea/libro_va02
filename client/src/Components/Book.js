@@ -13,7 +13,7 @@ class Book extends Component {
             <img src={this.props.src} alt={this.props.title} className="mybookimage m-2"/>
             <div className="d-flex flex-row justify-content-between title-icon mx-2 mb-2">
               <p className="uppercase dosis mini">{this.props.title}</p>
-              <i class={this.props.classIcon}></i>
+              <i className={this.props.classIcon}></i>
             </div>
         </div>
     );

@@ -1,14 +1,14 @@
-const mariadb = require("mariadb");
+const mariadb = require('mariadb');
 
 //------------------------------------------------------------------------------
 // BBDD CONECTION MARIADB - LIBROVA
 //------------------------------------------------------------------------------
 const pool = mariadb.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
+  host: 'localhost',
+  user: 'root',
+  password: '',
   connectionLimit: 5,
-  database: "librova",
+  database: 'librova',
 });
 
 /* ----------------------------------------------------------------------
@@ -19,13 +19,14 @@ exports.createUser = async (user) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    INSERT INTO users (firebaseID, name, tutorName, phone)
+    INSERT INTO users (firebaseID, name, tutorName, phone, email)
     VALUES
     (
-      "${user.firebaseID}",
-      "${user.name}",
-      "${user.tutorName}",
-      ${user.phone}
+      '${user.firebaseID}',
+      '${user.name}',
+      '${user.tutorName}',
+      ${user.phone},
+      '${user.email}'
     )
     `);
     return res;
@@ -45,8 +46,8 @@ exports.getUserName = async (firebaseID) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT name FROM users
-      WHERE firebaseID="${firebaseID}"
+    SELECT name, rol FROM users
+      WHERE firebaseID='${firebaseID}'
     `);
     return res;
   } catch (err) {
@@ -61,6 +62,9 @@ exports.getUserName = async (firebaseID) => {
 CREATE ONE BOOK FORM API GOOGLE
 ---------------------------------------------------------------------- */
 exports.createBook = async (newBook) => {
+  console.log("********************")
+  console.log(newBook.categories)
+  console.log("********************")
   let conn;
   try {
     conn = await pool.getConnection();
@@ -68,21 +72,22 @@ exports.createBook = async (newBook) => {
     INSERT INTO books (ownerID, isbn, title, authors, publisher, publishedDate, description, categories, language, image, textSnippet)
     VALUES
     (
-      "${newBook.firebaseID}",
-      "${newBook.isbn}",
-      "${newBook.title}",
-      "${newBook.authors}",
-      "${newBook.publisher}",
-      "${newBook.publishedDate}",
-      "${newBook.description}",
-      "${newBook.categories}",
-      "${newBook.language}",
-      "${newBook.image}",
-      "${newBook.textSnippet.substr(0,252).concat('',"...")}"
+      '${newBook.firebaseID}',
+      '${newBook.isbn}',
+      '${newBook.title}',
+      '${newBook.authors}',
+      '${newBook.publisher}',
+      '${newBook.publishedDate}',
+      '${newBook.description}',
+      '${newBook.categories}',
+      '${newBook.language}',
+      '${newBook.image}',
+      '${newBook.textSnippet.substr(0,252).concat("","...")}'
     )
     `);
     return res;
   } catch (err) {
+    console.log("EL ERROR ES ESTE")
     console.log(err);
     return;
   } finally {
@@ -99,7 +104,7 @@ exports.getAllMyBooks = async (firebaseID) => {
     conn = await pool.getConnection();
     const res = await conn.query(`
     SELECT image,title, bookID FROM books
-      WHERE ownerID="${firebaseID}"
+      WHERE ownerID='${firebaseID}'
     `);
     return res;
   } catch (err) {
@@ -120,7 +125,7 @@ exports.getAllCatalogue = async (firebaseID) => {
     const res = await conn.query(`
     SELECT books.image, books.title, books.isbn, books.ownerID
   	FROM books
-    WHERE NOT books.ownerID="${firebaseID}"
+    WHERE NOT books.ownerID='${firebaseID}'
  	  AND NOT EXISTS (SELECT loans.phase
                      	FROM loans
                       WHERE loans.bookID=books.bookID)
@@ -137,7 +142,7 @@ exports.getAllCatalogue = async (firebaseID) => {
 
 
 // SELECT image, title, isbn, ownerID, bookID FROM books
-// WHERE NOT ownerID="${firebaseID}"
+// WHERE NOT ownerID='${firebaseID}'
 // AND NOT loans.phase =1
 
 /* ----------------------------------------------------------------------
@@ -168,8 +173,8 @@ exports.getAddedBookTitle = async (isbn, firebaseid) => {
     conn = await pool.getConnection();
     const res = await conn.query(`
     SELECT title FROM books
-    WHERE isbn="${isbn}"
-    AND ownerID="${firebaseid}"
+    WHERE isbn='${isbn}'
+    AND ownerID='${firebaseid}'
     `);
     return res;
   } catch (err) {
@@ -214,11 +219,11 @@ exports.createLoan = async (bookid, borrowerid) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    INSERT INTO loans (bookID, borrowerID, phase, dateRequest, deathLine)
+    INSERT INTO loans (bookID, borrowerID, phase, dateRequest, deadLine)
     VALUES
     (
     ${bookid},
-    "${borrowerid}",
+    '${borrowerid}',
     2,
     CURDATE(),
     CURDATE() + INTERVAL 28 DAY
@@ -242,7 +247,7 @@ exports.getAskedBooks = async (firebaseid) => {
     const res = await conn.query(`
     SELECT books.title, books.image, books.bookID 
     FROM books, loans
-    WHERE books.ownerID="${firebaseid}"
+    WHERE books.ownerID='${firebaseid}'
     AND loans.bookID=books.bookID
     AND loans.phase=2
     `);
@@ -262,9 +267,9 @@ exports.getReadingBook = async (firebaseid) => {
   try {
     conn = await pool.getConnection();
     const res = await conn.query(`
-    SELECT books.title, books.image, books.bookID, loans.dateLoan, loans.deathLine 
+    SELECT books.title, books.image, books.bookID, loans.dateLoan, loans.deadLine 
     FROM books, loans
-    WHERE loans.borrowerID="${firebaseid}"
+    WHERE loans.borrowerID='${firebaseid}'
     AND loans.bookID=books.bookID
     AND loans.phase=4
     `);
@@ -330,12 +335,31 @@ exports.getLoanHistory = async (phase) => {
     owners.name 'ownerName', 
     borrowers.name 'borrowerName',
     borrowers.phone 'borrowerPhone',
-    loans.dateRequest, loans.dateLoan, loans.dateReading, loans.dateReturn, loans.dateRest, loans.deathLine, loans.phase
+    loans.dateRequest, loans.dateLoan, loans.dateReading, loans.dateReturn, loans.dateRest, loans.deadLine, loans.phase
     FROM loans, books, users AS owners, users AS borrowers
     WHERE loans.bookID=books.bookID
     AND books.ownerID=owners.firebaseID
     AND loans.borrowerID=borrowers.firebaseID
     AND phase=${phase}
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); 
+  }
+};
+/* ----------------------------------------------------------------------
+GET ALL USERS
+---------------------------------------------------------------------- */
+exports.getAllUsers = async () => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT * 
+    FROM users
     `);
     return res;
   } catch (err) {

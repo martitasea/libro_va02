@@ -38,7 +38,6 @@ componentDidMount(){
             exportButton: true,
             rowStyle:{
               height:"10px",
-              padding: "5px",
               align:"center" 
             },
             headerStyle:{

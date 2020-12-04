@@ -22,7 +22,7 @@ export const columns=[
     },
     { 
       title: "Fecha límite",
-      render: rowData => <span style={{color: "red"}}>{rowData.deathLine? rowData.deathLine.slice(0,10): "-"}</span>
+      render: rowData => <span style={{color: "red"}}>{rowData.deadLine? rowData.deadLine.slice(0,10): "-"}</span>
     }, 
     { 
       title: "Propietario", field: "ownerName",

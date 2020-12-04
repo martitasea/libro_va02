@@ -18,7 +18,6 @@ componentDidMount(){
     fetch("http://localhost:5000/getloanhistory/5")
     .then((res) => {return res.json();})
     .then(history => {
-        console.log(history)
       this.setState({data:history})
     })
     .catch(err => {console.log(err);});

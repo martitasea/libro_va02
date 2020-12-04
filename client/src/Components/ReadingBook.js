@@ -24,7 +24,7 @@ getReadingBook(){
         <div className="pl-3">
           <p className="pt-3 pb-2 my-0">Tienes que devolverlo antes del:</p>
           
-          <p className="heavy red pb-2"><i class="fas fa-exclamation-triangle"></i><span>  </span>{book.deathLine.slice(0,10)}</p>
+          <p className="heavy red pb-2"><i className="fas fa-exclamation-triangle"></i><span>  </span>{book.deadLine.slice(0,10)}</p>
           <button className="btn btn-blue" onClick={()=>{
             fetch(`http://localhost:5000/updatebookphase/${book.bookID}/4/dateReturn`)
             .then(()=>{
