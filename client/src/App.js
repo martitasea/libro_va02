@@ -54,7 +54,7 @@ function App() {
             <Route exact path="/charts" component={Charts}/>
             <Route exact path="/users" component={Users}/>
           </Switch>
-      {rol==="admin" ? <Redirect to="/admin"/> : <Redirect to="/"/>}
+      {rol==="admin" ? <Redirect to="/users"/> : <Redirect to="/"/>}
         </BrowserRouter>
       </AuthProvider>
     </div>

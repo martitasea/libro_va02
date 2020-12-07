@@ -62,9 +62,6 @@ exports.getUserName = async (firebaseID) => {
 CREATE ONE BOOK FORM API GOOGLE
 ---------------------------------------------------------------------- */
 exports.createBook = async (newBook) => {
-  console.log("********************")
-  console.log(newBook.categories)
-  console.log("********************")
   let conn;
   try {
     conn = await pool.getConnection();
@@ -75,14 +72,14 @@ exports.createBook = async (newBook) => {
       '${newBook.firebaseID}',
       '${newBook.isbn}',
       '${newBook.title}',
-      '${newBook.authors}',
-      '${newBook.publisher}',
-      '${newBook.publishedDate}',
-      '${newBook.description}',
-      '${newBook.categories}',
-      '${newBook.language}',
-      '${newBook.image}',
-      '${newBook.textSnippet.substr(0,252).concat("","...")}'
+      '${newBook.authors? newBook.authors:'-'}',
+      '${newBook.publisher? newBook.publisher:'-'}',
+      '${newBook.publishedDate? newBook.publishedDate:'-'}',
+      '${newBook.description? newBook.description:'-'}',
+      '${newBook.categories? newBook.categories:'-'}',
+      '${newBook.language? newBook.language:'-'}',
+      '${newBook.image? newBook.image:''}',
+      '${newBook.textSnippet? newBook.textSnippet:'-'}'
     )
     `);
     return res;

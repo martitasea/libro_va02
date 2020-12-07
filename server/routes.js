@@ -34,32 +34,91 @@ READ ONE BOOK FROM GOOGLE API
 ---------------------------------------------------------------------- */
 exports.getBookApi = async (req, res) => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${req.body.isbn}`)
+
        .then(function (response) {
         return response.json();
         })
         .then(function (myJson) {
+          let authors
+          if(myJson.items[0].volumeInfo.authors){
+            authors=myJson.items[0].volumeInfo.authors[0]
+          }else{
+            authors="Sin autor"
+          }
+          let publisher
+          if(myJson.items[0].volumeInfo.publisher){
+            publisher=myJson.items[0].volumeInfo.publisher
+          }else{
+            publisher="Sin editorial"
+          }
+          let publishedDate
+          if(myJson.items[0].volumeInfo.publishedDate){
+            publishedDate=myJson.items[0].volumeInfo.publishedDate
+          }else{
+            publishedDate="Sin fecha"
+          }
+          let description
+          if(myJson.items[0].volumeInfo.description){
+            description=myJson.items[0].volumeInfo.description.replace(/'/g,"")
+          }else{
+            description="Sin descripción"
+          }
+          let categories
+          if(myJson.items[0].volumeInfo.categories){
+            categories=myJson.items[0].volumeInfo.categories[0]
+          }else{
+            categories="Categoría desconocida"
+          }
+          let language
+          if(myJson.items[0].volumeInfo.language){
+            language=myJson.items[0].volumeInfo.language
+          }else{
+            language="Idioma desconocido"
+          }
+          let image
+          if(myJson.items[0].volumeInfo.imageLinks){
+            image=myJson.items[0].volumeInfo.imageLinks.thumbnail
+          }else{
+            image="./media/sinportada.jpg"
+          }
+          let textSnippet
+          if(myJson.items[0].searchInfo.textSnippet){
+            textSnippet=myJson.items[0].searchInfo.textSnippet.replace(/'/g,"")
+          }else{
+            textSnippet="Sin reseña de autor"
+          }
+
+          
         let newBook={
           firebaseID: req.body.firebaseID,
           isbn:req.body.isbn,
           title:myJson.items[0].volumeInfo.title,
-          authors:myJson.items[0].volumeInfo.authors[0],
-          publisher:myJson.items[0].volumeInfo.publisher,
-          publishedDate:myJson.items[0].volumeInfo.publishedDate,
-          description:myJson.items[0].volumeInfo.description,
-          categories:myJson.items[0].volumeInfo.categories[0],
-          language:myJson.items[0].volumeInfo.language,
-          image:myJson.items[0].volumeInfo.imageLinks.thumbnail,
-          textSnippet:myJson.items[0].searchInfo.textSnippet,
+          authors:authors,
+          // authors:myJson.items[0].volumeInfo.authors[0],
+          publisher:publisher,
+          // publisher:myJson.items[0].volumeInfo.publisher,
+          publishedDate:publishedDate,
+          // publishedDate:myJson.items[0].volumeInfo.publishedDate,
+          description:description,
+          // description:myJson.items[0].volumeInfo.description,
+          categories:categories,
+          // categories:myJson.items[0].volumeInfo.categories[0],
+          language:language,
+          // language:myJson.items[0].volumeInfo.language,
+          image:image,
+          // image:myJson.items[0].volumeInfo.imageLinks.thumbnail,
+          textSnippet:textSnippet
+          // textSnippet:myJson.items[0].searchInfo.textSnippet,
         }
-        console.log("Has guardado el libro "+newBook.title);
         bbdd
           .createBook(newBook)
           .then((data) =>
           res.status(200).json(data)
           ) 
-          // .catch((e) => console.log("ocurrió un error:" + e));
+          .catch((e) => console.log("ocurrió un error:" + e));
         }
-        // .catch((e) => console.log("ocurrió un error:" + e))
+        // .catch((e) => {
+        //   console.log("ocurrió un error:" + e)})
         );
       }
     

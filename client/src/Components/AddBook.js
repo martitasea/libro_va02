@@ -20,7 +20,7 @@ class AddBook extends Component {
   }
 
 inputChange(e){
-  const change=e.target.value;
+  //const change=e.target.value;
 }
 
 setAddIsbn(e){

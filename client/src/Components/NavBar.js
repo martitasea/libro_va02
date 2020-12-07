@@ -16,6 +16,7 @@ return (
                     className="fas fa-bars userIcon"></i>
             </Link>
         </div>
+        
         <nav className={sidebar ? "nav-menu active shadow" : "nav-menu shadow"}>
             <ul onClick={showSidebar} className="nav-menu-items d-flex flex-column justify-content-start">
                 <li className="nav-menu-items mx-4 my-3">

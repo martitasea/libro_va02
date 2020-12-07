@@ -29,24 +29,25 @@ class Header extends Component {
             </Link>
         </div>
     );
+  }else{
+    return (
+      <div className="d-flex justify-content-between align-items-center">
+        <NavBar  
+        name={this.context.name} 
+        text1="Devoluciones-Préstamos" link1="/admin"
+        text2="Usuarios" link2="/users"
+        text3="Indicadores" link3="/charts"
+        log={this.context.login} 
+        />
+          <Link to="/">
+            <img src="./media/logo.svg" alt="Logo Libro va" className="logo"/>
+          </Link>
+          <Link to="/instructions">
+            <i className="fas fa-exclamation-circle questionIcon"></i>
+          </Link>
+      </div>
+  );
   }
-  return (
-    <div className="d-flex justify-content-between align-items-center">
-      <NavBar  
-      name={this.context.name} 
-      text1="Devoluciones-Préstamos" link1="/admin"
-      text2="Usuarios" link2="/users"
-      text3="Indicadores" link3="/charts"
-      log={this.context.login} 
-      />
-        <Link to="/">
-          <img src="./media/logo.svg" alt="Logo Libro va" className="logo"/>
-        </Link>
-        <Link to="/instructions">
-          <i className="fas fa-exclamation-circle questionIcon"></i>
-        </Link>
-    </div>
-);
 }
 }
 Header.contextType=AuthContext;

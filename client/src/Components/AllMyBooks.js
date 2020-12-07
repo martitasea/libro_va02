@@ -45,7 +45,8 @@ getAllMyBooks(){
 }
 
 // In order to reload if book is deleted (books change)
-componentWillUpdate(prevProps, prevState){
+// componentWillUpdate(prevProps, prevState){
+  getSnapshotBeforeUpdate(prevProps, prevState){
   if(prevState.books!==this.state.books){
   this.getAllMyBooks()
 }
