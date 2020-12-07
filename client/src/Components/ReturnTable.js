@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthContext from '../Context/AuthContext';
 import MaterialTable from "material-table";
-import columnsReturns from '../data/columnsLoans';
+import columnsReturns from '../data/columnsReturns';
 
 
 

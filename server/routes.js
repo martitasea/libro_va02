@@ -270,12 +270,24 @@ exports.getLoanHistory = async (req, res) => {
       .catch((e) => console.log("ocurrió un error:" + e));
   };
 
-  /* ----------------------------------------------------------------------
+/* ----------------------------------------------------------------------
 GET ALL USERS
 ---------------------------------------------------------------------- */
 exports.getAllUsers = async (req, res) => {
   bbdd
     .getAllUsers()
+    .then((data) =>
+      res.status(200).json(data)
+      )
+      .catch((e) => console.log("ocurrió un error:" + e));
+  };
+
+/* ----------------------------------------------------------------------
+GET NUMBER BOOKS
+---------------------------------------------------------------------- */
+exports.getNumberBooks = async (req, res) => {
+  bbdd
+    .getNumberBooks()
     .then((data) =>
       res.status(200).json(data)
       )

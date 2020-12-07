@@ -331,13 +331,12 @@ exports.getLoanHistory = async (phase) => {
     SELECT loans.loanID, books.title, books.image, books.isbn, books.bookID,
     owners.name 'ownerName', 
     borrowers.name 'borrowerName',
-    borrowers.phone 'borrowerPhone',
-    loans.dateRequest, loans.dateLoan, loans.dateReading, loans.dateReturn, loans.dateRest, loans.deadLine, loans.phase
+    loans.dateRequest, loans.dateLoan, loans.deadLine, loans.phase
     FROM loans, books, users AS owners, users AS borrowers
     WHERE loans.bookID=books.bookID
     AND books.ownerID=owners.firebaseID
     AND loans.borrowerID=borrowers.firebaseID
-    AND phase=${phase}
+    AND (phase=3 OR phase=5)
     `);
     return res;
   } catch (err) {
@@ -366,3 +365,35 @@ exports.getAllUsers = async () => {
     if (conn) conn.release(); 
   }
 };
+
+/* ----------------------------------------------------------------------
+GET NUMBER BOOKS
+---------------------------------------------------------------------- */
+exports.getNumberBooks = async () => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT COUNT (*) 
+    FROM books
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); 
+  }
+};
+
+
+// SELECT loans.loanID, books.title, books.image, books.isbn, books.bookID,
+//     owners.name 'ownerName', 
+//     borrowers.name 'borrowerName',
+//     borrowers.phone 'borrowerPhone',
+//     loans.dateRequest, loans.dateLoan, loans.dateReading, loans.dateReturn, loans.dateRest, loans.deadLine, loans.phase
+//     FROM loans, books, users AS owners, users AS borrowers
+//     WHERE loans.bookID=books.bookID
+//     AND books.ownerID=owners.firebaseID
+//     AND loans.borrowerID=borrowers.firebaseID
+//     AND phase=${phase}

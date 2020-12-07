@@ -28,7 +28,7 @@ componentDidMount(){
    return(
     <div className="table background shadow">
  <MaterialTable 
-          title="Confirmaciones de préstamo" 
+          title="Listado de usuarios" 
           columns={columnsUsers}
           data={this.state.data}
           options={

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 import MaterialTable from "material-table";
-import columnsLoans from '../data/columnsLoans';
+// import columnsLoans from '../data/columnsLoans';
+import columnsReturns from '../data/columnsReturns';
 
 
 
@@ -30,7 +31,7 @@ componentDidMount(){
     <div className="table background shadow">
  <MaterialTable 
           title="Confirmaciones de préstamo" 
-          columns={columnsLoans}
+          columns={columnsReturns}
           data={this.state.data}
           options={
           {
@@ -45,12 +46,22 @@ componentDidMount(){
               color: "white",
               height: "1px",
               margin: "0",
-              padding: "5px",
+              // padding: "5px",
               align:"center" 
+            },
+            rowStyle:{
+              // backgroundColor: "#195392",
+              fontFamily:"arial",
+              color: " #195392"
             }
 
           }
         }
+          localization={{
+            header:{
+              actions: "Confirmar"
+            }
+          }}
           actions={[
             {
               icon: 'check',
@@ -72,6 +83,7 @@ componentDidMount(){
             }
           ]}
         />
+        <a href=""></a>
     </div>
       )
     }

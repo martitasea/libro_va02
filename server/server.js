@@ -76,8 +76,8 @@ app.get("/getloanhistory/:phase", routes.getLoanHistory);
 // Get all users
 app.get("/getallusers", routes.getAllUsers);
 
-// Update loan
-// app.post("/updateloan/:bookid", routes.deleteBook);
+// Get number books
+app.get("/getnumberbooks", routes.getNumberBooks);
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

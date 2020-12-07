@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 import { auth } from '../firebaseConfig';
 import {AuthConsumer} from '../Context/AuthContext';
+
 
 function NavBar (props) {
     const[sidebar, setSidebar]=useState(false);

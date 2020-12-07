@@ -1,7 +1,11 @@
 
+import {Link} from "react-router-dom";
+
 export const columns=[
     { 
-      title: "Fase", field: "phase",
+      title: "Fase", 
+      // field: "phase",
+      render: rowData => <span>{rowData.phase===3? "Prestar": "Devolver"}</span>
       },
     { 
       title: "ID", field: "loanID",
@@ -17,15 +21,21 @@ export const columns=[
       title: "Título", field: "title" ,
     }, 
     { 
-      title: "Devolución",field: "dateLoan", defatultSort:"ASC",
+      title: "Préstamo",field: "dateLoan", defatultSort:"ASC",
       render: rowData => <span>{rowData.dateLoan? rowData.dateLoan.slice(0,10): "-"}</span>
     },
     { 
+      title: "Devolución",field: "dateReturn", defatultSort:"ASC",
+      render: rowData => <span>{rowData.dateReturn? rowData.dateReturn.slice(0,10): "-"}</span>
+    },
+    { 
       title: "Fecha límite",
-      render: rowData => <span style={{color: "red"}}>{rowData.deadLine? rowData.deadLine.slice(0,10): "-"}</span>
+      render: rowData => <span style={{color: "#EE7A71"}}>{rowData.deadLine? rowData.deadLine.slice(0,10): "-"}</span>
     }, 
     { 
-      title: "Propietario", field: "ownerName",
+      title: "Propietario",
+      //  field: "ownerName",
+      render: rowData =><Link to="/users"><p style={{color: "#195392"}}>{rowData.ownerName}</p></Link>
     },
     { 
         title: "Lector", field: "borrowerName",

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import 'rsuite/lib/styles/index.less'; 
 import Login from "./Views/Login";
 import Instructions from "./Views/Instructions";
@@ -27,38 +27,63 @@ function App() {
   const [sidebar, setSidebar]=useState(false);
 
 
-  
-  return (
+  if(rol==="admin"){
+    return(
     <div className="background">
-    <AuthProvider value={{
-      rol, setRol,
-      name, setName, 
-      firebaseID, setFirebaseID, 
-      email, setEmail,
-      password, setPassword,
-      tutorName, setTutorName, 
-      login, setLogin, 
-      err, setErr, 
-      isbn, setIsbn,
-      sidebar, setSidebar
-    }}>                   
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Catalogue}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/instructions" component={Instructions}/>
-            <Route exact path="/signup" component={Signup}/>
-            <Route exact path="/bookdetail" component={Bookdetail}/>
-            <Route exact path="/userarea" component={Userarea}/>
-            <Route exact path="/admin" component={Table}/>
-            <Route exact path="/charts" component={Charts}/>
-            <Route exact path="/users" component={Users}/>
-          </Switch>
-      {rol==="admin" ? <Redirect to="/users"/> : <Redirect to="/"/>}
-        </BrowserRouter>
+      <AuthProvider value={{
+        rol, setRol,
+        name, setName, 
+        firebaseID, setFirebaseID, 
+        email, setEmail,
+        password, setPassword,
+        tutorName, setTutorName, 
+        login, setLogin, 
+        err, setErr, 
+        isbn, setIsbn,
+        sidebar, setSidebar
+      }}>                   
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/admin" component={Table}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/signup" component={Signup}/>
+              <Route exact path="/charts" component={Charts}/>
+              <Route exact path="/users" component={Users}/>
+            </Switch>
+          </BrowserRouter>
       </AuthProvider>
     </div>
-  );
+    )
+  }else{
+    return (
+      <div className="background">
+      <AuthProvider value={{
+        rol, setRol,
+        name, setName, 
+        firebaseID, setFirebaseID, 
+        email, setEmail,
+        password, setPassword,
+        tutorName, setTutorName, 
+        login, setLogin, 
+        err, setErr, 
+        isbn, setIsbn,
+        sidebar, setSidebar
+      }}>                   
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Catalogue}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/instructions" component={Instructions}/>
+              <Route exact path="/signup" component={Signup}/>
+              <Route exact path="/bookdetail" component={Bookdetail}/>
+              <Route exact path="/userarea" component={Userarea}/>
+            </Switch>
+          </BrowserRouter>
+        </AuthProvider>
+      </div>
+    );
+  }
+  
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoanTable from '../Components/LoanTable';
-import ReturnTable from '../Components/ReturnTable';
+// import ReturnTable from '../Components/ReturnTable';
 import Header from '../Components/Header';
 
 
@@ -17,7 +17,6 @@ class Table extends Component {
     <div>
       <Header/>
       <LoanTable/>
-      <ReturnTable/>
     </div>
   )}
 }
