@@ -15,8 +15,10 @@ class AllMyBooks extends Component {
   }
 
 getAllMyBooks(){
+  if(this.state.myBooks.length!==0){
     return this.state.myBooks.map((book)=>(
-    <Book
+    <>
+      <Book
       key={book.bookID}
       src={book.image}
       title={book.title}
@@ -40,7 +42,9 @@ getAllMyBooks(){
           })
           }}      
       />
+    </>
   ))
+  } 
 }
 
 // In order to reload if book is deleted (books change)
@@ -84,7 +88,9 @@ componentDidMount(){
           </p>
         </a>
         <div id="allmybooksloggedin" className="collapse grey pl-2">
-          <p className="grey pl-2 pb-2">Estos son los libros de tu biblioteca:</p>
+        <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>Estos son los libros de tu biblioteca:</p>
+          <p className="grey pl-3 pb-2">Puedes borrarlos del catálogo haciendo click en <i className="prevapceptIconDelete far fa-trash-alt"></i>
+          </p>
         <p className="ml-2 mb-2 redbg white mediumbold">{this.state.message}</p>
         <div className="d-flex flex-wrap justify-content-around">
             {this.getAllMyBooks()}

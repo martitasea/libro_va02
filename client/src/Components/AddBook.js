@@ -88,11 +88,11 @@ render() {
               </p>
             </a>
             <div id="addbook" className="collapse grey px-2 pb-2">
-              <p>Busca en las primera páginas de tu libro el código ISBN e introdúcelo:</p>
+              <p className="black pl-2 pb-2"><span className="childIcon medium black pt-3">O </span>Busca en las primera páginas de tu libro el código ISBN e introdúcelo:</p>
               <p className="green mediumbold mb-1">{this.state.message}</p>
               <p className="greenbg white">{this.state.info}</p>
               
-              <form method="POST" action="/getbookapi" className="my-3"
+              <form method="POST" action="/getbookapi" className="pl-3 my-2"
                   onSubmit={(e)=>{
                   e.preventDefault();
                   this.getBookApi(contxt);

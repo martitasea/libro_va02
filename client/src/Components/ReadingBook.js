@@ -14,8 +14,10 @@ class ReadingBook extends Component {
   }
 
 getReadingBook(){
+  if(this.state.books.length!==0){
     return this.state.books.map((book)=>( 
       <div className="d-flex flex-row">
+        <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>Actualmente tienes el siguiente libro en préstamo:</p>
           <Book
         key={book.isbn}
         src={book.image}
@@ -37,6 +39,16 @@ getReadingBook(){
         </div>
       </div>
   ))
+}else{
+  return(
+    <>
+    <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>No estás leyendo ningún libro, ve al catálogo para pedir uno.</p>
+    <Link to="/login">
+        <button type="text" className="btn btn-green ml-3 my-2">CATÁLOGO</button>
+    </Link>
+    </>
+  )
+}
 }
 
 componentDidMount(){
@@ -74,7 +86,6 @@ componentDidMount(){
         </p>
       </a>
       <div id="askedbook" className="collapse grey pl-2">
-        <p className="pb-2">Actualmente tienes el siguiente libro en préstamo:</p>
         {this.getReadingBook()}
       </div>
     </div>  
