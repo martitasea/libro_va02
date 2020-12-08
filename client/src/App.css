@@ -34,6 +34,9 @@ COLORS
 .greenbg{
   background-color: #29A18C;
 }
+.noview{
+  visibility:hidden;
+}
 /* ------------------------------------
 FONTS 
 ---------------------------------------*/
@@ -198,6 +201,11 @@ form.search{
 input.search{
   height: 35px;
 }
+.back{
+  /* position: relative;
+  left: 80vw;
+  text-align:right; */
+}
 /* ------------------------------------
 MSIGNUP 
 ---------------------------------------*/
@@ -294,7 +302,9 @@ CATALOGUE
 THUMBNAIL - HOVER EFECT IMAGE TEXT
 ---------------------------------------*/
 .file-thumbnail{
-  height: 11.5em;
+  width: 8em;
+  height: 13em;
+  margin: 3em;
 }
 .file-thumbnail:hover .overlay{
   opacity: 1;
@@ -302,13 +312,13 @@ THUMBNAIL - HOVER EFECT IMAGE TEXT
 .thumbnail-book{
   position: absolute;
   object-fit: cover;
-  width: 73%;
-  height: 70%;
+  width:7em;
+  height: 9.625em
 }
 .overlay{
   position: absolute;
-  width: 73%;
-  height: 70%;
+  width:7em;
+  height: 9.625em;
   background-color: #195492c7;
   transition: .35s ease;
   opacity: 0;
@@ -327,7 +337,7 @@ THUMBNAIL - HOVER EFECT IMAGE TEXT
 .text-title{
   position: relative;
   z-index: 10;
-  top: 12em;
+  top: 13.5em;
   text-transform: uppercase;
 }
 /* ------------------------------------
@@ -342,6 +352,10 @@ DELETE APCEPT ICON
 .prevapceptIconOK{
   font-size: 20px;
   color: #cccaca;
+}
+.prevapceptIconOK:hover{
+  font-size: 20px;
+  color:  #29A18C;
 }
 .prevapceptIconDelete{
   font-size: 15px;

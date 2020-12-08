@@ -7,8 +7,20 @@ class Header extends Component {
   constructor(props){
     super(props);
     this.state = {
+
     };
+    // this.thereAreNotification=this.thereAreNotification.bind(this);
   }
+
+  // thereAreNotification(){
+  //   if(this.context.pendingBooks!==[]||this.context.askedBooks!==[]){
+  //     return (<i class="fas fa-bell questionIcon"></i>)
+  //   }
+  // }
+
+// componentDidMount(){
+//   fetch()
+// }
 
   render() {
     if(this.context.rol!=="admin"){
@@ -24,8 +36,8 @@ class Header extends Component {
             <Link to="/">
               <img src="./media/logo.svg" alt="Logo Libro va" className="logo"/>
             </Link>
-            <Link to="/instructions">
-              <i className="fas fa-exclamation-circle questionIcon"></i>
+            <Link to="/userarea">
+              {this.context.notification}
             </Link>
         </div>
     );
@@ -42,9 +54,9 @@ class Header extends Component {
           <Link to="/">
             <img src="./media/logo.svg" alt="Logo Libro va" className="logo"/>
           </Link>
-          <Link to="/instructions">
-            <i className="fas fa-exclamation-circle questionIcon"></i>
-          </Link>
+          <div className="noview">
+           Administrador
+          </div>
       </div>
   );
   }

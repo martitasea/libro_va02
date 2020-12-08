@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import User from '../Components/User';
-// import Footer from '../Components/Footer';
+import Back from '../Components/Back';
 
 
 class Userarea extends Component {
@@ -14,8 +14,8 @@ class Userarea extends Component {
     return (
       <div>
         <Header/>
+        <Back/>
         <User/>
-        {/* <Footer/> */}
       </div>
     );
   }

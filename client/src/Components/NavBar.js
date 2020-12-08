@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { auth } from '../firebaseConfig';
 import {AuthConsumer} from '../Context/AuthContext';
 
@@ -8,6 +8,7 @@ import {AuthConsumer} from '../Context/AuthContext';
 function NavBar (props) {
     const[sidebar, setSidebar]=useState(false);
     const showSidebar = () =>setSidebar(!sidebar);
+    let history=useHistory();
 
         
 return (
@@ -61,13 +62,20 @@ return (
                                  onClick={(e)=>{
                                     e.preventDefault();
                                     auth.signOut()
-                                    .then((res)=> {
+                                    .then(()=> {
                                       contxt.setName('');
                                       contxt.setEmail('');
                                       contxt.setFirebaseID('');
                                       contxt.setLogin("Iniciar Sesión")
-                                      console.log("Sign-out successful");
+                                      contxt.setNotification('');
+                                      contxt.setEmail('');
+                                      contxt.setIsbn('');
+                                      contxt.setFirebaseID('');
+                                      contxt.setPassword('');
                                     })
+                                    .then(()=>
+                                        history.push("/login")
+                                    )
                                 }}
                                     >
                                 {props.log}

@@ -41,7 +41,7 @@ app.get("/getusername/:firebaseid", routes.getUserName);
 app.post("/getbookapi/:isbn/:firebaseid", routes.getBookApi);
 
 // Read all my books
-app.get("/allmybooks/:firebaseid", routes.getAllMyBooks);
+app.get("/getallmybooks/:firebaseid", routes.getAllMyBooks);
 
 // Read all catalogue
 app.get("/allcatalogue/:firebaseid", routes.getAllCatalogue);
@@ -59,9 +59,9 @@ app.get("/updatebookphase/:bookid/:phase/:date", routes.updateBookPhase);
 app.get("/createloan/:bookid/:borrowerid", routes.createLoan);
 
 //Read asked books
-app.get("/getaskedbooks/:firebaseid", routes.getAskedBooks);
+app.get("/getbooks/:firebaseid/:phase", routes.getBooks);
 
-//Read reading books
+//Read reading book
 app.get("/getreadingbook/:firebaseid", routes.getReadingBook);
 
 // Read book title
@@ -78,6 +78,10 @@ app.get("/getallusers", routes.getAllUsers);
 
 // Get number books
 app.get("/getnumberbooks", routes.getNumberBooks);
+
+// Get number books
+app.get("/getnotifications", routes.getNumberBooks);
+
 //------------------------------------------------------------------------------
 // CREATE USERS TABLE
 //------------------------------------------------------------------------------

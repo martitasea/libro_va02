@@ -94,21 +94,13 @@ exports.getBookApi = async (req, res) => {
           isbn:req.body.isbn,
           title:myJson.items[0].volumeInfo.title,
           authors:authors,
-          // authors:myJson.items[0].volumeInfo.authors[0],
           publisher:publisher,
-          // publisher:myJson.items[0].volumeInfo.publisher,
           publishedDate:publishedDate,
-          // publishedDate:myJson.items[0].volumeInfo.publishedDate,
           description:description,
-          // description:myJson.items[0].volumeInfo.description,
           categories:categories,
-          // categories:myJson.items[0].volumeInfo.categories[0],
           language:language,
-          // language:myJson.items[0].volumeInfo.language,
           image:image,
-          // image:myJson.items[0].volumeInfo.imageLinks.thumbnail,
           textSnippet:textSnippet
-          // textSnippet:myJson.items[0].searchInfo.textSnippet,
         }
         bbdd
           .createBook(newBook)
@@ -208,12 +200,13 @@ exports.createLoan = async (req, res) =>{
 }
 
 /* ----------------------------------------------------------------------
-GET ASKED BOOKS
+GET BOOKS (ASKED=2, LOANED=4, PENDING=5)
 ---------------------------------------------------------------------- */
-exports.getAskedBooks = async (req, res) => {
+exports.getBooks = async (req, res) => {
   let firebaseid=req.params.firebaseid;
+  let phase=req.params.phase;
   bbdd
-  .getAskedBooks(firebaseid)
+  .getBooks(firebaseid, phase)
   .then((data) =>
   res.status(200).json(data)
   )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import MCatalogue from '../Components/MCatalogue';
-// import Footer from '../Components/Footer';
+import Back from '../Components/Back';
 
 
 class Catalogue extends Component {

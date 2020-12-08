@@ -188,7 +188,7 @@ UPDATE BOOK PHASE
 exports.updateBookPhase = async (bookid, phase, date) => {
   bookid=parseInt(bookid)
   phase=parseInt(phase)
-  if(phase<5){
+  if(phase<6){
     phase+=1
   }else phase=1
   let conn;
@@ -237,7 +237,8 @@ exports.createLoan = async (bookid, borrowerid) => {
 /* ----------------------------------------------------------------------
 READ ASKED BOOKS
 ---------------------------------------------------------------------- */
-exports.getAskedBooks = async (firebaseid) => {
+exports.getBooks = async (firebaseid, phase) => {
+  phase=parseInt(phase)
   let conn;
   try {
     conn = await pool.getConnection();
@@ -246,7 +247,7 @@ exports.getAskedBooks = async (firebaseid) => {
     FROM books, loans
     WHERE books.ownerID='${firebaseid}'
     AND loans.bookID=books.bookID
-    AND loans.phase=2
+    AND loans.phase=${phase}
     `);
     return res;
   } catch (err) {
@@ -256,6 +257,7 @@ exports.getAskedBooks = async (firebaseid) => {
     if (conn) conn.release(); 
   }
 };
+
 /* ----------------------------------------------------------------------
 GET READING BOOKS
 ---------------------------------------------------------------------- */
@@ -278,6 +280,7 @@ exports.getReadingBook = async (firebaseid) => {
     if (conn) conn.release(); 
   }
 };
+
 
 /* ----------------------------------------------------------------------
 GET BOOK TITLE
@@ -336,7 +339,7 @@ exports.getLoanHistory = async (phase) => {
     WHERE loans.bookID=books.bookID
     AND books.ownerID=owners.firebaseID
     AND loans.borrowerID=borrowers.firebaseID
-    AND (phase=3 OR phase=5)
+    AND (phase=3 OR phase=6)
     `);
     return res;
   } catch (err) {

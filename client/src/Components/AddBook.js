@@ -50,12 +50,9 @@ getBookApi(){
       this.setState({message: "¡Muy bien! Has añadido el libro "})
       
     })
-    .then(()=>{
-      // setTimeout((e)=>(e.target.reset()))
-      // setTimeout(()=>document.getElementById("addBookForm").reset)
-      // document.getElementById("addBook").reset();
-      setTimeout(() => this.props.history.push('/'), 2500)
-    })
+    // .then(()=>{
+    //   setTimeout(() => this.props.history.push('/'), 2500)
+    // })
     .catch(err => {console.log(err);});
   })
 }
@@ -103,7 +100,7 @@ render() {
               >
                 <div>
                   <label className="mb-1 grey mini">ISBN</label>
-                  <input id="addBookForm" onChange={this.setAddIsbn} type="text" name="isbn" className="p-1 mb-2 grey width100 border-blue-1"/>
+                  <input id="addBookForm" onChange={this.setAddIsbn} type="text" placeHolder="Introduce el ISBN" name="isbn" className="p-1 mb-2 grey width100 border-blue-1"/>
                 </div>
                   <input type="submit" value="AÑADIR" className="btn btn-blue mt-2" onChange={(e)=>this.inputChange(e)}></input>
               </form>

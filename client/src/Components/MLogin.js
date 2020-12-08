@@ -49,7 +49,7 @@ setPassword(e){this.setState({password: e.target.value})}
                       if(this.context.rol==="admin"){
                         this.props.history.push("/admin")
                       }else{
-                        this.props.history.push("/")
+                        this.props.history.push("/userarea")
                       }                     
                      })
                     })

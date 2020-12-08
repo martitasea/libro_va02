@@ -25,6 +25,7 @@ function App() {
   const [err, setErr]=useState(null);
   const [isbn, setIsbn]=useState('');
   const [sidebar, setSidebar]=useState(false);
+  const [notification, setNotification]=useState('');
 
 
   if(rol==="admin"){
@@ -40,7 +41,8 @@ function App() {
         login, setLogin, 
         err, setErr, 
         isbn, setIsbn,
-        sidebar, setSidebar
+        sidebar, setSidebar,
+        notification, setNotification,
       }}>                   
           <BrowserRouter>
             <Switch>
@@ -67,7 +69,8 @@ function App() {
         login, setLogin, 
         err, setErr, 
         isbn, setIsbn,
-        sidebar, setSidebar
+        sidebar, setSidebar,
+        notification, setNotification,
       }}>                   
           <BrowserRouter>
             <Switch>

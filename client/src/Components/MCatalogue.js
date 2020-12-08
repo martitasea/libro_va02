@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Thumbnail from './Thumbnail';
 import {Link} from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
+import Back from '../Components/Back';
 
 class MCatalogue extends Component {
   constructor(props){
@@ -52,10 +53,15 @@ componentDidMount(){
       )}
       return (
         <Fragment>
-          <p className="margin-catalogue child blue title pt-2 pl-2">
-          <span className="childIcon blue">f </span>CaTáLoGo
-          </p>
-        <div className="container sheet">
+          <div className="d-flex flex-row justify-content-between">
+            <div className="d-flex flex-row">
+              <p className="margin-catalogue child blue title pt-2 pl-2">
+              <span className="childIcon blue">f </span>CaTáLoGo
+              </p>
+            </div>
+            <Back/>
+          </div>
+        <div>
           <div className="row d-flex justify-content-center">
             {this.getAllCatalogue()}
           </div>

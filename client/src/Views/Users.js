@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListUsers from '../Components/ListUsers';
 import Header from '../Components/Header';
+import Back from '../Components/Back';
 
 
 
@@ -15,6 +16,7 @@ class Users extends Component {
    return(
     <div>
       <Header/>
+      <Back/>
       <ListUsers/>      
     </div>
       )}

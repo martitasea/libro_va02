@@ -8,15 +8,14 @@ class AllMyBooks extends Component {
   constructor(props){
     super(props);
     this.state = {
-      books:[],
-      isFetch:false,
+      myBooks:[],
       message:""
     };
     this.getAllMyBooks=this.getAllMyBooks.bind(this);
   }
 
 getAllMyBooks(){
-    return this.state.books.map((book)=>(
+    return this.state.myBooks.map((book)=>(
     <Book
       key={book.bookID}
       src={book.image}
@@ -34,9 +33,9 @@ getAllMyBooks(){
             this.setState({message:"Has borrado el libro con éxito."})  
           })
           .then(()=>{
-            fetch(`http://localhost:5000/allmybooks/${this.context.firebaseID}`)
+            fetch(`http://localhost:5000/getallmybooks/${this.context.firebaseID}`)
             .then((res) => {return res.json();})
-            .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
+            .then(booksJson => {this.setState({myBooks:booksJson})})
             .catch(err => {console.log(err);});
           })
           }}      
@@ -46,16 +45,16 @@ getAllMyBooks(){
 
 // In order to reload if book is deleted (books change)
 // componentWillUpdate(prevProps, prevState){
-  getSnapshotBeforeUpdate(prevProps, prevState){
-  if(prevState.books!==this.state.books){
+getSnapshotBeforeUpdate(prevProps, prevState){
+  if(prevState.myBooks!==this.state.myBooks){
   this.getAllMyBooks()
 }
 }
 
 componentDidMount(){
-  fetch(`http://localhost:5000/allmybooks/${this.context.firebaseID}`)
+  fetch(`http://localhost:5000/getallmybooks/${this.context.firebaseID}`)
     .then((res) => {return res.json();})
-    .then(booksJson => {this.setState({books:booksJson, isFetch:true})})
+    .then(MyBooks => {this.setState({myBooks:MyBooks})})
     .catch(err => {console.log(err);});
 }
 

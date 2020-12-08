@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
 import MInstructions from '../Components/MInstructions';
-// import Footer from '../Components/Footer';
+import Back from '../Components/Back';
 
 
 class Instructions extends Component {
@@ -14,6 +14,7 @@ class Instructions extends Component {
     return (
       <div>
         <Header/>
+        <Back/>
         <MInstructions/>
         {/* <Footer/> */}
       </div>

@@ -15,7 +15,7 @@ class ReturnTable extends Component {
   }
 
 componentDidMount(){
-    fetch("http://localhost:5000/getloanhistory/5")
+    fetch("http://localhost:5000/getloanhistory/6")
     .then((res) => {return res.json();})
     .then(history => {
       this.setState({data:history})
@@ -46,8 +46,7 @@ componentDidMount(){
               margin: "0",
               padding: "5px",
               align:"center" 
-            }
-
+            },
           }
         }
           actions={[

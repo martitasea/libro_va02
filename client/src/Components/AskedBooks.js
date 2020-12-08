@@ -7,17 +7,21 @@ class AskedBooks extends Component {
   constructor(props){
     super(props);
     this.state = {
-      books:[], 
+      askedBooks:[], 
+      loanedBooks:[], 
+      pendingBooks:[], 
       message1:"",
       message2:"",
       message3:"",
       info:""
     };
     this.getAskedBooks=this.getAskedBooks.bind(this);
+    this.getLoanedBooks=this.getLoanedBooks.bind(this);
+    this.getPendingBooks=this.getPendingBooks.bind(this);
   }
 
 getAskedBooks(){
-    return this.state.books.map((book)=>(
+    return this.state.askedBooks.map((book)=>(
       <Book
       key={book.isbn}
       src={book.image}
@@ -33,9 +37,9 @@ getAskedBooks(){
           })
         })
         .then(()=>{
-          fetch(`http://localhost:5000/getaskedbooks/${this.context.firebaseID}`)
+          fetch(`http://localhost:5000/getbooks/${this.context.firebaseID}/2`)
           .then((res) => {return res.json();})
-          .then(booksJson => {this.setState({books:booksJson})})
+          .then(booksJson => {this.setState({askedBooks:booksJson})})
           .catch(err => {console.log(err);});
         })
         .catch(err => {console.log(err);});
@@ -43,19 +47,78 @@ getAskedBooks(){
     }/>
   ))
 }
+
+getLoanedBooks(){
+  return this.state.loanedBooks.map((book)=>(
+    <Book
+    key={book.isbn}
+    src={book.image}
+    title={book.title}/>
+))
+}
+
+getPendingBooks(){
+  return this.state.pendingBooks.map((book)=>(
+    <Book
+    key={book.isbn}
+    src={book.image}
+    title={book.title}
+    classIcon="prevapceptIconOK fas fa-check-square"
+    onClick={()=>{
+      fetch(`http://localhost:5000/updatebookphase/${book.bookID}/5/datePending`)
+      .then(()=>{
+        fetch(`http://localhost:5000/getbooktitle/${book.bookID}`)
+        .then((res)=>{return res.json();})
+        .then((titleJson)=>{
+          this.setState({info:titleJson[0].title, message1: "Se ha confirmado la devolución del libro: ", message2: " Ve a recogerlo el próximo día de cole en el AMPA", message3:<i className="fas fa-exclamation-triangle"></i>})
+        })
+      })
+      .then(()=>{
+        fetch(`http://localhost:5000/getbooks/${this.context.firebaseID}/5`)
+        .then((res) => {return res.json();})
+        .then(booksJson => {this.setState({askedBooks:booksJson})})
+        .catch(err => {console.log(err);});
+      })
+      .catch(err => {console.log(err);});
+    }}
+    />
+))
+}
+
 // In order to reload if book is loaned (books change)
 // componentWillUpdate(prevProps, prevState){
-  getSnapshotBeforeUpdate(prevProps, prevState){
-  if(prevState.books!==this.state.books){
+componentDidUpdate(prevProps, prevState){
+  if(prevState.askedBooks!==this.state.askedBooks||
+    prevState.loanedBooks!==this.state.loanedBooks||
+    prevState.pendingBooks!==this.state.pendingBooks){
   this.getAskedBooks()
+  this.getLoanedBooks()
+  this.getPendingBooks()
 }
 }
 
-componentDidUpdate(){
-  fetch(`http://localhost:5000/getaskedbooks/${this.context.firebaseID}`)
+componentDidMount(){
+  fetch(`http://localhost:5000/getbooks/${this.context.firebaseID}/2`)
     .then((res) => {return res.json();})
-    .then(booksJson => {this.setState({books:booksJson})})
-    .catch(err => {console.log(err);});
+    .then(booksAsked => {
+      this.setState({askedBooks:booksAsked})
+      if(booksAsked!==[]){
+        this.context.setNotification(<i class="fas fa-bell questionIcon"></i>)
+      }
+    })
+    .then(
+      ()=>fetch(`http://localhost:5000/getbooks/${this.context.firebaseID}/4`)
+      .then((res) => {return res.json();})
+      .then(booksLoaned => {this.setState({loanedBooks:booksLoaned})})
+      .then(()=>fetch(`http://localhost:5000/getbooks/${this.context.firebaseID}/5`)
+        .then((res) => {return res.json();})
+        .then(booksPending => {this.setState({pendingBooks:booksPending})})))
+    .then(()=>{
+      if(this.state.askedBooks.length===0&&this.state.pendingBooks.length===0)
+      {this.context.setNotification("")}
+      else{this.context.setNotification(<i class="fas fa-bell questionIcon"></i>)}
+    })
+    .catch(err => {console.log(err);})
 }
 
   render() {
@@ -84,14 +147,14 @@ componentDidUpdate(){
           </p>
         </a>
         <div id="notificationsloggedin" className="collapse grey pl-2">
-          <p className="grey pl-2">Te han pedido prestados los siguientes libros: </p>
-          <p className="grey pl-2 pt-1 pb-2">Para confirmar el préstamo haz click en <i className="prevapceptIconOK fas fa-check-square"></i></p>
+          <p className="grey pl-2">Te han pedido prestados los siguientes libros: (Confirma haciendo click en <i className="prevapceptIconOK fas fa-check-square"></i> )</p>
           <p className="greenbg white px-2 mb-2">{this.state.message1}{this.state.info}</p>
           <p className="redbg white px-2 mb-2"><span>{this.state.message3}</span>{this.state.message2}</p>
-          <p className="grey pl-2 pt-1 pb-2">Te quieren devolver los siguientes libros</p>
-        <div className="d-flex flex-wrap justify-content-around">
           {this.getAskedBooks()}
-        </div>
+          <p className="grey pl-2 pb-2">Tienes prestados ya:</p>
+          {this.getLoanedBooks()}
+          <p className="grey pl-2 pb-2">Te quieren devolver: (Confirma haciendo click en <i className="prevapceptIconOK fas fa-check-square"></i> )</p>
+          {this.getPendingBooks()}
         </div>
     </div>  
     );
