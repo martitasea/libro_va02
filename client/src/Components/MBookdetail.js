@@ -82,24 +82,32 @@ class MBookdetail extends Component {
               <div className="my-3 mx-1 col-6">
                 <p className="uppercase dosis medium py-1 my-0">{this.state.title}</p>
                 <p>{this.state.authors}</p>
-                <p className="dosis uppercase pt-3 pb-1 my-0">Editorial</p>
-                <p>{this.state.publisher}</p>
-                <p className="dosis uppercase pt-3 pb-1 my-0">Idioma</p>
+                <div className="d-flex flex-column justify-content-between flex-md-row">
+                  <div>
+                    <p className="dosis uppercase pt-3  my-0">Editorial</p>
+                    <p>{this.state.publisher}</p>
+                  </div>
+                  <div>
+                    <p className="dosis uppercase pt-3 m-0">Fecha de publicación</p>
+                    <p>{this.state.publishedDate}</p>
+                  </div>
+                </div>
+
+                <p className="dosis uppercase pt-3 my-0">Idioma</p>
                 <p>{this.state.language}</p>
+                <p className="dosis uppercase pt-3 my-0">ISBN</p>
+                <p className="mb-3">{this.state.isbn}</p>
+                <span className="redbg boxrounded white mt-5">{this.state.categories}</span>
               </div>
-              <div className="mx-3">
-                <p>{this.state.description}</p>
-                <p className="dosis uppercase pt-3 pb-1 my-0">Fecha de publicación</p>
-                <p>{this.state.publishedDate}</p>
-                <p className="dosis uppercase pt-3 pb-1 my-0">ISBN</p>
-                <p>{this.state.isbn}</p>
-              </div>
+              <div >
+                <p className="mx-3">{this.state.description}</p>
               <div className="mb-3">
                 <button onClick={this.changePhaseRequest} className="btn btn-green uppercase ml-3 mt-3 mb-2">Pedir prestado</button>
                 <p className="greenbg white ml-3">{this.state.message1}{this.state.info}</p>
                 <p className="greenbg white ml-3">{this.state.message2}</p>
               </div>
               </div>
+            </div>
           </section>
     );
   }

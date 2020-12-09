@@ -9,7 +9,7 @@ class MInstructions extends Component {
 
   render() {
     return (
-      <section className="bg-white shadow d-flex flex-column signup instructions">
+      <section className="bg-white shadow d-flex flex-column instructions">
         <p className="child green title text-center  mt-3 mb-0">Instrucciones</p>
         <article className="overflow textinstructions mx-3 mb-4">
         <p>

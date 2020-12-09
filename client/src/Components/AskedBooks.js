@@ -18,17 +18,26 @@ class AskedBooks extends Component {
     this.getAskedBooks=this.getAskedBooks.bind(this);
     this.getLoanedBooks=this.getLoanedBooks.bind(this);
     this.getPendingBooks=this.getPendingBooks.bind(this);
-    this.getNoNotification=this.getNoNotification.bind(this)
+    this.getNoNotification=this.getNoNotification.bind(this);
+    this.getAskedTitle=this.getAskedTitle.bind(this);
   }
+
+getAskedTitle(){
+  if(this.state.askedBooks.length!==0){
+    return(
+      <>
+        <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>Te han pedido prestados los siguientes libros:</p>
+        <p className="ml-3">Confirma haciendo click en <i className="prevapceptIconOK fas fa-check-square"></i></p>
+        <p className="greenbg white px-2 mb-2">{this.state.message1}{this.state.info}</p>
+        <p className="redbg white px-2 mb-2"><span>{this.state.message3}</span>{this.state.message2}</p>
+      </>
+    )
+}
+}
 
 getAskedBooks(){
   if(this.state.askedBooks.length!==0){
     return this.state.askedBooks.map((book)=>(
-      <>
-      <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>Te han pedido prestados los siguientes libros:</p>
-          <p className="ml-3">Confirma haciendo click en <i className="prevapceptIconOK fas fa-check-square"></i></p>
-          <p className="greenbg white px-2 mb-2">{this.state.message1}{this.state.info}</p>
-          <p className="redbg white px-2 mb-2"><span>{this.state.message3}</span>{this.state.message2}</p>
       <Book
       key={book.isbn}
       src={book.image}
@@ -52,7 +61,6 @@ getAskedBooks(){
         .catch(err => {console.log(err);});
       }
     }/>
-    </>
   ))
   }
   }
@@ -177,7 +185,10 @@ componentDidMount(){
           </p>
         </a>
         <div id="notificationsloggedin" className="collapse grey pl-2">
-          {this.getAskedBooks()}
+          {this.getAskedTitle()}
+          <div className="d-flex flex-row flex-start">
+            {this.getAskedBooks()}
+          </div>
           {this.getLoanedBooks()}
           {this.getPendingBooks()}
           {this.getNoNotification()}

@@ -43,7 +43,7 @@ getReadingBook(){
   return(
     <>
     <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>No estás leyendo ningún libro, ve al catálogo para pedir uno.</p>
-    <Link to="/login">
+    <Link to="/">
         <button type="text" className="btn btn-green ml-3 my-2">CATÁLOGO</button>
     </Link>
     </>

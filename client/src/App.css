@@ -272,6 +272,10 @@ MYBOOK
 .title-icon{
   width: 100px;
 }
+.boxrounded{
+  border-radius: 3px;
+  padding:0 0.5em;
+}
 /* ------------------------------------
 MBOOKDETAIL 
 ---------------------------------------*/
@@ -284,7 +288,7 @@ MBOOKDETAIL
   /* position:relative; */
   object-fit: cover;
   width: 250px;
-  height: 200px;
+  /* height: 300px; */
   margin:0px;
   padding: 0px;
 }
@@ -295,10 +299,12 @@ MBOOKDETAIL
 MINSTRUCTIONS 
 ---------------------------------------*/
 .instructions{
-  width: 390px;
+  width: 80vw;
   margin-left: 50%;
-  left: -195px;
-  top: 5em;
+  left: -40vw;
+  top: 7em;
+  height: 80vh;
+  position: fixed;
 }
 .overflow{
   overflow: scroll;
