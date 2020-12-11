@@ -65,7 +65,7 @@ class MSignup extends Component {
                       this.setState({firebaseID: res.user.uid})
                       contxt.setLogin("Cerrar Sesión");
                       this.createUser();
-                      this.props.history.push("/")
+                      this.props.history.push("/userarea")
                     })
                     .catch((err)=> 
                         {if(err.code==="auth/email-already-in-use")

@@ -65,7 +65,7 @@ componentDidMount(){
           actions={[
             {
               icon: 'check',
-              tooltip: 'Confirmar como devuelto',
+              tooltip: 'Confirmar',
               onClick: (e, rowData) => {
                 e.preventDefault()
                 console.log(rowData.bookID);

@@ -16,13 +16,15 @@ class ReadingBook extends Component {
 getReadingBook(){
   if(this.state.books.length!==0){
     return this.state.books.map((book)=>( 
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-column">
         <p className="black pl-2"><span className="childIcon medium black pt-3">O </span>Actualmente tienes el siguiente libro en préstamo:</p>
+        <div className="d-flex flex-row">
           <Book
         key={book.isbn}
         src={book.image}
         title={book.title}
         />
+
         <div className="pl-3">
           <p className="pt-3 pb-2 my-0">Tienes que devolverlo antes del:</p>
           
@@ -36,6 +38,7 @@ getReadingBook(){
             }  
           }>DEVOLVERLO YA</button>
           <p className="greenbg white mt-2 mr-2 mediumbold">{this.state.message}</p>
+        </div>
         </div>
       </div>
   ))
