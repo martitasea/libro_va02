@@ -47,8 +47,8 @@ class Header extends Component {
         <NavBar  
         name={this.context.name} 
         text1="Devoluciones-Préstamos" link1="/admin"
-        text2="Usuarios" link2="/users"
-        text3="Indicadores" link3="/charts"
+        text2="Libros" link2="/charts"
+        text3="Usuarios" link3="/users"
         log={this.context.login} 
         />
           <Link to="/">

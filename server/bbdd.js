@@ -324,7 +324,7 @@ exports.deleteBook = async (book) => {
 };
 
 /* ----------------------------------------------------------------------
-GET ALL LOANS
+GET ALL LOANS PHASE 3 OR 6
 ---------------------------------------------------------------------- */
 exports.getLoanHistory = async (phase) => {
   let conn;
@@ -349,6 +349,33 @@ exports.getLoanHistory = async (phase) => {
     if (conn) conn.release(); 
   }
 };
+
+/* ----------------------------------------------------------------------
+GET ALL LOANS
+---------------------------------------------------------------------- */
+exports.getAllLoans = async () => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const res = await conn.query(`
+    SELECT loans.loanID, books.title, books.image, books.isbn, books.bookID,
+    owners.name 'ownerName', 
+    borrowers.name 'borrowerName',
+    loans.dateRequest, loans.dateLoan, loans.deadLine, loans.phase
+    FROM loans, books, users AS owners, users AS borrowers
+    WHERE loans.bookID=books.bookID
+    AND books.ownerID=owners.firebaseID
+    AND loans.borrowerID=borrowers.firebaseID
+    `);
+    return res;
+  } catch (err) {
+    console.log(err);
+    return;
+  } finally {
+    if (conn) conn.release(); 
+  }
+};
+
 /* ----------------------------------------------------------------------
 GET ALL USERS
 ---------------------------------------------------------------------- */

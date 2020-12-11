@@ -70,8 +70,11 @@ app.get("/getbooktitle/:bookid", routes.getBookTitle);
 // Delete one book
 app.post("/deletebook/:bookid", routes.deleteBook);
 
-// Get all loans
+// Get all loans phase 3 or 6
 app.get("/getloanhistory/:phase", routes.getLoanHistory);
+
+// Get all loans phase 3 or 6
+app.get("/getallloans", routes.getAllLoans);
 
 // Get all users
 app.get("/getallusers", routes.getAllUsers);

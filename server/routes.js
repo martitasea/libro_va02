@@ -251,7 +251,7 @@ exports.deleteBook = async (req, res) => {
 };
 
 /* ----------------------------------------------------------------------
-GET LOAN HISTORY
+GET LOAN HISTORY PHASE 3 OR 6
 ---------------------------------------------------------------------- */
 exports.getLoanHistory = async (req, res) => {
   let phase = await req.params.phase;
@@ -263,6 +263,17 @@ exports.getLoanHistory = async (req, res) => {
       .catch((e) => console.log("ocurrió un error:" + e));
   };
 
+/* ----------------------------------------------------------------------
+GET ALL LOANS
+---------------------------------------------------------------------- */
+exports.getAllLoans = async (req, res) => {
+  bbdd
+    .getAllLoans()
+    .then((data) =>
+      res.status(200).json(data)
+      )
+      .catch((e) => console.log("ocurrió un error:" + e));
+  };
 /* ----------------------------------------------------------------------
 GET ALL USERS
 ---------------------------------------------------------------------- */

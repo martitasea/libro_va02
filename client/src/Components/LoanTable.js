@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import {Link} from "react-router-dom";
+
 import AuthContext from '../Context/AuthContext';
 import MaterialTable from "material-table";
-// import columnsLoans from '../data/columnsLoans';
 import columnsReturns from '../data/columnsReturns';
 
 
