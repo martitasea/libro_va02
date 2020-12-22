@@ -26,7 +26,7 @@ render() {
   return(
    <div className="table background shadow">
 <MaterialTable 
-         title="Confirmaciones de préstamo" 
+         title="Histórico de préstamos" 
          columns={columnsBooks}
          data={this.state.data}
          options={
