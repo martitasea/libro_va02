@@ -11,6 +11,28 @@ Libro Va está enmarcada dentro de la convocatoria de subvenciones para **la pro
 Esta modalidad está destinada a financiar proyectos de Fomento del Asociacionismo destinados a fortalecer las relaciones entre asociados y a promover la incorporación de nuevas personas
 >Plan Estratégico de Subvenciones de Distritos 2018-2020 aprobado por Decreto de 20 de diciembre de 2018 del Delegado del Área de Gobierno de Coordinación Territorial y Cooperación Público-Social,
 
+## Comenzando 🚀
+
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+
+### Pre-requisitos 📋
+
+_Que cosas necesitas para instalar el software y como instalarlas_
+
+```
+node.js
+react
+npm
+```
+### Instalación 🔧
+
+_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+- Clona el repositorio desde la siguiente dirección: https://github.com/geomatico/libro_va.git
+- El proyecto está estructurado como dos proyectos independientes, en la carpeta client el front y en la carpeta server el back
+- Inicializa Apache y MySQL en XAMPP, accede a la BBDD mediante phpMyAdmin poniendo en el navegador localhost
+- Sitúate en el directorio /client y ejecuta `npm install` (para que se instalen todas las dependencias) y posteriormente `npm start` (para que se ejecute React)
+- Ahora sitúate en el directorio /server y ejecuta `node server.js`
+
 ## ¿Cómo funciona LibroVa?
 
 Libro Va funciona como una plataforma de intercambio de libro entre bibliotecas. Cada niño en su casa tiene "su biblioteca" que pone a disposición de los demás niños del colegio.
@@ -58,12 +80,13 @@ Aquí podrás visualizar el libro que te han prestado y avisar a su dueño de qu
 Necesitarás confirmar el préstamo y la recogida de cada libro que vayas a dejar.
 Para poder pedir prestado un libro será necesario que tenga compartidos al menos 10 de los suyos. El plazo máximo de préstamo de un libro será de 1 mes. 
 
-## ¿Qué tecnologías se han utilizado?
+## Construido con 🛠️
 
 Se han usado las siguientes tecnologías:
 - React.js (react-router-dom)
 - Bootstrap (react-bootstrap)
 - Node.js
+- Express
 - Firebase
 - Xampp
 - MariaDB (SQL)
